@@ -1,0 +1,4 @@
+rootProject.name = 'desirefu'
+include 'dfu-common'
+include 'dfu-service'
+
