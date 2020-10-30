@@ -1,14 +1,31 @@
-plugins {
-    id 'java'
-}
-
 group 'cn.gatesma'
-version '1.0-SNAPSHOT'
+version '0.0.1'
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 
-repositories {
-    mavenCentral()
+    //强制指定第三方引用库，解决引用时用 + 出现的编译错误
+    resolutionStrategy.force 'com.alibaba:fastjson:1.2.67'
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // common-collections 增强集合框架等
+    compile 'commons-collections:commons-collections:3.2.2'
+
+    // commons-io
+    compile 'commons-io:commons-io:2.4'
+
+    // common-fileupload
+    compile 'commons-fileupload:commons-fileupload:1.3.3'
+
+    // commons-beanutils
+    compile 'commons-beanutils:commons-beanutils:1.9.4'
+
+    // joda-time 时间日期处理
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+
+    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
+
+javadoc.enabled = false

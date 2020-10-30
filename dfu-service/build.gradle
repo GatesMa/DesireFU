@@ -1,14 +1,130 @@
-plugins {
-    id 'java'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'org.jooq:jooq-codegen:3.10.5'
+        classpath 'mysql:mysql-connector-java:5.1.45'
+    }
 }
 
-group 'cn.gatesma'
-version '1.0-SNAPSHOT'
+apply plugin: 'org.springframework.boot'
 
-repositories {
-    mavenCentral()
+
+// 依赖包位置
+task copyRuntimeLibs(type: Copy) {
+    into "build/libs/lib"
+    from configurations.runtime
+}
+
+// 打jar包，不包含lib，启动时要指定依赖包的位置，要打完整的jar包，使用gradle -x test build
+jar {
+    baseName = 'dfu_service_pub_api'
+    version = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes('Main-Class': 'cn.gatesma.desirfu.Application')
+    }
+}
+
+jar.dependsOn copyRuntimeLibs
+
+// swagger代码生成task
+task swaggerCodeGen(type:Exec,dependsOn:copyRuntimeLibs) {
+    String jar='build/libs/lib/swagger-codegen-cli-3.0.8.jar'
+    String swagger='./src/main/resources/swagger.yaml'
+    String config='./src/main/resources/swagger_generate_config.json'
+    String output='./build/output/swagger/'
+    commandLine 'java','-jar',jar,'generate','-i',swagger,'-l','spring','-o',output,'-c',config
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile project(":dfu-common")
+
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    compile ('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.hibernate.validator', module: 'hibernate-validator'
+    }
+
+    compile 'org.springframework.boot:spring-boot-starter-logging'
+
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+
+    compile 'org.springframework.boot:spring-boot-starter-cache'
+
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.3'
+
+    compile 'org.springframework:springloaded:1.2.6.RELEASE'
+
+    // resilience
+    compile ('io.github.resilience4j:resilience4j-spring-boot:1.0.0') {
+        exclude group: 'org.hibernate.validator', module: 'hibernate-validator'
+    }
+
+    compile 'javax.validation:validation-api:2.0.1.Final'
+
+    // swagger code gen
+    runtime 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.8'
+
+    // swagger
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+    compile 'io.springfox:springfox-swagger-ui:2.9.2'
+
+    // jooq
+    compile 'org.jooq:jooq:3.10.5'
+    compile 'org.jooq:jool:0.9.12'
+
+    // mysql
+    runtime 'mysql:mysql-connector-java:5.1.45'
+
+    // db pool
+    compile 'com.zaxxer:HikariCP:3.4.1'
+
+    // logback
+    compile 'ch.qos.logback:logback-core:1.2.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+    // JMX监控 版权问题，目前下载不了，先不用
+    //compile 'com.sun.jdmk:jmxtools:1.2.1'
+
+    // es
+    compile 'org.elasticsearch.client:transport:5.4.1'
+    compile 'org.elasticsearch:elasticsearch:5.4.1'
+
 }
+
+
+task pathingJar(type: Jar) {
+    dependsOn configurations.runtime
+    appendix = 'pathing'
+
+    doFirst {
+        manifest {
+            attributes "Class-Path": configurations.runtime.files.collect { it.toURL().toString().replaceFirst("file:/", '/') }.join(" ")
+        }
+    }
+}
+
+bootRun {
+    dependsOn pathingJar
+    doFirst {
+        classpath = files("$buildDir/classes/main", "$buildDir/resources/main", pathingJar.archivePath)
+    }
+}
+
+javadoc.enabled = false
