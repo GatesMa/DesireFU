@@ -1,0 +1,9 @@
+{
+  "useTags":true,
+  "serializableModel":true,
+  "hideGenerationTimestamp":true,
+  "fullJavaUtil":true,
+  "apiPackage":"cn.gatesma.desirefu.controller.api.generate",
+  "modelPackage":"cn.gatesma.desirefu.domain.api.generate",
+  "configPackage":"cn.gatesma.desirefu.config.api.generate"
+}

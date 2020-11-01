@@ -1,0 +1,273 @@
+---
+swagger: "2.0"
+info:
+  description: DesireFU后端接口文档。
+  version: 1.0.0
+  title: DFU_API_DOC
+host: gatesma.cn
+basePath: /desirefu/v1
+tags:
+  - name: Account
+    description: 账号接口
+  - name: User
+    description: 用户接口
+  - name: Login
+    description: 登录接口
+  - name: Upload
+    description: 文件上传接口
+schemes:
+  - http
+paths:
+  /user/add:
+    post:
+      tags:
+        - User
+      summary: 创建用户
+      description: 创建用户，返回"用户ID"
+      operationId: addUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建用户
+          required: true
+          schema:
+            $ref: '#/definitions/AddUserRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddUserRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+  /user/get:
+    post:
+      tags:
+        - User
+      summary: 查询用户
+      description: 查询用户
+      operationId: getUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 查询用户
+          required: true
+          schema:
+            $ref: '#/definitions/GetUserRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetUserRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+
+definitions:
+  Object:
+    type: object
+  ReturnCode:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+      message:
+        type: string
+        example: OK
+  Page:
+    properties:
+      page_num:
+        type: integer
+        format: int32
+        description: 页号
+        minimum: 1
+        default: 1
+      page_size:
+        type: integer
+        format: int32
+        description: 每页数据量
+        minimum: 1
+        default: 10
+  PageInfo:
+    properties:
+      page_num:
+        type: integer
+        format: int32
+        description: 当前页号
+      page_size:
+        type: integer
+        format: int32
+        description: 当前页数据量
+      total_page:
+        type: integer
+        format: int32
+        description: 总共页数
+      total_count:
+        type: integer
+        format: int32
+        description: 总共数据量
+
+  Login:
+    required:
+      - login_name
+      - login_name_type
+    properties:
+      login_name:
+        type: string
+        example: "78837721"
+        description: 登录账号名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 登录账号类型
+      uin:
+        type: string
+        example: wid_syndekas34mnsj
+        description: 微信或QQ对应的openID
+    description: 登录信息
+  LoginInfo:
+    properties:
+      login_name:
+        type: string
+        example: "78837721"
+        description: 登录账号名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 登录账号类型
+      uin:
+        type: string
+        example: "wx112341"
+        description: loginNameType=12时，此字段为原始wx号
+    description: 登录信息
+
+
+  GetUserRequest:
+    properties:
+      user_id:
+        type: integer
+        format: int64
+        example: 17998821
+        description: 用户登录信息 (login_name, login_name_type) 和 user_id两个必填一个
+      login_name:
+        type: string
+        example: "78837721"
+        description: 用户登录名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 用户登录类型
+  User:
+    allOf:
+      - $ref: '#/definitions/Login'
+      - properties:
+          user_id:
+            type: integer
+            format: int64
+            example: 17998821
+            description: 用户ID
+            readOnly: true
+          logins:
+            type: array
+            description: 所有login信息，包括绑定的
+            items:
+              $ref: '#/definitions/LoginInfo'
+          user_name:
+            type: string
+            description: 用户名称
+          cellphone:
+            type: string
+            description: 手机号码
+          email:
+            type: string
+            description: 邮箱
+          delete_status:
+            type: integer
+            format: int32
+            example: 0
+            description: 删除状态
+            readOnly: true
+          created_time:
+            type: string
+            example: '2018-01-01 12:00:00'
+            description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+            readOnly: true
+          last_modified_user_id:
+            type: integer
+            format: int64
+            example: 3453334
+            description: 最后修改人userId
+          last_modified_time:
+            type: string
+            example: '2018-01-02 13:20:15'
+            description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
+            readOnly: true
+    description: 用户
+  GetUserRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/User'
+  AddUserRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddUserRetData'
+  AddUserRetData:
+    properties:
+      user_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 用户ID
+  AddUserRequest:
+    required:
+      - login_name
+      - login_name_type
+    properties:
+      login_name:
+        type: string
+        description: 登录账号名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 登录账号类型
+      user_name:
+        type: string
+        description: 用户名称
+      cellphone:
+        type: string
+        description: 手机号码
+      email:
+        type: string
+        description: 邮箱
+      created_user_id:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 创建者userId
+    title: AddUserRequest
+
+
