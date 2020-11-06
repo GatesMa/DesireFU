@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_TEMP" value="./dfu-service/spring.log"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--常规日志-->
+    <appender name="desire_fu_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./dfu-service/log/desire_fu.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./dfu-service/log/desire_fu-log-%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!-- 访问监控日志记录 -->
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./dfu-service/log/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./dfu-service/log/access.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Error级别日志 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./dfu-service/log/error.log</file>
+        <!-- 只保存error级别 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./dfu-service/log/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 开发/测试 （DEBUG级别）-->
+    <springProfile name="dev,test">
+        <root level="INFO">
+            <appender-ref ref="desire_fu_log"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+
+
+    <!-- 线上/预发布 （INFO级别）-->
+    <springProfile name="preview,prod">
+        <root level="INFO">
+            <appender-ref ref="desire_fu_log"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+
+
+</configuration>

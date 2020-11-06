@@ -15,9 +15,33 @@ tags:
     description: 登录接口
   - name: Upload
     description: 文件上传接口
+  - name: Test
+    description: 测试、健康检查
 schemes:
   - http
 paths:
+
+  /hello:
+    post:
+      tags:
+        - Test
+      summary: Hello
+      description: 返回"hello"
+      operationId: hello
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/HelloRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /user/add:
     post:
       tags:
@@ -45,6 +69,7 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+
   /user/get:
     post:
       tags:
@@ -158,24 +183,6 @@ definitions:
         example: "wx112341"
         description: loginNameType=12时，此字段为原始wx号
     description: 登录信息
-
-
-  GetUserRequest:
-    properties:
-      user_id:
-        type: integer
-        format: int64
-        example: 17998821
-        description: 用户登录信息 (login_name, login_name_type) 和 user_id两个必填一个
-      login_name:
-        type: string
-        example: "78837721"
-        description: 用户登录名称
-      login_name_type:
-        type: integer
-        format: int32
-        example: 1
-        description: 用户登录类型
   User:
     allOf:
       - $ref: '#/definitions/Login'
@@ -222,12 +229,30 @@ definitions:
             description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
             readOnly: true
     description: 用户
+
+  GetUserRequest:
+    properties:
+      user_id:
+        type: integer
+        format: int64
+        example: 17998821
+        description: 用户登录信息 (login_name, login_name_type) 和 user_id两个必填一个
+      login_name:
+        type: string
+        example: "78837721"
+        description: 用户登录名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 用户登录类型
   GetUserRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
       - properties:
           data:
             $ref: '#/definitions/User'
+
   AddUserRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
@@ -270,4 +295,10 @@ definitions:
         description: 创建者userId
     title: AddUserRequest
 
-
+  HelloRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: string
+            description: 返回字符串

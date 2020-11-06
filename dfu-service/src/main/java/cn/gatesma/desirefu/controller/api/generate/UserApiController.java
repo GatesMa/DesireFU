@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.domain.api.generate.AddUserRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddUserRet;
+import cn.gatesma.desirefu.domain.api.generate.AddUserRetData;
 import cn.gatesma.desirefu.domain.api.generate.GetUserRequest;
 import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +34,11 @@ public class UserApiController implements UserApi {
     public ResponseEntity<AddUserRet> addUser(
             @ApiParam(value = "创建用户", required = true) @Valid @RequestBody AddUserRequest body) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<AddUserRet>(HttpStatus.NOT_IMPLEMENTED);
+        AddUserRet ret = new AddUserRet();
+        AddUserRetData data = new AddUserRetData();
+        data.setUserId(123L);
+        ret.setData(data);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
     public ResponseEntity<GetUserRet> getUser(
