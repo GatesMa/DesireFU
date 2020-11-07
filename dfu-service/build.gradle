@@ -1,3 +1,12 @@
+apply plugin: 'org.springframework.boot'
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+
+    //强制指定第三方引用库，解决引用时用 + 出现的编译错误
+    resolutionStrategy.force 'com.alibaba:fastjson:1.2.67'
+}
 
 buildscript {
     ext {
@@ -17,7 +26,6 @@ buildscript {
     }
 }
 
-apply plugin: 'org.springframework.boot'
 
 
 // 依赖包位置
@@ -28,8 +36,8 @@ task copyRuntimeLibs(type: Copy) {
 
 // 打jar包，不包含lib，启动时要指定依赖包的位置，要打完整的jar包，使用gradle -x test build
 jar {
-    baseName = 'dfu_service_pub_api'
-    version = '0.0.1-SNAPSHOT'
+    baseName = 'dfu_service_api'
+    version = '0.0.1'
     manifest {
         attributes('Main-Class': 'cn.gatesma.desirfu.Application')
     }
