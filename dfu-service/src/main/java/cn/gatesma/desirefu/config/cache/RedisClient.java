@@ -148,4 +148,9 @@ public class RedisClient {
         return stringRedisTemplate.execute(script, keys, args);
     }
 
+    public void del(String key) {
+        LOGGER.info("redis del key={}", key);
+        stringRedisTemplate.delete(key);
+    }
+
 }
