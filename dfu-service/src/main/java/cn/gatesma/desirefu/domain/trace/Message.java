@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.domain.trace;
 
 import cn.gatesma.desirefu.utils.ValidateUtil;
+
 import java.util.Objects;
 
 /**
@@ -34,18 +35,22 @@ public class Message {
         this.version = version;
         return this;
     }
+
     public Message context(TraceContext context) {
         this.context = context;
         return this;
     }
+
     public Message appName(String appName) {
         this.appName = appName;
         return this;
     }
+
     public Message client(String client) {
         this.client = client;
         return this;
     }
+
     public Message callee(String callee) {
         this.callee = callee;
         return this;
@@ -55,14 +60,17 @@ public class Message {
         this.modName = modName;
         return this;
     }
+
     public Message actName(String actName) {
         this.actName = actName;
         return this;
     }
+
     public Message clientIp(String clientIp) {
         this.clientIp = clientIp;
         return this;
     }
+
     public Message serverIp(String serverIp) {
         this.serverIp = serverIp;
         return this;
@@ -72,30 +80,37 @@ public class Message {
         this.duration = duration;
         return this;
     }
+
     public Message errorCode(Long errorCode) {
         this.errorCode = errorCode;
         return this;
     }
+
     public Message errorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
         return this;
     }
+
     public Message reqMethod(String reqMethod) {
         this.reqMethod = reqMethod;
         return this;
     }
+
     public Message respCode(Long respCode) {
         this.respCode = respCode;
         return this;
     }
+
     public Message reqUrl(String reqUrl) {
         this.reqUrl = reqUrl;
         return this;
     }
+
     public Message reqBody(String reqBody) {
         this.reqBody = reqBody;
         return this;
     }
+
     public Message respBody(String respBody) {
         this.respBody = respBody;
         return this;

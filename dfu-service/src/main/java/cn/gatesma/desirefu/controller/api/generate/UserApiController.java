@@ -7,8 +7,10 @@ import cn.gatesma.desirefu.domain.api.generate.GetUserRequest;
 import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

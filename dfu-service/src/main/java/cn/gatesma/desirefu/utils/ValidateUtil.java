@@ -3,7 +3,7 @@ package cn.gatesma.desirefu.utils;
 /**
  * @author gatesma
  * @date 2020/11/7
- * @desc trace验证工具类(spanId,traceId)
+ * @desc trace验证工具类(spanId, traceId)
  */
 public class ValidateUtil {
 

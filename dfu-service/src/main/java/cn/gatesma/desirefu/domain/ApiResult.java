@@ -14,7 +14,8 @@ public class ApiResult<T> {
     private String message;
     private T data;
 
-    public ApiResult() {}
+    public ApiResult() {
+    }
 
     public ApiResult(int code, String message, T data) {
         this.code = code;
@@ -46,8 +47,8 @@ public class ApiResult<T> {
      * @return
      */
     public static <T> ApiResult buildFailedResult(ApiReturnCode retCode, String message) {
-        retCode=retCode==null?ApiReturnCode.INNER_ERROR:retCode;
-        message= StringUtils.isBlank(message)?retCode.name():message;
+        retCode = retCode == null ? ApiReturnCode.INNER_ERROR : retCode;
+        message = StringUtils.isBlank(message) ? retCode.name() : message;
         return new ApiResult(retCode.code(), message, null);
     }
 

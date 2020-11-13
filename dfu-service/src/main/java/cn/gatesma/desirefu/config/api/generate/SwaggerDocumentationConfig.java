@@ -35,14 +35,14 @@ public class SwaggerDocumentationConfig {
                 .apis(RequestHandlerSelectors.basePackage("cn.gatesma.desirefu.controller.api.generate"))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(tags[0], ArrayUtils.subarray(tags,1,tags.length))
+                .tags(tags[0], ArrayUtils.subarray(tags, 1, tags.length))
                 .apiInfo(apiInfo());
     }
 
     private Tag[] getTagsSorted() {
         return new Tag[]{
-                new Tag("测试","测试",100),
-                new Tag("用户","用户",200),
+                new Tag("测试", "测试", 100),
+                new Tag("用户", "用户", 200),
         };
     }
 

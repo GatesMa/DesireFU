@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 @Controller
 public class TestApiController implements TestApi {
 
@@ -39,7 +40,8 @@ public class TestApiController implements TestApi {
 
     public ResponseEntity<HelloRet> hello() {
 
-        HelloRet ret = RetCodeUtils.ok(new HelloRet());;
+        HelloRet ret = RetCodeUtils.ok(new HelloRet());
+        ;
         ret.setData("Hello! It's DesireFu!");
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }

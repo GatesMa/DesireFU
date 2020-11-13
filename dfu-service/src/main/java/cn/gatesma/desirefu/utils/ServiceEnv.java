@@ -3,6 +3,7 @@ package cn.gatesma.desirefu.utils;
 import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceEnv {
 
-    private static final String DEV="dev";
-    private static final String DNS="dns";
-    private static final String SST="sst";
-    private static final String SANDBOX="sandbox";
-    private static final String PREVIEW="preview";
-    private static final String PROD="prod";
-    private static final String UT="ut";
+    private static final String DEV = "dev";
+    private static final String DNS = "dns";
+    private static final String SST = "sst";
+    private static final String SANDBOX = "sandbox";
+    private static final String PREVIEW = "preview";
+    private static final String PROD = "prod";
+    private static final String UT = "ut";
 
     private String[] activeProfiles;
 
@@ -29,12 +30,12 @@ public class ServiceEnv {
     private Environment env;
 
     @PostConstruct
-    public void init(){
-        String profiles= Arrays.toString(env.getActiveProfiles()).toLowerCase();
-        if(profiles.length()>2) {
-            activeProfiles=profiles.substring(1,profiles.length()-1).split(",");
-        }else {
-            activeProfiles=new String[0];
+    public void init() {
+        String profiles = Arrays.toString(env.getActiveProfiles()).toLowerCase();
+        if (profiles.length() > 2) {
+            activeProfiles = profiles.substring(1, profiles.length() - 1).split(",");
+        } else {
+            activeProfiles = new String[0];
         }
 
     }
@@ -51,8 +52,8 @@ public class ServiceEnv {
         return ArrayUtils.contains(activeProfiles, SST);
     }
 
-    public boolean isUt(){
-        return ArrayUtils.contains(activeProfiles,UT);
+    public boolean isUt() {
+        return ArrayUtils.contains(activeProfiles, UT);
     }
 
     public boolean isSandBox() {

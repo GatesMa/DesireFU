@@ -22,17 +22,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
+
 @Api(value = "Test", tags = {"测试"}, description = "the Test API")
 public interface TestApi {
 
-    @ApiOperation(value = "Hello", nickname = "hello", notes = "返回\"hello\"", response = String.class, tags={ "测试", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = String.class),
-        @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
-        @ApiResponse(code = 404, message = "RequestBody not found") })
+    @ApiOperation(value = "Hello", nickname = "hello", notes = "返回\"hello\"", response = String.class, tags = {"测试",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = String.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found")})
     @RequestMapping(value = "/hello",
-        produces = { "application/json" }, 
-        method = RequestMethod.POST)
+            produces = {"application/json"},
+            method = RequestMethod.POST)
     ResponseEntity<HelloRet> hello();
 
 }

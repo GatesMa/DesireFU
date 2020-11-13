@@ -20,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableCaching
 @EnableAsync
-@ComponentScan(basePackages = { "cn.gatesma.desirefu","cn.gatesma.desirefu.controller.api", "cn.gatesma.desirefu.controller.api.generate" })
+@ComponentScan(basePackages = {"cn.gatesma.desirefu", "cn.gatesma.desirefu.controller.api", "cn.gatesma.desirefu.controller.api.generate"})
 public class Application {
 
     public static void main(String[] args) {

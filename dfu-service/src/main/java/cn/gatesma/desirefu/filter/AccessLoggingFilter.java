@@ -6,11 +6,13 @@ import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.domain.trace.Message;
 import cn.gatesma.desirefu.domain.trace.TraceContext;
 import com.alibaba.fastjson.JSONObject;
+
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -125,7 +127,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
         String apiMsg = "";
         try {
             JSONObject jsonObject = JSONObject.parseObject(responseBody);
-            if (!jsonObject.isEmpty()) {
+            if (jsonObject != null) {
                 Integer code = jsonObject.getInteger("code");
                 String message = jsonObject.getString("message");
                 // 解析 code 和 message
@@ -150,10 +152,11 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
 
     /**
      * 生成trace log
+     *
      * @param request
      */
     private void addTraceLog(ContentCachingRequestWrapper request, String requestBody,
-            String responseBody, int apiCode, String apiMsg, int responseCode) {
+                             String responseBody, int apiCode, String apiMsg, int responseCode) {
 
 
         TraceContext tc = getOrCreateTraceContext(request);
@@ -190,6 +193,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
 
     /**
      * 获取request body
+     *
      * @param request
      * @return
      */
@@ -216,6 +220,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
 
     /**
      * 获取response body
+     *
      * @param response
      * @return
      */

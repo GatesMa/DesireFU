@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.domain.api.generate;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import org.springframework.validation.annotation.Validated;
 
 /**

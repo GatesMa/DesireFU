@@ -5,10 +5,12 @@ import cn.gatesma.desirefu.constants.Global;
 import cn.gatesma.desirefu.domain.ApiResult;
 import cn.gatesma.desirefu.utils.ServiceEnv;
 import com.alibaba.fastjson.JSONObject;
+
 import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -56,11 +58,11 @@ public class InfoInjectInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    private void handleException(HttpServletRequest request, HttpServletResponse response, ApiReturnCode retCode,String msg) {
+    private void handleException(HttpServletRequest request, HttpServletResponse response, ApiReturnCode retCode, String msg) {
         String url = request.getContextPath() + request.getServletPath();
         try {
             response.setHeader("Content-Type", "text/json;charset=UTF-8");
-            response.getWriter().write(JSONObject.toJSONString(ApiResult.buildFailedResult(retCode,msg)));
+            response.getWriter().write(JSONObject.toJSONString(ApiResult.buildFailedResult(retCode, msg)));
         } catch (IOException ioe) {
             LOG.error("调用接口 {} 验证失败 {} 写入response异常", url, msg, ioe);
         }

@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.domain.trace;
 
 import cn.gatesma.desirefu.utils.ValidateUtil;
 import com.fasterxml.uuid.Generators;
+
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -31,6 +32,7 @@ public class TraceContext {
 
     /**
      * 接收外部id，生成TraceContext
+     *
      * @param traceId
      * @param spanId
      * @return
@@ -48,6 +50,7 @@ public class TraceContext {
 
     /**
      * 生成uuid
+     *
      * @return 一个例如e37b7e44142b11e7b627fb44f8adfbd8的32位长度字符串
      */
     private static String traceId() {
@@ -64,6 +67,7 @@ public class TraceContext {
 
     /**
      * 生成基于parentId的第n个子节点spanId
+     *
      * @return 如果parentId是0.1，childNum是2，返回0.1.2
      */
     private static String spanId(String parentId, int childId) {

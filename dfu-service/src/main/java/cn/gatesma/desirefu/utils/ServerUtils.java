@@ -3,6 +3,7 @@ package cn.gatesma.desirefu.utils;
 import cn.gatesma.desirefu.constants.Global;
 import cn.gatesma.desirefu.domain.trace.TraceContext;
 import com.google.common.base.Strings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -38,22 +40,21 @@ public class ServerUtils {
     public static final String HEADER_SPAN_ID = "X-Span-Id";
 
 
-
-
     /**
      * 获取/生成 TraceContext
+     *
      * @param request
      * @return
      */
-    public static TraceContext getOrCreateTraceContext(HttpServletRequest request){
-        if (request !=null && request.getAttribute(TRACE_CONTEXT_ATTR) != null) {
+    public static TraceContext getOrCreateTraceContext(HttpServletRequest request) {
+        if (request != null && request.getAttribute(TRACE_CONTEXT_ATTR) != null) {
             return (TraceContext) request.getAttribute(TRACE_CONTEXT_ATTR);
         }
 
         TraceContext tc;
-        if (request !=null &&
-                request.getHeader(HEADER_TRACE_ID)!=null &&
-                request.getHeader(HEADER_SPAN_ID)!=null) {
+        if (request != null &&
+                request.getHeader(HEADER_TRACE_ID) != null &&
+                request.getHeader(HEADER_SPAN_ID) != null) {
             try {
                 // parse may fail if traceId or spanId invalid.
                 tc = TraceContext.parse(request.getHeader(HEADER_TRACE_ID), request.getHeader(HEADER_SPAN_ID));
@@ -70,6 +71,7 @@ public class ServerUtils {
 
     /**
      * 获取调用端ip
+     *
      * @param request
      * @return
      */
@@ -94,26 +96,25 @@ public class ServerUtils {
     }
 
     /**
-     *
      * @param request
      * @return
      */
-    public static String getClient(HttpServletRequest request){
-        return request==null ? "UNKNOWN" : CommonUtils.safeGetStringFromObj(request.getHeader(Global.PROXY_CLIENT_ID), "UNKNOWN");
+    public static String getClient(HttpServletRequest request) {
+        return request == null ? "UNKNOWN" : CommonUtils.safeGetStringFromObj(request.getHeader(Global.PROXY_CLIENT_ID), "UNKNOWN");
     }
 
-    public static Long getClientId(HttpServletRequest request){
+    public static Long getClientId(HttpServletRequest request) {
         String client = getClient(request);
         return NumberUtils.isParsable(client) ? Long.valueOf(client) : 0L;
     }
 
-    public static String getModName(HttpServletRequest request){
-        return request==null ? "-" : CommonUtils.safeGetStringFromObj(request.getAttribute(Global.REQ_CONTROLLER_NAME));
+    public static String getModName(HttpServletRequest request) {
+        return request == null ? "-" : CommonUtils.safeGetStringFromObj(request.getAttribute(Global.REQ_CONTROLLER_NAME));
     }
 
 
-    public static String getActName(HttpServletRequest request){
-        return request==null ? "-" : CommonUtils.safeGetStringFromObj(request.getAttribute(Global.REQ_METHOD_NAME));
+    public static String getActName(HttpServletRequest request) {
+        return request == null ? "-" : CommonUtils.safeGetStringFromObj(request.getAttribute(Global.REQ_METHOD_NAME));
     }
 
 }
