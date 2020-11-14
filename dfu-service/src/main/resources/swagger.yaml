@@ -184,50 +184,53 @@ definitions:
         description: loginNameType=12时，此字段为原始wx号
     description: 登录信息
   User:
-    allOf:
-      - $ref: '#/definitions/Login'
-      - properties:
-          user_id:
-            type: integer
-            format: int64
-            example: 17998821
-            description: 用户ID
-            readOnly: true
-          logins:
-            type: array
-            description: 所有login信息，包括绑定的
-            items:
-              $ref: '#/definitions/LoginInfo'
-          user_name:
-            type: string
-            description: 用户名称
-          cellphone:
-            type: string
-            description: 手机号码
-          email:
-            type: string
-            description: 邮箱
-          delete_status:
-            type: integer
-            format: int32
-            example: 0
-            description: 删除状态
-            readOnly: true
-          created_time:
-            type: string
-            example: '2018-01-01 12:00:00'
-            description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
-            readOnly: true
-          last_modified_user_id:
-            type: integer
-            format: int64
-            example: 3453334
-            description: 最后修改人userId
-          last_modified_time:
-            type: string
-            example: '2018-01-02 13:20:15'
-            description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
-            readOnly: true
+    properties:
+      user_id:
+        type: integer
+        format: int64
+        example: 17998821
+        description: 用户ID
+        readOnly: true
+      logins:
+        type: array
+        description: 所有login信息，包括绑定的
+        items:
+          $ref: '#/definitions/LoginInfo'
+      user_name:
+        type: string
+        description: 用户名称
+      cellphone:
+        type: string
+        description: 手机号码
+      email:
+        type: string
+        description: 邮箱
+      delete_status:
+        type: integer
+        format: int32
+        example: 0
+        description: 删除状态
+        readOnly: true
+      created_user_id:
+        type: integer
+        format: int64
+        example: 3453334
+        description: 创建人userId
+      created_time:
+        type: string
+        example: '2018-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+        readOnly: true
+      last_modified_user_id:
+        type: integer
+        format: int64
+        example: 3453334
+        description: 最后修改人userId
+      last_modified_time:
+        type: string
+        example: '2018-01-02 13:20:15'
+        description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
+        readOnly: true
     description: 用户
 
   GetUserRequest:

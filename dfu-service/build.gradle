@@ -135,4 +135,42 @@ bootRun {
     }
 }
 
+
+task generateDFU {
+    doLast {
+        def writer = new StringWriter()
+        def xml = new groovy.xml.MarkupBuilder(writer)
+                .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
+                    jdbc() {
+                        driver('com.mysql.jdbc.Driver')
+                        url('jdbc:mysql://127.0.0.1:3306/DFU_?useUnicode=true&characterEncoding=utf8&useSSL=true')
+                        user('root')
+                        password('qzone')
+                    }
+                    generator() {
+                        database() {
+                            name('org.jooq.util.mysql.MySQLDatabase')
+                            inputSchema('DFU_')
+                            includes('.*')
+                            excludes()
+                        }
+
+                        generate([:]) {
+                            pojos true
+                            daos true
+                        }
+
+                        target() {
+                            packageName('cn.gatesma.desirefu.domain.db.generate.DFU_')
+                            directory('dfu-service/build/output/jooq/DFU_')
+                        }
+                    }
+                }
+
+        org.jooq.util.GenerationTool.generate(
+                javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+        )
+    }
+}
+
 javadoc.enabled = false
