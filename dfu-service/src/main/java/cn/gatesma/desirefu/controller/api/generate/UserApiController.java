@@ -3,11 +3,7 @@ package cn.gatesma.desirefu.controller.api.generate;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.type.LoginNameType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
-import cn.gatesma.desirefu.domain.api.generate.AddUserRequest;
-import cn.gatesma.desirefu.domain.api.generate.AddUserRet;
-import cn.gatesma.desirefu.domain.api.generate.AddUserRetData;
-import cn.gatesma.desirefu.domain.api.generate.GetUserRequest;
-import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.service.UserService;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,10 +94,40 @@ public class UserApiController implements UserApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetUserRet> getUser(
             @ApiParam(value = "查询用户", required = true) @Valid @RequestBody GetUserRequest body) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<GetUserRet>(HttpStatus.NOT_IMPLEMENTED);
+        if (accept != null && accept.contains("application/json")) {
+            GetUserRet response = get(body);
+            return new ResponseEntity<GetUserRet>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    private GetUserRet get(GetUserRequest body) {
+        // 参数
+        Long userId = body.getUserId();
+        String loginName = body.getLoginName();
+        Integer loginNameType = body.getLoginNameType();
+        // 查询
+        GetUserRet ret = null;
+        if (userId != null) {
+            ret = userService.getUser(userId);
+        } else {
+            if (StringUtils.isBlank(loginName)) {
+                return RetCodeUtils.create(new GetUserRet(), ApiReturnCode.INVALID_ARGUMENT, "login_name为空");
+            }
+            if (LoginNameType.valueOf(loginNameType) == null) {
+                return RetCodeUtils.create(new GetUserRet(), ApiReturnCode.INVALID_ARGUMENT, "非法的login_name_type值");
+            }
+            ret = userService.getUser(new Login()
+                    .loginName(loginName)
+                    .loginNameType(loginNameType));
+        }
+
+        return ret;
     }
 
 }

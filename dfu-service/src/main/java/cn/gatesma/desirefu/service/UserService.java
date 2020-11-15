@@ -15,6 +15,7 @@ import cn.gatesma.desirefu.utils.RetCodeUtils;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import cn.gatesma.desirefu.utils.user.UserUtils;
 import com.google.common.base.Strings;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -168,13 +169,27 @@ public class UserService {
 
         String loginName = login.getLoginName();
         Integer loginNameType = login.getLoginNameType();
-        // 查询新库表
+        // 查询库表
         User data = getUser(loginName, loginNameType);
 
         // 返回结果
         return (GetUserRet) new GetUserRet().data(data)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 根据userId获取User信息
+     */
+    public GetUserRet getUser(Long userId) {
+        // 查询库表
+        GetUserRet ret = RetCodeUtils.ok(new GetUserRet());
+        User user = getUserById(userId);
+        if (null != user) {
+            ret.setData(user);
+        }
+        //返回结果
+        return ret;
     }
 
     public User getUser(String loginName, Integer loginNameType) {
