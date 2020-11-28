@@ -17,6 +17,10 @@ public class Global {
 
     // client-id
     public static final String PROXY_CLIENT_ID = "X-Client-Id";
+    public static final String PROXY_CLIENT = "X-Client";
+
+
+
 
 
 }

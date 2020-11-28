@@ -6,6 +6,8 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
@@ -35,7 +37,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = 1486391893;
+    private static final long serialVersionUID = 1269998621;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -51,6 +53,16 @@ public class Dfu_ extends SchemaImpl {
      * The table <code>DFU_.Account_</code>.
      */
     public final Account_ ACCOUNT_ = Account_.ACCOUNT_;
+
+    /**
+     * 高校信息
+     */
+    public final College_ COLLEGE_ = College_.COLLEGE_;
+
+    /**
+     * 学院信息
+     */
+    public final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
      * 用于存储openId对应qq关联关系
@@ -99,6 +111,8 @@ public class Dfu_ extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             Accountuserrole_.ACCOUNTUSERROLE_,
             Account_.ACCOUNT_,
+            College_.COLLEGE_,
+            Department_.DEPARTMENT_,
             Openidqqidx_.OPENIDQQIDX_,
             Openidwxidx_.OPENIDWXIDX_,
             Userlogin_.USERLOGIN_,

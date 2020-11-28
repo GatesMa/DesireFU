@@ -1,7 +1,6 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -12,32 +11,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * HelloRet
+ * AddAccountRetData
  */
 @Validated
-public class HelloRet extends ReturnCode implements Serializable {
+public class AddAccountRetData  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("data")
-  private String data = null;
+  @JsonProperty("account_id")
+  private Long accountId = null;
 
-  public HelloRet data(String data) {
-    this.data = data;
+  public AddAccountRetData accountId(Long accountId) {
+    this.accountId = accountId;
     return this;
   }
 
   /**
-   * 返回字符串
-   * @return data
+   * 账号ID
+   * @return accountId
   **/
-  @ApiModelProperty(value = "返回字符串")
+  @ApiModelProperty(example = "100000", value = "账号ID")
 
-  public String getData() {
-    return data;
+  public Long getAccountId() {
+    return accountId;
   }
 
-  public void setData(String data) {
-    this.data = data;
+  public void setAccountId(Long accountId) {
+    this.accountId = accountId;
   }
 
 
@@ -49,22 +48,21 @@ public class HelloRet extends ReturnCode implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    HelloRet helloRet = (HelloRet) o;
-    return Objects.equals(this.data, helloRet.data) &&
-        super.equals(o);
+    AddAccountRetData addAccountRetData = (AddAccountRetData) o;
+    return Objects.equals(this.accountId, addAccountRetData.accountId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, super.hashCode());
+    return Objects.hash(accountId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class HelloRet {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("class AddAccountRetData {\n");
+    
+    sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

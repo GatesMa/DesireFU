@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_ extends TableImpl<Account_Record> {
 
-    private static final long serialVersionUID = -1524685937;
+    private static final long serialVersionUID = -1563292439;
 
     /**
      * The reference instance of <code>DFU_.Account_</code>
@@ -83,7 +83,7 @@ public class Account_ extends TableImpl<Account_Record> {
     /**
      * The column <code>DFU_.Account_.memo</code>. 备注
      */
-    public final TableField<Account_Record, String> MEMO = createField("memo", org.jooq.impl.SQLDataType.VARCHAR(1024).nullable(false), this, "备注");
+    public final TableField<Account_Record, String> MEMO = createField("memo", org.jooq.impl.SQLDataType.VARCHAR(1024).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "备注");
 
     /**
      * The column <code>DFU_.Account_.auditUserId</code>. 审核人userId

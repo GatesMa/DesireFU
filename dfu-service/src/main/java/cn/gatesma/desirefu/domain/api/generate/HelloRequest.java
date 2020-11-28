@@ -1,43 +1,17 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * AddUserRetData
+ * HelloRequest
  */
 @Validated
-public class AddUserRetData  implements Serializable {
+public class HelloRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
-
-  @JsonProperty("user_id")
-  private Long userId = null;
-
-  public AddUserRetData userId(Long userId) {
-    this.userId = userId;
-    return this;
-  }
-
-  /**
-   * 用户ID
-   * @return userId
-  **/
-  @ApiModelProperty(example = "100000", value = "用户ID")
-
-  public Long getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Long userId) {
-    this.userId = userId;
-  }
 
 
   @Override
@@ -48,21 +22,19 @@ public class AddUserRetData  implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddUserRetData addUserRetData = (AddUserRetData) o;
-    return Objects.equals(this.userId, addUserRetData.userId);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId);
+    return Objects.hash();
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AddUserRetData {\n");
+    sb.append("class HelloRequest {\n");
     
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

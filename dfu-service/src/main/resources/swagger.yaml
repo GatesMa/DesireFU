@@ -13,8 +13,12 @@ tags:
     description: 用户接口
   - name: Login
     description: 登录接口
+  - name: Meta
+    description: 元数据接口
   - name: Upload
     description: 文件上传接口
+  - name: College
+    description: 高校相关接口
   - name: Test
     description: 测试、健康检查
 schemes:
@@ -98,6 +102,89 @@ paths:
         404:
           description: RequestBody not found
 
+  /account/add:
+    post:
+      tags:
+        - Account
+      summary: 创建账号
+      description: 创建账号，返回"账号ID"
+      operationId: addAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建用户
+          required: true
+          schema:
+            $ref: '#/definitions/AddAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /college/add:
+    post:
+      tags:
+        - College
+      summary: 创建学校
+      description: 创建学校，返回"学校ID"
+      operationId: addCollege
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建学校
+          required: true
+          schema:
+            $ref: '#/definitions/AddCollegeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddCollegeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /college/get:
+    post:
+      tags:
+        - College
+      summary: 查询高校
+      description: 查询高校
+      operationId: getCollege
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 查询高校
+          required: true
+          schema:
+            $ref: '#/definitions/GetCollegeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetCollegeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
 definitions:
   Object:
@@ -147,6 +234,88 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  AddAccountRequest:
+    required:
+      - login_name
+      - login_name_type
+    properties:
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      nick_name:
+        type: string
+        example: gatesma
+        description: 账号名称
+      memo:
+        type: string
+        example: 审核通过
+        description: 备注
+      created_user_id:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 创建者userId
+    title: AddAccountRequest
+  AddAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddAccountRetData'
+  AddAccountRetData:
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  AddCollegeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddCollegeData'
+  AddCollegeData:
+    properties:
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+  AddCollegeRequest:
+    required:
+      - name
+      - ministry
+      - identification
+    properties:
+      name:
+        type: string
+        example: 四川大学
+        description: 学校名称
+      ministry:
+        type: string
+        example: 教育部
+        description: 主管部门
+      identification:
+        type: string
+        example: 4151010610
+        description: 学校标识码
+      location:
+        type: string
+        example: 成都
+        description: 所在地
+      level:
+        type: string
+        example: 本科
+        description: 办学层次
+      memo:
+        type: string
+        example: 备注
+        description: 备注
 
   Login:
     required:
@@ -255,6 +424,73 @@ definitions:
       - properties:
           data:
             $ref: '#/definitions/User'
+
+
+  GetCollegeRequest:
+    properties:
+      name:
+        type: string
+        example: 四川大学
+        description: 高校名称
+      ministry:
+        type: string
+        example: 教育部
+        description: 主管部门
+      identification:
+        type: string
+        example: 4151010610
+        description: 唯一标识码
+  GetCollegeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/College'
+  College:
+    description: 高校
+    properties:
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+      name:
+        type: string
+        example: 四川大学
+        description: 学校名称
+      ministry:
+        type: string
+        example: 教育部
+        description: 主管部门
+      identification:
+        type: string
+        example: 4151010610
+        description: 学校标识码
+      location:
+        type: string
+        example: 成都
+        description: 所在地
+      level:
+        type: string
+        example: 本科
+        description: 办学层次
+      memo:
+        type: string
+        example: 备注
+        description: 备注
+      created_time:
+        type: string
+        example: "2020-01-01 00:00:00"
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      last_modified_time:
+        type: string
+        example: "2000-01-01 00:00:00"
+        description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
+
+
+
 
   AddUserRet:
     allOf:

@@ -1,6 +1,8 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
+import cn.gatesma.desirefu.domain.api.generate.College;
+import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -11,56 +13,41 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * ReturnCode
+ * GetCollegeRet
  */
 @Validated
-public class ReturnCode  implements Serializable {
+public class GetCollegeRet extends ReturnCode implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("code")
-  private Integer code = null;
+  @JsonProperty("data")
+  @Valid
+  private java.util.List<College> data = null;
 
-  @JsonProperty("message")
-  private String message = null;
+  public GetCollegeRet data(java.util.List<College> data) {
+    this.data = data;
+    return this;
+  }
 
-  public ReturnCode code(Integer code) {
-    this.code = code;
+  public GetCollegeRet addDataItem(College dataItem) {
+    if (this.data == null) {
+      this.data = new java.util.ArrayList<College>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
   /**
-   * Get code
-   * @return code
+   * Get data
+   * @return data
   **/
-  @ApiModelProperty(example = "0", required = true, value = "")
-  @NotNull
-
-  public Integer getCode() {
-    return code;
+  @ApiModelProperty(value = "")
+  @Valid
+  public java.util.List<College> getData() {
+    return data;
   }
 
-  public void setCode(Integer code) {
-    this.code = code;
-  }
-
-  public ReturnCode message(String message) {
-    this.message = message;
-    return this;
-  }
-
-  /**
-   * Get message
-   * @return message
-  **/
-  @ApiModelProperty(example = "OK", required = true, value = "")
-  @NotNull
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
+  public void setData(java.util.List<College> data) {
+    this.data = data;
   }
 
 
@@ -72,23 +59,22 @@ public class ReturnCode  implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ReturnCode returnCode = (ReturnCode) o;
-    return Objects.equals(this.code, returnCode.code) &&
-        Objects.equals(this.message, returnCode.message);
+    GetCollegeRet getCollegeRet = (GetCollegeRet) o;
+    return Objects.equals(this.data, getCollegeRet.data) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, message);
+    return Objects.hash(data, super.hashCode());
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ReturnCode {\n");
-    
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("class GetCollegeRet {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }
