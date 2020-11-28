@@ -19,6 +19,8 @@ tags:
     description: 文件上传接口
   - name: College
     description: 高校相关接口
+  - name: Department
+    description: 学院相关接口
   - name: Test
     description: 测试、健康检查
 schemes:
@@ -45,6 +47,8 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+
+  # user
 
   /user/add:
     post:
@@ -102,6 +106,8 @@ paths:
         404:
           description: RequestBody not found
 
+  # account
+
   /account/add:
     post:
       tags:
@@ -129,6 +135,8 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+
+  # college
 
   /college/add:
     post:
@@ -181,6 +189,64 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GetCollegeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  # department
+
+  /department/add:
+    post:
+      tags:
+        - Department
+      summary: 创建学院
+      description: 创建学院，返回"学院ID"
+      operationId: addDepartment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建学院
+          required: true
+          schema:
+            $ref: '#/definitions/AddDepartmentRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddDepartmentRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /department/get:
+    post:
+      tags:
+        - Department
+      summary: 查询学院
+      description: 查询学院
+      operationId: getDepartment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 查询学院
+          required: true
+          schema:
+            $ref: '#/definitions/GetDepartmentRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetDepartmentRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -316,6 +382,36 @@ definitions:
         type: string
         example: 备注
         description: 备注
+
+
+  AddDepartmentRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddDepartmentData'
+  AddDepartmentData:
+    properties:
+      department_id:
+        type: integer
+        format: int32
+        example: 1111
+        description: 学院ID
+  AddDepartmentRequest:
+    required:
+      - name
+      - college_id
+    properties:
+      name:
+        type: string
+        example: 计算机学院
+        description: 学院名称
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+
 
   Login:
     required:
@@ -489,8 +585,55 @@ definitions:
         example: "2000-01-01 00:00:00"
         description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
 
-
-
+  GetDepartmentRequest:
+    properties:
+      name:
+        type: string
+        example: 计算机学院
+        description: 学院名称
+      department_id:
+        type: integer
+        format: int32
+        example: 1111
+        description: 学院ID
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+  GetDepartmentRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/Department'
+  Department:
+    description: 学院
+    properties:
+      name:
+        type: string
+        example: 计算机学院
+        description: 学院名称
+      department_id:
+        type: integer
+        format: int32
+        example: 1111
+        description: 学院ID
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+      created_time:
+        type: string
+        example: "2020-01-01 00:00:00"
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      last_modified_time:
+        type: string
+        example: "2000-01-01 00:00:00"
+        description: 最后修改时间，格式：yyyy-MM-dd HH:mm:ss
 
   AddUserRet:
     allOf:

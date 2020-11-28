@@ -83,7 +83,6 @@ public class CollegeRepository {
     public int addCollege(String name, String ministry, String identification, String location, String level, String memo) {
 
         Timestamp createdTime = TimeUtils.now();
-        Timestamp lastModifiedTime = TimeUtils.now();
 
         College_Record record = dslContext
                 .insertInto(
@@ -106,7 +105,7 @@ public class CollegeRepository {
                         level,
                         memo,
                         createdTime,
-                        lastModifiedTime,
+                        createdTime,
                         DeleteStatus.NORMAL.code()
                 ).returning(COLLEGE_.COLLEGEID).fetchOne();
         return record.getValue(COLLEGE_.COLLEGEID);
