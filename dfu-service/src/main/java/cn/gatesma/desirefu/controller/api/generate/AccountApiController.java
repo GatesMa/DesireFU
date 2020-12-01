@@ -1,7 +1,10 @@
 package cn.gatesma.desirefu.controller.api.generate;
 
+import cn.gatesma.desirefu.constants.ApiReturnCode;
+import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRet;
+import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -37,9 +40,20 @@ public class AccountApiController implements AccountApi {
         this.request = request;
     }
 
-    public ResponseEntity<AddAccountRet> addAccount(@ApiParam(value = "创建用户" ,required=true )  @Valid @RequestBody AddAccountRequest body) {
+    @Override
+    public ResponseEntity<AddAccountRet> addAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddAccountRequest body) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<AddAccountRet>(HttpStatus.NOT_IMPLEMENTED);
+        if (accept != null && accept.contains("application/json")) {
+            AddAccountRet response = add(body);
+            return new ResponseEntity<AddAccountRet>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
     }
+
+    private AddAccountRet add(AddAccountRequest request) {
+        return null;
+    }
+
 
 }

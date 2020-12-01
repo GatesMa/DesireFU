@@ -8,6 +8,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
@@ -16,6 +17,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidqqidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidwxidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
@@ -61,6 +63,7 @@ public class Keys {
     public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = UniqueKeys0.KEY_ACCOUNT__PRIMARY;
     public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = UniqueKeys0.KEY_COLLEGE__PRIMARY;
     public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = UniqueKeys0.KEY_DEPARTMENT__PRIMARY;
+    public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = UniqueKeys0.KEY_NORMALACCOUNT__PRIMARY;
     public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = UniqueKeys0.KEY_OPENIDQQIDX__PRIMARY;
     public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = UniqueKeys0.KEY_OPENIDWXIDX__PRIMARY;
     public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = UniqueKeys0.KEY_USERLOGIN__PRIMARY;
@@ -89,6 +92,7 @@ public class Keys {
         public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_Account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
         public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_College__PRIMARY", College_.COLLEGE_.COLLEGEID);
         public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_Department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
+        public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_NormalAccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
         public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
         public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_OpenIdWXIdx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
         public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = Internal.createUniqueKey(Userlogin_.USERLOGIN_, "KEY_UserLogin__PRIMARY", Userlogin_.USERLOGIN_.ID);

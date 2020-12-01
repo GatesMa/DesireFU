@@ -26,8 +26,8 @@ public class AddAccountRequest  implements Serializable {
   @JsonProperty("memo")
   private String memo = null;
 
-  @JsonProperty("created_user_id")
-  private Long createdUserId = null;
+  @JsonProperty("root_user_id")
+  private Long rootUserId = null;
 
   public AddAccountRequest accountType(Integer accountType) {
     this.accountType = accountType;
@@ -38,7 +38,8 @@ public class AddAccountRequest  implements Serializable {
    * 账号类型
    * @return accountType
   **/
-  @ApiModelProperty(example = "1", value = "账号类型")
+  @ApiModelProperty(example = "1", required = true, value = "账号类型")
+  @NotNull
 
   public Integer getAccountType() {
     return accountType;
@@ -76,7 +77,7 @@ public class AddAccountRequest  implements Serializable {
    * 备注
    * @return memo
   **/
-  @ApiModelProperty(example = "审核通过", value = "备注")
+  @ApiModelProperty(example = "备注", value = "备注")
 
   public String getMemo() {
     return memo;
@@ -86,23 +87,24 @@ public class AddAccountRequest  implements Serializable {
     this.memo = memo;
   }
 
-  public AddAccountRequest createdUserId(Long createdUserId) {
-    this.createdUserId = createdUserId;
+  public AddAccountRequest rootUserId(Long rootUserId) {
+    this.rootUserId = rootUserId;
     return this;
   }
 
   /**
    * 创建者userId
-   * @return createdUserId
+   * @return rootUserId
   **/
-  @ApiModelProperty(example = "3453454", value = "创建者userId")
+  @ApiModelProperty(example = "3453454", required = true, value = "创建者userId")
+  @NotNull
 
-  public Long getCreatedUserId() {
-    return createdUserId;
+  public Long getRootUserId() {
+    return rootUserId;
   }
 
-  public void setCreatedUserId(Long createdUserId) {
-    this.createdUserId = createdUserId;
+  public void setRootUserId(Long rootUserId) {
+    this.rootUserId = rootUserId;
   }
 
 
@@ -118,12 +120,12 @@ public class AddAccountRequest  implements Serializable {
     return Objects.equals(this.accountType, addAccountRequest.accountType) &&
         Objects.equals(this.nickName, addAccountRequest.nickName) &&
         Objects.equals(this.memo, addAccountRequest.memo) &&
-        Objects.equals(this.createdUserId, addAccountRequest.createdUserId);
+        Objects.equals(this.rootUserId, addAccountRequest.rootUserId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountType, nickName, memo, createdUserId);
+    return Objects.hash(accountType, nickName, memo, rootUserId);
   }
 
   @Override
@@ -134,7 +136,7 @@ public class AddAccountRequest  implements Serializable {
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
     sb.append("    nickName: ").append(toIndentedString(nickName)).append("\n");
     sb.append("    memo: ").append(toIndentedString(memo)).append("\n");
-    sb.append("    createdUserId: ").append(toIndentedString(createdUserId)).append("\n");
+    sb.append("    rootUserId: ").append(toIndentedString(rootUserId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_Record extends UpdatableRecordImpl<Account_Record> implements Record14<Long, Integer, String, Integer, Integer, String, Long, String, Timestamp, Long, Timestamp, Integer, Long, Timestamp> {
 
-    private static final long serialVersionUID = 1448989133;
+    private static final long serialVersionUID = 1994130373;
 
     /**
      * Setter for <code>DFU_.Account_.accountId</code>. 帐号ID
@@ -159,16 +159,16 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
     }
 
     /**
-     * Setter for <code>DFU_.Account_.createdUserId</code>. 创建人userId
+     * Setter for <code>DFU_.Account_.rootUserId</code>. 创建人userId
      */
-    public void setCreateduserid(Long value) {
+    public void setRootuserid(Long value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>DFU_.Account_.createdUserId</code>. 创建人userId
+     * Getter for <code>DFU_.Account_.rootUserId</code>. 创建人userId
      */
-    public Long getCreateduserid() {
+    public Long getRootuserid() {
         return (Long) get(9);
     }
 
@@ -215,14 +215,14 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
     }
 
     /**
-     * Setter for <code>DFU_.Account_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Setter for <code>DFU_.Account_.lastModifiedTime</code>. lastModifiedTime
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(13, value);
     }
 
     /**
-     * Getter for <code>DFU_.Account_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Getter for <code>DFU_.Account_.lastModifiedTime</code>. lastModifiedTime
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(13);
@@ -337,7 +337,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
      */
     @Override
     public Field<Long> field10() {
-        return Account_.ACCOUNT_.CREATEDUSERID;
+        return Account_.ACCOUNT_.ROOTUSERID;
     }
 
     /**
@@ -449,7 +449,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
      */
     @Override
     public Long component10() {
-        return getCreateduserid();
+        return getRootuserid();
     }
 
     /**
@@ -561,7 +561,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
      */
     @Override
     public Long value10() {
-        return getCreateduserid();
+        return getRootuserid();
     }
 
     /**
@@ -682,7 +682,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
      */
     @Override
     public Account_Record value10(Long value) {
-        setCreateduserid(value);
+        setRootuserid(value);
         return this;
     }
 
@@ -758,7 +758,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
     /**
      * Create a detached, initialised Account_Record
      */
-    public Account_Record(Long accountid, Integer accounttype, String nickname, Integer accountstatus, Integer approvalstatus, String memo, Long audituserid, String auditmsg, Timestamp auditedtime, Long createduserid, Timestamp createdtime, Integer deletestatus, Long lastmodifieduserid, Timestamp lastmodifiedtime) {
+    public Account_Record(Long accountid, Integer accounttype, String nickname, Integer accountstatus, Integer approvalstatus, String memo, Long audituserid, String auditmsg, Timestamp auditedtime, Long rootuserid, Timestamp createdtime, Integer deletestatus, Long lastmodifieduserid, Timestamp lastmodifiedtime) {
         super(Account_.ACCOUNT_);
 
         set(0, accountid);
@@ -770,7 +770,7 @@ public class Account_Record extends UpdatableRecordImpl<Account_Record> implemen
         set(6, audituserid);
         set(7, auditmsg);
         set(8, auditedtime);
-        set(9, createduserid);
+        set(9, rootuserid);
         set(10, createdtime);
         set(11, deletestatus);
         set(12, lastmodifieduserid);

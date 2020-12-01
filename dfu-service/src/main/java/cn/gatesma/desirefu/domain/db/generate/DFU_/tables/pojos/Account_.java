@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_ implements Serializable {
 
-    private static final long serialVersionUID = 159809807;
+    private static final long serialVersionUID = 1181379751;
 
     private Long      accountid;
     private Integer   accounttype;
@@ -34,7 +34,7 @@ public class Account_ implements Serializable {
     private Long      audituserid;
     private String    auditmsg;
     private Timestamp auditedtime;
-    private Long      createduserid;
+    private Long      rootuserid;
     private Timestamp createdtime;
     private Integer   deletestatus;
     private Long      lastmodifieduserid;
@@ -52,7 +52,7 @@ public class Account_ implements Serializable {
         this.audituserid = value.audituserid;
         this.auditmsg = value.auditmsg;
         this.auditedtime = value.auditedtime;
-        this.createduserid = value.createduserid;
+        this.rootuserid = value.rootuserid;
         this.createdtime = value.createdtime;
         this.deletestatus = value.deletestatus;
         this.lastmodifieduserid = value.lastmodifieduserid;
@@ -69,7 +69,7 @@ public class Account_ implements Serializable {
         Long      audituserid,
         String    auditmsg,
         Timestamp auditedtime,
-        Long      createduserid,
+        Long      rootuserid,
         Timestamp createdtime,
         Integer   deletestatus,
         Long      lastmodifieduserid,
@@ -84,7 +84,7 @@ public class Account_ implements Serializable {
         this.audituserid = audituserid;
         this.auditmsg = auditmsg;
         this.auditedtime = auditedtime;
-        this.createduserid = createduserid;
+        this.rootuserid = rootuserid;
         this.createdtime = createdtime;
         this.deletestatus = deletestatus;
         this.lastmodifieduserid = lastmodifieduserid;
@@ -163,12 +163,12 @@ public class Account_ implements Serializable {
         this.auditedtime = auditedtime;
     }
 
-    public Long getCreateduserid() {
-        return this.createduserid;
+    public Long getRootuserid() {
+        return this.rootuserid;
     }
 
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
+    public void setRootuserid(Long rootuserid) {
+        this.rootuserid = rootuserid;
     }
 
     public Timestamp getCreatedtime() {
@@ -216,7 +216,7 @@ public class Account_ implements Serializable {
         sb.append(", ").append(audituserid);
         sb.append(", ").append(auditmsg);
         sb.append(", ").append(auditedtime);
-        sb.append(", ").append(createduserid);
+        sb.append(", ").append(rootuserid);
         sb.append(", ").append(createdtime);
         sb.append(", ").append(deletestatus);
         sb.append(", ").append(lastmodifieduserid);

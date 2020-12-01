@@ -122,10 +122,10 @@ public class Account_Dao extends DAOImpl<Account_Record, cn.gatesma.desirefu.dom
     }
 
     /**
-     * Fetch records that have <code>createdUserId IN (values)</code>
+     * Fetch records that have <code>rootUserId IN (values)</code>
      */
-    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Account_> fetchByCreateduserid(Long... values) {
-        return fetch(Account_.ACCOUNT_.CREATEDUSERID, values);
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Account_> fetchByRootuserid(Long... values) {
+        return fetch(Account_.ACCOUNT_.ROOTUSERID, values);
     }
 
     /**

@@ -122,7 +122,7 @@ paths:
       parameters:
         - in: body
           name: body
-          description: 创建用户
+          description: 创建账号
           required: true
           schema:
             $ref: '#/definitions/AddAccountRequest'
@@ -303,8 +303,8 @@ definitions:
 
   AddAccountRequest:
     required:
-      - login_name
-      - login_name_type
+      - account_type
+      - root_user_id
     properties:
       account_type:
         type: integer
@@ -317,9 +317,9 @@ definitions:
         description: 账号名称
       memo:
         type: string
-        example: 审核通过
+        example: 备注
         description: 备注
-      created_user_id:
+      root_user_id:
         type: integer
         format: int64
         example: 3453454

@@ -8,7 +8,6 @@ import cn.gatesma.desirefu.domain.api.generate.Department;
 import cn.gatesma.desirefu.domain.api.generate.GetDepartmentRet;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
 import cn.gatesma.desirefu.repository.DepartmentRepository;
-import cn.gatesma.desirefu.repository.DepartmentRepository;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.jooq.tools.StringUtils;

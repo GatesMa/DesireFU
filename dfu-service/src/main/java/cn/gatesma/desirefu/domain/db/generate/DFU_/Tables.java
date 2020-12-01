@@ -8,6 +8,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
@@ -48,6 +49,11 @@ public class Tables {
      * 学院信息
      */
     public static final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
+
+    /**
+     * The table <code>DFU_.NormalAccount_</code>.
+     */
+    public static final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 
     /**
      * 用于存储openId对应qq关联关系

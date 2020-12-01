@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_ extends TableImpl<Account_Record> {
 
-    private static final long serialVersionUID = -1563292439;
+    private static final long serialVersionUID = -1092489955;
 
     /**
      * The reference instance of <code>DFU_.Account_</code>
@@ -101,9 +101,9 @@ public class Account_ extends TableImpl<Account_Record> {
     public final TableField<Account_Record, Timestamp> AUDITEDTIME = createField("auditedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "审核时间");
 
     /**
-     * The column <code>DFU_.Account_.createdUserId</code>. 创建人userId
+     * The column <code>DFU_.Account_.rootUserId</code>. 创建人userId
      */
-    public final TableField<Account_Record, Long> CREATEDUSERID = createField("createdUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建人userId");
+    public final TableField<Account_Record, Long> ROOTUSERID = createField("rootUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建人userId");
 
     /**
      * The column <code>DFU_.Account_.createdTime</code>. 创建时间
@@ -121,9 +121,9 @@ public class Account_ extends TableImpl<Account_Record> {
     public final TableField<Account_Record, Long> LASTMODIFIEDUSERID = createField("lastModifiedUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "最后修改人userId");
 
     /**
-     * The column <code>DFU_.Account_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * The column <code>DFU_.Account_.lastModifiedTime</code>. lastModifiedTime
      */
-    public final TableField<Account_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+    public final TableField<Account_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "lastModifiedTime");
 
     /**
      * Create a <code>DFU_.Account_</code> table reference
