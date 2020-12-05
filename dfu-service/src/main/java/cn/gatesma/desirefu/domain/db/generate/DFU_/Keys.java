@@ -32,7 +32,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>DFU_</code> schema.
+ * the <code>dfu_</code> schema.
  */
 @Generated(
     value = {
@@ -88,14 +88,14 @@ public class Keys {
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = Internal.createUniqueKey(Accountuserrole_.ACCOUNTUSERROLE_, "KEY_AccountUserRole__PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
-        public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_Account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
-        public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_College__PRIMARY", College_.COLLEGE_.COLLEGEID);
-        public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_Department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
-        public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_NormalAccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
-        public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
-        public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_OpenIdWXIdx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
-        public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = Internal.createUniqueKey(Userlogin_.USERLOGIN_, "KEY_UserLogin__PRIMARY", Userlogin_.USERLOGIN_.ID);
-        public static final UniqueKey<User_Record> KEY_USER__PRIMARY = Internal.createUniqueKey(User_.USER_, "KEY_User__PRIMARY", User_.USER_.USERID);
+        public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = Internal.createUniqueKey(Accountuserrole_.ACCOUNTUSERROLE_, "KEY_accountuserrole__PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
+        public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_college__PRIMARY", College_.COLLEGE_.COLLEGEID);
+        public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
+        public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_normalaccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_openidqqidx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
+        public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_openidwxidx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
+        public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = Internal.createUniqueKey(Userlogin_.USERLOGIN_, "KEY_userlogin__PRIMARY", Userlogin_.USERLOGIN_.ID);
+        public static final UniqueKey<User_Record> KEY_USER__PRIMARY = Internal.createUniqueKey(User_.USER_, "KEY_user__PRIMARY", User_.USER_.USERID);
     }
 }

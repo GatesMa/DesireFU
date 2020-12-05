@@ -23,13 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Normalaccount_ implements Serializable {
 
-    private static final long serialVersionUID = 261639861;
+    private static final long serialVersionUID = 273253425;
 
     private Long      accountid;
     private Integer   accounttype;
     private Integer   collegeid;
     private Integer   departmentid;
     private String    major;
+    private Long      createduserid;
     private Timestamp createdtime;
     private Integer   deletestatus;
     private Long      lastmodifieduserid;
@@ -43,6 +44,7 @@ public class Normalaccount_ implements Serializable {
         this.collegeid = value.collegeid;
         this.departmentid = value.departmentid;
         this.major = value.major;
+        this.createduserid = value.createduserid;
         this.createdtime = value.createdtime;
         this.deletestatus = value.deletestatus;
         this.lastmodifieduserid = value.lastmodifieduserid;
@@ -55,6 +57,7 @@ public class Normalaccount_ implements Serializable {
         Integer   collegeid,
         Integer   departmentid,
         String    major,
+        Long      createduserid,
         Timestamp createdtime,
         Integer   deletestatus,
         Long      lastmodifieduserid,
@@ -65,6 +68,7 @@ public class Normalaccount_ implements Serializable {
         this.collegeid = collegeid;
         this.departmentid = departmentid;
         this.major = major;
+        this.createduserid = createduserid;
         this.createdtime = createdtime;
         this.deletestatus = deletestatus;
         this.lastmodifieduserid = lastmodifieduserid;
@@ -111,6 +115,14 @@ public class Normalaccount_ implements Serializable {
         this.major = major;
     }
 
+    public Long getCreateduserid() {
+        return this.createduserid;
+    }
+
+    public void setCreateduserid(Long createduserid) {
+        this.createduserid = createduserid;
+    }
+
     public Timestamp getCreatedtime() {
         return this.createdtime;
     }
@@ -152,6 +164,7 @@ public class Normalaccount_ implements Serializable {
         sb.append(", ").append(collegeid);
         sb.append(", ").append(departmentid);
         sb.append(", ").append(major);
+        sb.append(", ").append(createduserid);
         sb.append(", ").append(createdtime);
         sb.append(", ").append(deletestatus);
         sb.append(", ").append(lastmodifieduserid);

@@ -1,9 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.College_;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
@@ -16,7 +14,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.COLLEGE_;
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.USER_;
 
 
 /**

@@ -23,9 +23,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Accountuserrole_ implements Serializable {
 
-    private static final long serialVersionUID = -589071380;
+    private static final long serialVersionUID = 1699765193;
 
     private Long      accountroleid;
+    private Integer   accounttype;
     private Long      userid;
     private Long      accountid;
     private Integer   role;
@@ -39,6 +40,7 @@ public class Accountuserrole_ implements Serializable {
 
     public Accountuserrole_(Accountuserrole_ value) {
         this.accountroleid = value.accountroleid;
+        this.accounttype = value.accounttype;
         this.userid = value.userid;
         this.accountid = value.accountid;
         this.role = value.role;
@@ -51,6 +53,7 @@ public class Accountuserrole_ implements Serializable {
 
     public Accountuserrole_(
         Long      accountroleid,
+        Integer   accounttype,
         Long      userid,
         Long      accountid,
         Integer   role,
@@ -61,6 +64,7 @@ public class Accountuserrole_ implements Serializable {
         Timestamp lastmodifiedtime
     ) {
         this.accountroleid = accountroleid;
+        this.accounttype = accounttype;
         this.userid = userid;
         this.accountid = accountid;
         this.role = role;
@@ -77,6 +81,14 @@ public class Accountuserrole_ implements Serializable {
 
     public void setAccountroleid(Long accountroleid) {
         this.accountroleid = accountroleid;
+    }
+
+    public Integer getAccounttype() {
+        return this.accounttype;
+    }
+
+    public void setAccounttype(Integer accounttype) {
+        this.accounttype = accounttype;
     }
 
     public Long getUserid() {
@@ -148,6 +160,7 @@ public class Accountuserrole_ implements Serializable {
         StringBuilder sb = new StringBuilder("Accountuserrole_ (");
 
         sb.append(accountroleid);
+        sb.append(", ").append(accounttype);
         sb.append(", ").append(userid);
         sb.append(", ").append(accountid);
         sb.append(", ").append(role);

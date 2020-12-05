@@ -22,7 +22,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>DFU_</code> schema.
+ * A class modelling indexes of tables of the <code>dfu_</code> schema.
  */
 @Generated(
     value = {

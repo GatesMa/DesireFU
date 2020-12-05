@@ -64,7 +64,7 @@ task generateDFU {
                     generator() {
                         database() {
                             name('org.jooq.util.mysql.MySQLDatabase')
-                            inputSchema('DFU_')
+                            inputSchema('dfu_')
                             includes('.*')
                             excludes()
                         }

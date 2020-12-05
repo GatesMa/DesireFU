@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Openidqqidx_Record extends UpdatableRecordImpl<Openidqqidx_Record> implements Record3<String, String, Integer> {
 
-    private static final long serialVersionUID = -85350011;
+    private static final long serialVersionUID = -1458007675;
 
     /**
-     * Setter for <code>DFU_.OpenIdQQIdx_.openId</code>. qq对应生成的openId
+     * Setter for <code>dfu_.openidqqidx_.openId</code>. qq对应生成的openId
      */
     public void setOpenid(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdQQIdx_.openId</code>. qq对应生成的openId
+     * Getter for <code>dfu_.openidqqidx_.openId</code>. qq对应生成的openId
      */
     public String getOpenid() {
         return (String) get(0);
     }
 
     /**
-     * Setter for <code>DFU_.OpenIdQQIdx_.qqNumber</code>. qq号
+     * Setter for <code>dfu_.openidqqidx_.qqNumber</code>. qq号
      */
     public void setQqnumber(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdQQIdx_.qqNumber</code>. qq号
+     * Getter for <code>dfu_.openidqqidx_.qqNumber</code>. qq号
      */
     public String getQqnumber() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>DFU_.OpenIdQQIdx_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>dfu_.openidqqidx_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdQQIdx_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>dfu_.openidqqidx_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(2);

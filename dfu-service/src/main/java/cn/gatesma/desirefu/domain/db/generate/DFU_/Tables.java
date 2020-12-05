@@ -18,7 +18,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in DFU_
+ * Convenience access to all tables in dfu_
  */
 @Generated(
     value = {
@@ -36,7 +36,7 @@ public class Tables {
     public static final Accountuserrole_ ACCOUNTUSERROLE_ = Accountuserrole_.ACCOUNTUSERROLE_;
 
     /**
-     * The table <code>DFU_.Account_</code>.
+     * The table <code>dfu_.account_</code>.
      */
     public static final Account_ ACCOUNT_ = Account_.ACCOUNT_;
 
@@ -51,7 +51,7 @@ public class Tables {
     public static final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>DFU_.NormalAccount_</code>.
+     * The table <code>dfu_.normalaccount_</code>.
      */
     public static final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 
@@ -71,7 +71,7 @@ public class Tables {
     public static final Userlogin_ USERLOGIN_ = Userlogin_.USERLOGIN_;
 
     /**
-     * The table <code>DFU_.User_</code>.
+     * The table <code>dfu_.user_</code>.
      */
     public static final User_ USER_ = User_.USER_;
 }

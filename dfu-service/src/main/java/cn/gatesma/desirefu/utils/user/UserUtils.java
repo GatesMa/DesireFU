@@ -1,8 +1,7 @@
 package cn.gatesma.desirefu.utils.user;
 
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
-import cn.gatesma.desirefu.domain.api.generate.User;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Userlogin_Record;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 

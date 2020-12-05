@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class College_ extends TableImpl<College_Record> {
 
-    private static final long serialVersionUID = -1179429384;
+    private static final long serialVersionUID = -878827048;
 
     /**
-     * The reference instance of <code>DFU_.College_</code>
+     * The reference instance of <code>dfu_.college_</code>
      */
     public static final College_ COLLEGE_ = new College_();
 
@@ -56,71 +56,71 @@ public class College_ extends TableImpl<College_Record> {
     }
 
     /**
-     * The column <code>DFU_.College_.collegeId</code>. 学校Id
+     * The column <code>dfu_.college_.collegeId</code>. 学校Id
      */
     public final TableField<College_Record, Integer> COLLEGEID = createField("collegeId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "学校Id");
 
     /**
-     * The column <code>DFU_.College_.name</code>. 学校名称
+     * The column <code>dfu_.college_.name</code>. 学校名称
      */
     public final TableField<College_Record, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(1024).nullable(false).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "学校名称");
 
     /**
-     * The column <code>DFU_.College_.ministry</code>. 主管部门
+     * The column <code>dfu_.college_.ministry</code>. 主管部门
      */
     public final TableField<College_Record, String> MINISTRY = createField("ministry", org.jooq.impl.SQLDataType.VARCHAR(1024).nullable(false).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "主管部门");
 
     /**
-     * The column <code>DFU_.College_.identification</code>. 学校标识码
+     * The column <code>dfu_.college_.identification</code>. 学校标识码
      */
     public final TableField<College_Record, String> IDENTIFICATION = createField("identification", org.jooq.impl.SQLDataType.VARCHAR(255).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "学校标识码");
 
     /**
-     * The column <code>DFU_.College_.location</code>. 所在地
+     * The column <code>dfu_.college_.location</code>. 所在地
      */
     public final TableField<College_Record, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR(255).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "所在地");
 
     /**
-     * The column <code>DFU_.College_.level</code>. 办学层次
+     * The column <code>dfu_.college_.level</code>. 办学层次
      */
     public final TableField<College_Record, String> LEVEL = createField("level", org.jooq.impl.SQLDataType.VARCHAR(255).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "办学层次");
 
     /**
-     * The column <code>DFU_.College_.memo</code>. 备注
+     * The column <code>dfu_.college_.memo</code>. 备注
      */
     public final TableField<College_Record, String> MEMO = createField("memo", org.jooq.impl.SQLDataType.VARCHAR(255).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "备注");
 
     /**
-     * The column <code>DFU_.College_.createdTime</code>. 创建时间
+     * The column <code>dfu_.college_.createdTime</code>. 创建时间
      */
     public final TableField<College_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>DFU_.College_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>dfu_.college_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<College_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>DFU_.College_.lastModifiedTime</code>. lastModifiedTime
+     * The column <code>dfu_.college_.lastModifiedTime</code>. lastModifiedTime
      */
     public final TableField<College_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "lastModifiedTime");
 
     /**
-     * Create a <code>DFU_.College_</code> table reference
+     * Create a <code>dfu_.college_</code> table reference
      */
     public College_() {
-        this(DSL.name("College_"), null);
+        this(DSL.name("college_"), null);
     }
 
     /**
-     * Create an aliased <code>DFU_.College_</code> table reference
+     * Create an aliased <code>dfu_.college_</code> table reference
      */
     public College_(String alias) {
         this(DSL.name(alias), COLLEGE_);
     }
 
     /**
-     * Create an aliased <code>DFU_.College_</code> table reference
+     * Create an aliased <code>dfu_.college_</code> table reference
      */
     public College_(Name alias) {
         this(alias, COLLEGE_);

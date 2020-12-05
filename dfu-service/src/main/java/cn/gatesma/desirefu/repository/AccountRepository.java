@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
+
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;

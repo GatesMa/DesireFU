@@ -66,6 +66,13 @@ public class Accountuserrole_Dao extends DAOImpl<Accountuserrole_Record, cn.gate
     }
 
     /**
+     * Fetch records that have <code>accountType IN (values)</code>
+     */
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Accountuserrole_> fetchByAccounttype(Integer... values) {
+        return fetch(Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTTYPE, values);
+    }
+
+    /**
      * Fetch records that have <code>userId IN (values)</code>
      */
     public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Accountuserrole_> fetchByUserid(Long... values) {

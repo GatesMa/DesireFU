@@ -1,13 +1,11 @@
 package cn.gatesma.desirefu.repository;
 
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Userlogin_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.jooq.DSLContext;
 import org.jooq.SelectConditionStep;
 import org.jooq.UpdateSetMoreStep;
-import org.jooq.types.UInteger;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

@@ -38,10 +38,10 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = 283720300;
+    private static final long serialVersionUID = -553046388;
 
     /**
-     * The reference instance of <code>DFU_</code>
+     * The reference instance of <code>dfu_</code>
      */
     public static final Dfu_ DFU_ = new Dfu_();
 
@@ -51,7 +51,7 @@ public class Dfu_ extends SchemaImpl {
     public final Accountuserrole_ ACCOUNTUSERROLE_ = Accountuserrole_.ACCOUNTUSERROLE_;
 
     /**
-     * The table <code>DFU_.Account_</code>.
+     * The table <code>dfu_.account_</code>.
      */
     public final Account_ ACCOUNT_ = Account_.ACCOUNT_;
 
@@ -66,7 +66,7 @@ public class Dfu_ extends SchemaImpl {
     public final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>DFU_.NormalAccount_</code>.
+     * The table <code>dfu_.normalaccount_</code>.
      */
     public final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 
@@ -86,7 +86,7 @@ public class Dfu_ extends SchemaImpl {
     public final Userlogin_ USERLOGIN_ = Userlogin_.USERLOGIN_;
 
     /**
-     * The table <code>DFU_.User_</code>.
+     * The table <code>dfu_.user_</code>.
      */
     public final User_ USER_ = User_.USER_;
 
@@ -94,7 +94,7 @@ public class Dfu_ extends SchemaImpl {
      * No further instances allowed
      */
     private Dfu_() {
-        super("DFU_", null);
+        super("dfu_", null);
     }
 
 

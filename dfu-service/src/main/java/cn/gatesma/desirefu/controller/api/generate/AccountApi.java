@@ -23,10 +23,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
-@Api(value = "Account", description = "the Account API")
+@Api(value = "账号", tags={ "账号", }, description = "the Account API")
 public interface AccountApi {
 
-    @ApiOperation(value = "创建账号", nickname = "addAccount", notes = "创建账号，返回\"账号ID\"", response = AddAccountRet.class, tags={ "Account", })
+    @ApiOperation(value = "创建账号", nickname = "addAccount", notes = "创建账号，返回\"账号ID\"", response = AddAccountRet.class, tags={ "账号", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = AddAccountRet.class),
         @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),

@@ -2,7 +2,7 @@ package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.type.LoginNameType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
@@ -15,7 +15,6 @@ import cn.gatesma.desirefu.utils.RetCodeUtils;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import cn.gatesma.desirefu.utils.user.UserUtils;
 import com.google.common.base.Strings;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package cn.gatesma.desirefu.constants.type;
+package cn.gatesma.desirefu.constants.status;
 
 /**
  * User: gatesma

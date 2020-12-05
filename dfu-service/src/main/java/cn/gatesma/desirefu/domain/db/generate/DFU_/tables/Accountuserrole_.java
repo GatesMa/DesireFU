@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Accountuserrole_ extends TableImpl<Accountuserrole_Record> {
 
-    private static final long serialVersionUID = 1425024538;
+    private static final long serialVersionUID = -1438159144;
 
     /**
-     * The reference instance of <code>DFU_.AccountUserRole_</code>
+     * The reference instance of <code>dfu_.accountuserrole_</code>
      */
     public static final Accountuserrole_ ACCOUNTUSERROLE_ = new Accountuserrole_();
 
@@ -56,66 +56,71 @@ public class Accountuserrole_ extends TableImpl<Accountuserrole_Record> {
     }
 
     /**
-     * The column <code>DFU_.AccountUserRole_.accountRoleId</code>. qq对应生成的openId
+     * The column <code>dfu_.accountuserrole_.accountRoleId</code>. qq对应生成的openId
      */
     public final TableField<Accountuserrole_Record, Long> ACCOUNTROLEID = createField("accountRoleId", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "qq对应生成的openId");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.userId</code>. 用户ID
+     * The column <code>dfu_.accountuserrole_.accountType</code>. 账号类型
+     */
+    public final TableField<Accountuserrole_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "账号类型");
+
+    /**
+     * The column <code>dfu_.accountuserrole_.userId</code>. 用户ID
      */
     public final TableField<Accountuserrole_Record, Long> USERID = createField("userId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "用户ID");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.accountId</code>. 账号ID
+     * The column <code>dfu_.accountuserrole_.accountId</code>. 账号ID
      */
     public final TableField<Accountuserrole_Record, Long> ACCOUNTID = createField("accountId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "账号ID");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.role</code>. 系统角色
+     * The column <code>dfu_.accountuserrole_.role</code>. 系统角色
      */
     public final TableField<Accountuserrole_Record, Integer> ROLE = createField("role", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "系统角色");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>dfu_.accountuserrole_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<Accountuserrole_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.createdTime</code>. 创建时间
+     * The column <code>dfu_.accountuserrole_.createdTime</code>. 创建时间
      */
     public final TableField<Accountuserrole_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.createdUserId</code>. 创建人ID
+     * The column <code>dfu_.accountuserrole_.createdUserId</code>. 创建人ID
      */
     public final TableField<Accountuserrole_Record, Long> CREATEDUSERID = createField("createdUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建人ID");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.lastModifiedUserId</code>. 最后修改人userId
+     * The column <code>dfu_.accountuserrole_.lastModifiedUserId</code>. 最后修改人userId
      */
     public final TableField<Accountuserrole_Record, Long> LASTMODIFIEDUSERID = createField("lastModifiedUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "最后修改人userId");
 
     /**
-     * The column <code>DFU_.AccountUserRole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * The column <code>dfu_.accountuserrole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public final TableField<Accountuserrole_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
     /**
-     * Create a <code>DFU_.AccountUserRole_</code> table reference
+     * Create a <code>dfu_.accountuserrole_</code> table reference
      */
     public Accountuserrole_() {
-        this(DSL.name("AccountUserRole_"), null);
+        this(DSL.name("accountuserrole_"), null);
     }
 
     /**
-     * Create an aliased <code>DFU_.AccountUserRole_</code> table reference
+     * Create an aliased <code>dfu_.accountuserrole_</code> table reference
      */
     public Accountuserrole_(String alias) {
         this(DSL.name(alias), ACCOUNTUSERROLE_);
     }
 
     /**
-     * Create an aliased <code>DFU_.AccountUserRole_</code> table reference
+     * Create an aliased <code>dfu_.accountuserrole_</code> table reference
      */
     public Accountuserrole_(Name alias) {
         this(alias, ACCOUNTUSERROLE_);

@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Openidwxidx_Record extends UpdatableRecordImpl<Openidwxidx_Record> implements Record3<String, String, Integer> {
 
-    private static final long serialVersionUID = -1106012285;
+    private static final long serialVersionUID = -332538109;
 
     /**
-     * Setter for <code>DFU_.OpenIdWXIdx_.openId</code>. wx对应生成的openId
+     * Setter for <code>dfu_.openidwxidx_.openId</code>. wx对应生成的openId
      */
     public void setOpenid(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdWXIdx_.openId</code>. wx对应生成的openId
+     * Getter for <code>dfu_.openidwxidx_.openId</code>. wx对应生成的openId
      */
     public String getOpenid() {
         return (String) get(0);
     }
 
     /**
-     * Setter for <code>DFU_.OpenIdWXIdx_.wxId</code>. 微信ID
+     * Setter for <code>dfu_.openidwxidx_.wxId</code>. 微信ID
      */
     public void setWxid(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdWXIdx_.wxId</code>. 微信ID
+     * Getter for <code>dfu_.openidwxidx_.wxId</code>. 微信ID
      */
     public String getWxid() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>DFU_.OpenIdWXIdx_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>dfu_.openidwxidx_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>DFU_.OpenIdWXIdx_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>dfu_.openidwxidx_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(2);

@@ -1,7 +1,10 @@
 package cn.gatesma.desirefu.constants.type;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +21,15 @@ public enum AccountTypeEnum {
 
     private Integer value;
     private String desc;
+
+    public static Set<Integer> accountTypeSet;
+
+    static {
+        accountTypeSet = Sets.newHashSet();
+        for (AccountTypeEnum type : AccountTypeEnum.values()) {
+            accountTypeSet.add(type.value);
+        }
+    }
 
     AccountTypeEnum(Integer value, String desc) {
         this.value = value;

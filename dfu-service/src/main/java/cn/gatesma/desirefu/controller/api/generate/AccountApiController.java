@@ -1,10 +1,12 @@
 package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
+import cn.gatesma.desirefu.constants.type.AccountTypeEnum;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
-import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
-import cn.gatesma.desirefu.domain.api.generate.AddAccountRet;
-import cn.gatesma.desirefu.domain.api.generate.GetUserRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
+import cn.gatesma.desirefu.service.AccountService;
+import cn.gatesma.desirefu.service.CollegeService;
+import cn.gatesma.desirefu.utils.RetCodeUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +36,9 @@ public class AccountApiController implements AccountApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+
+    @Resource
+    private AccountService accountService;
 
     @org.springframework.beans.factory.annotation.Autowired
     public AccountApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -52,7 +58,24 @@ public class AccountApiController implements AccountApi {
     }
 
     private AddAccountRet add(AddAccountRequest request) {
-        return null;
+
+        if (request.getRootUserId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "userId必须传");
+        }
+
+        if (request.getAccountType() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "账号类型必须传");
+        }
+
+        // 校验accountType
+        if (!AccountTypeEnum.accountTypeSet.contains(request.getAccountType())) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "账号类型超出限制");
+        }
+
+        // 账号账号
+        Long accountId = accountService.createAccount(request);
+
+        return RetCodeUtils.ok(new AddAccountRet()).data(new AddAccountRetData().accountId(accountId));
     }
 
 

@@ -1,25 +1,18 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
-import cn.gatesma.desirefu.constants.type.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Userlogin_;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Userlogin_Record;
-import cn.gatesma.desirefu.utils.TimeUtils;
 import org.jooq.*;
-import org.jooq.types.UInteger;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.USERLOGIN_;
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.USER_;
 
 
 /**
