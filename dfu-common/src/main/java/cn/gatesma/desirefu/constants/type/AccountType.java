@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * @date 2020/11/1
  * @desc 账号类型枚举
  */
-public enum AccountTypeEnum {
+public enum AccountType {
 
     NORMAL(1, "NORMAL"), // NORMAL类型的账号，可以参与组队
     COMPETITION_CREATOR(2, "COMPETITION_CREATOR"),// 比赛创建者账号
@@ -26,12 +26,12 @@ public enum AccountTypeEnum {
 
     static {
         accountTypeSet = Sets.newHashSet();
-        for (AccountTypeEnum type : AccountTypeEnum.values()) {
+        for (AccountType type : AccountType.values()) {
             accountTypeSet.add(type.value);
         }
     }
 
-    AccountTypeEnum(Integer value, String desc) {
+    AccountType(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -40,7 +40,7 @@ public enum AccountTypeEnum {
         if (value == null) {
             return null;
         }
-        for (AccountTypeEnum type : AccountTypeEnum.values()) {
+        for (AccountType type : AccountType.values()) {
             if (type.value.equals(value)) {
                 return type.desc;
             }
@@ -52,7 +52,7 @@ public enum AccountTypeEnum {
         if (desc == null) {
             return null;
         }
-        for (AccountTypeEnum type : AccountTypeEnum.values()) {
+        for (AccountType type : AccountType.values()) {
             if (type.desc.equals(desc)) {
                 return type.value;
             }
@@ -61,7 +61,7 @@ public enum AccountTypeEnum {
     }
 
     public static List<String> getAllDesc() {
-        return Lists.newArrayList(AccountTypeEnum.values()).stream().map(it -> it.desc).collect(Collectors.toList());
+        return Lists.newArrayList(AccountType.values()).stream().map(it -> it.desc).collect(Collectors.toList());
     }
 
     public Integer getValue() {

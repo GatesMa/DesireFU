@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Normalaccount_ extends TableImpl<Normalaccount_Record> {
 
-    private static final long serialVersionUID = -295732584;
+    private static final long serialVersionUID = 196781164;
 
     /**
      * The reference instance of <code>dfu_.normalaccount_</code>
@@ -78,6 +78,11 @@ public class Normalaccount_ extends TableImpl<Normalaccount_Record> {
      * The column <code>dfu_.normalaccount_.major</code>. 专业
      */
     public final TableField<Normalaccount_Record, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "专业");
+
+    /**
+     * The column <code>dfu_.normalaccount_.stuId</code>. 学号
+     */
+    public final TableField<Normalaccount_Record, String> STUID = createField("stuId", org.jooq.impl.SQLDataType.VARCHAR(255), this, "学号");
 
     /**
      * The column <code>dfu_.normalaccount_.createdUserId</code>. 创建人userId

@@ -1,16 +1,14 @@
 package cn.gatesma.desirefu.service;
 
-import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.ApprovalStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.type.OperatorRole;
-import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
+import cn.gatesma.desirefu.domain.api.generate.AddNormalAccountRequest;
 import cn.gatesma.desirefu.repository.AccountRepository;
 import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
+import cn.gatesma.desirefu.repository.NormalAccountRepository;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -19,44 +17,42 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  * User: gatesma
- * Date: 2020-11-29
+ * Date: 2020-12-06
  * Desc:
  */
 @Service
-public class AccountService {
+public class NormalAccountService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(NormalAccountService.class);
 
     @Resource
-    private AccountRepository accountRepository;
+    private NormalAccountRepository normalAccountRepository;
+
+    @Resource
+    private AccountService accountService;
 
     @Resource
     private AccountUserRoleRepository accountUserRoleRepository;
 
-    /**
-     * 创建一个 Account_ 表记录，并绑定rootUserId跟account的关系
-     */
-    public Long createAccount(AddAccountRequest request) {
+    public Long createNormalAccount(AddNormalAccountRequest request) {
 
-        Timestamp now = TimeUtils.now();
         Integer accountType = request.getAccountType();
-        String nickName = request.getNickName();
-        String memo = request.getMemo();
-        Long rootUserId = request.getRootUserId();
+        Integer collegeId = request.getCollegeId();
+        Integer departmentId = request.getDepartmentId();
+        String major = request.getMajor();
+        @NotNull Long rootUserId = request.getRootUserId();
+        String stuId = request.getStuId();
 
-        // 创建账号
-        long accountId = accountRepository.addAccount(accountType, nickName,
-                AccountStatus.STATUS_PENDING.code(), ApprovalStatus.PENDING.code(), memo, 0L,
-                StringUtils.EMPTY, null, rootUserId, now, DeleteStatus.NORMAL.code(), rootUserId, now);
 
-        // 创建账号和user的角色关系
-        accountUserRoleRepository.addAccountUserRole(accountId, accountType, rootUserId, OperatorRole.ROLE_ROOT.code(),
-                DeleteStatus.NORMAL.code(), rootUserId, rootUserId);
+        // 1. 先创建一个common账号
+        long accountId = accountService.createAccount(request);
+
+        // 2. 创建一个NormalAccount表记录
+        normalAccountRepository.addNormalAccount(accountId, accountType, collegeId, departmentId, major, stuId, rootUserId);
 
         return accountId;
     }

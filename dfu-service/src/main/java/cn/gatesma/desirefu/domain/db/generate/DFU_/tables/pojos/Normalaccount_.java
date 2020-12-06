@@ -23,13 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Normalaccount_ implements Serializable {
 
-    private static final long serialVersionUID = 273253425;
+    private static final long serialVersionUID = 1748720256;
 
     private Long      accountid;
     private Integer   accounttype;
     private Integer   collegeid;
     private Integer   departmentid;
     private String    major;
+    private String    stuid;
     private Long      createduserid;
     private Timestamp createdtime;
     private Integer   deletestatus;
@@ -44,6 +45,7 @@ public class Normalaccount_ implements Serializable {
         this.collegeid = value.collegeid;
         this.departmentid = value.departmentid;
         this.major = value.major;
+        this.stuid = value.stuid;
         this.createduserid = value.createduserid;
         this.createdtime = value.createdtime;
         this.deletestatus = value.deletestatus;
@@ -57,6 +59,7 @@ public class Normalaccount_ implements Serializable {
         Integer   collegeid,
         Integer   departmentid,
         String    major,
+        String    stuid,
         Long      createduserid,
         Timestamp createdtime,
         Integer   deletestatus,
@@ -68,6 +71,7 @@ public class Normalaccount_ implements Serializable {
         this.collegeid = collegeid;
         this.departmentid = departmentid;
         this.major = major;
+        this.stuid = stuid;
         this.createduserid = createduserid;
         this.createdtime = createdtime;
         this.deletestatus = deletestatus;
@@ -113,6 +117,14 @@ public class Normalaccount_ implements Serializable {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public String getStuid() {
+        return this.stuid;
+    }
+
+    public void setStuid(String stuid) {
+        this.stuid = stuid;
     }
 
     public Long getCreateduserid() {
@@ -164,6 +176,7 @@ public class Normalaccount_ implements Serializable {
         sb.append(", ").append(collegeid);
         sb.append(", ").append(departmentid);
         sb.append(", ").append(major);
+        sb.append(", ").append(stuid);
         sb.append(", ").append(createduserid);
         sb.append(", ").append(createdtime);
         sb.append(", ").append(deletestatus);

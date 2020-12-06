@@ -9,6 +9,8 @@ basePath: /desirefu/v1
 tags:
   - name: Account
     description: 账号接口
+  - name: NormalAccount
+    description: 普通账号接口
   - name: User
     description: 用户接口
   - name: Login
@@ -131,6 +133,36 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/AddAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  # account
+
+  /normal_account/add:
+    post:
+      tags:
+        - NormalAccount
+      summary: 创建普通学生账号
+      description: 创建普通学生账号，返回"账号ID"
+      operationId: addNormalAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/AddNormalAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddNormalAccountRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -332,6 +364,48 @@ definitions:
           data:
             $ref: '#/definitions/AddAccountRetData'
   AddAccountRetData:
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  AddNormalAccountRequest:
+    title: AddNormalAccountRequest
+    required:
+      - college_id
+      - department_id
+      - major
+    allOf:
+      - $ref: '#/definitions/AddAccountRequest'
+      - properties:
+          college_id:
+            type: integer
+            format: int32
+            example: 2211
+            description: 学校ID
+          department_id:
+            type: integer
+            format: int32
+            example: 1111
+            description: 学院ID
+          major:
+            type: string
+            example: 计算机科学与技术
+            description: 专业
+          stu_id:
+            type: string
+            example: 2017141461189
+            description: 学号
+
+  AddNormalAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddNormalAccountRetData'
+  AddNormalAccountRetData:
     properties:
       account_id:
         type: integer

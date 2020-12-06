@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_ extends TableImpl<Account_Record> {
 
-    private static final long serialVersionUID = 256677181;
+    private static final long serialVersionUID = 1914778875;
 
     /**
      * The reference instance of <code>dfu_.account_</code>
@@ -93,12 +93,12 @@ public class Account_ extends TableImpl<Account_Record> {
     /**
      * The column <code>dfu_.account_.auditMsg</code>. 审核结果信息
      */
-    public final TableField<Account_Record, String> AUDITMSG = createField("auditMsg", org.jooq.impl.SQLDataType.VARCHAR(2048).nullable(false), this, "审核结果信息");
+    public final TableField<Account_Record, String> AUDITMSG = createField("auditMsg", org.jooq.impl.SQLDataType.VARCHAR(2048), this, "审核结果信息");
 
     /**
      * The column <code>dfu_.account_.auditedTime</code>. 审核时间
      */
-    public final TableField<Account_Record, Timestamp> AUDITEDTIME = createField("auditedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "审核时间");
+    public final TableField<Account_Record, Timestamp> AUDITEDTIME = createField("auditedTime", org.jooq.impl.SQLDataType.TIMESTAMP, this, "审核时间");
 
     /**
      * The column <code>dfu_.account_.rootUserId</code>. 创建人userId

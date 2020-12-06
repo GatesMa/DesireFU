@@ -94,6 +94,13 @@ public class Normalaccount_Dao extends DAOImpl<Normalaccount_Record, cn.gatesma.
     }
 
     /**
+     * Fetch records that have <code>stuId IN (values)</code>
+     */
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Normalaccount_> fetchByStuid(String... values) {
+        return fetch(Normalaccount_.NORMALACCOUNT_.STUID, values);
+    }
+
+    /**
      * Fetch records that have <code>createdUserId IN (values)</code>
      */
     public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Normalaccount_> fetchByCreateduserid(Long... values) {
