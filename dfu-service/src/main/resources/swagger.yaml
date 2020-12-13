@@ -284,6 +284,33 @@ paths:
         404:
           description: RequestBody not found
 
+  /login/can_login_account:
+    post:
+      tags:
+        - Login
+      summary: 查询一个用户可以登录的账号
+      description: 查询一个用户可以登录的账号
+      operationId: canLoginAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CanLoginAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CanLoginAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
@@ -750,6 +777,70 @@ definitions:
         example: 3453454
         description: 创建者userId
     title: AddUserRequest
+
+  CanLoginAccountRequest:
+    properties:
+      login_name:
+        type: string
+        description: 登录账号名称
+      login_name_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 登录账号类型
+      user_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 用户ID
+  CanLoginAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/CanLoginAccountData'
+  CanLoginAccountData:
+    properties:
+      account_list:
+        type: array
+        items:
+          $ref: '#/definitions/CanLoginAccountItem'
+        description: 可以登录的账号列表
+      platform_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      platform:
+        type: string
+        description: 账号类型名称
+
+  CanLoginAccountItem:
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      account_name:
+        type: string
+        description: 账号名称
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+      role_name:
+        type: string
+        description: 角色名称
+
 
   HelloRet:
     allOf:

@@ -120,11 +120,15 @@ public class AccountUserRoleRepository {
     /**
      * 查询账号用户角色信息
      */
-    public List<Accountuserrole_Record> queryRoleRelation(long accountId, Integer accountType, Long userId,
+    public List<Accountuserrole_Record> queryRoleRelation(Long accountId, Integer accountType, Long userId,
                                                           Integer role, Integer deleteStatus) {
 
         SelectConditionStep<Accountuserrole_Record> step = dslContext.selectFrom(ACCOUNTUSERROLE_)
-                .where().and(ACCOUNTUSERROLE_.ACCOUNTID.eq(accountId));
+                .where();
+
+        if (null != accountId) {
+            step.and(ACCOUNTUSERROLE_.ACCOUNTID.eq(accountId));
+        }
 
         if (null != accountType) {
             step.and(ACCOUNTUSERROLE_.ACCOUNTTYPE.eq(accountType));

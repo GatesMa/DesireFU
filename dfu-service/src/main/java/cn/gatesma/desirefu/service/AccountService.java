@@ -12,6 +12,8 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrol
 import cn.gatesma.desirefu.repository.AccountRepository;
 import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,9 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -59,6 +64,26 @@ public class AccountService {
                 DeleteStatus.NORMAL.code(), rootUserId, rootUserId);
 
         return accountId;
+    }
+
+    /**
+     * 通过账号列表获取账号名称的map
+     */
+    public Map<Long, String> getAccountNameMap(List<Long> accountIds) {
+
+
+        if (CollectionUtils.isEmpty(accountIds)) {
+            return null;
+        }
+
+        List<Account_Record> records = accountRepository.batchGetAccountById(accountIds);
+
+        if (CollectionUtils.isNotEmpty(records)) {
+            return records.stream().collect(Collectors.toMap(Account_Record::getAccountid,
+                    Account_Record::getNickname));
+        } else {
+            return null;
+        }
     }
 
 

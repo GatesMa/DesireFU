@@ -95,6 +95,19 @@ public class AccountRepository {
         return step.where(ACCOUNT_.ACCOUNTID.eq(accountId)).execute();
     }
 
+    /**
+     * 批量通过uid获取数据
+     */
+    public List<Account_Record> batchGetAccountById(List<Long> accountIds) {
+
+        SelectConditionStep<Account_Record> stmt = dslContext
+                .selectFrom(ACCOUNT_)
+                .where(ACCOUNT_.ACCOUNTID.in(accountIds))
+                .and(ACCOUNT_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
+
+        return stmt.fetch();
+    }
+
 
 
 }
