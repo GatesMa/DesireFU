@@ -1,0 +1,90 @@
+import groovy.xml.MarkupBuilder
+import org.jooq.util.GenerationTool
+
+import javax.xml.bind.JAXB
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+
+    //强制指定第三方引用库，解决引用时用 + 出现的编译错误
+    resolutionStrategy.force 'com.alibaba:fastjson:1.2.67'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.10.5'
+        classpath 'mysql:mysql-connector-java:5.1.45'
+    }
+}
+
+// 依赖包位置
+task copyRuntimeLibs(type: Copy) {
+    into "build/libs/lib"
+    from configurations.runtime
+}
+
+dependencies {
+    compile project(":dfu-common")
+
+    // jooq
+    compile 'org.jooq:jooq:3.10.5'
+    compile 'org.jooq:jool:0.9.12'
+
+    // mysql
+    runtime 'mysql:mysql-connector-java:5.1.45'
+
+    // db pool
+    compile 'com.zaxxer:HikariCP:3.4.1'
+
+    // logback
+    compile 'ch.qos.logback:logback-core:1.2.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+}
+
+task generateDFU {
+    doLast {
+        def writer = new StringWriter()
+        def xml = new MarkupBuilder(writer)
+                .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
+                    jdbc() {
+                        driver('com.mysql.jdbc.Driver')
+                        url('jdbc:mysql://127.0.0.1:3306/DFU_?useUnicode=true&characterEncoding=utf8&useSSL=true')
+                        user('root')
+                        password('qzone')
+                    }
+                    generator() {
+                        database() {
+                            name('org.jooq.util.mysql.MySQLDatabase')
+                            inputSchema('dfu_')
+                            includes('.*')
+                            excludes()
+                        }
+
+                        generate([:]) {
+                            pojos true
+                            daos true
+                        }
+
+                        target() {
+                            packageName('cn.gatesma.desirefu.domain.db.generate.DFU_')
+                            directory('dfu-jooq/build/output/jooq/DFU_')
+                        }
+                    }
+                }
+
+        GenerationTool.generate(
+                JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+        )
+    }
+}
+
+javadoc.enabled = false

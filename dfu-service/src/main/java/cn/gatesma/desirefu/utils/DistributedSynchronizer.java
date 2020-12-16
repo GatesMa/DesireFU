@@ -63,4 +63,11 @@ public class DistributedSynchronizer {
         String lockName = accountId + "_" + accountType;
         return synchronize(lockName, expireAfterMilSec, callable);
     }
+
+    public <V> V synchronizeByUser(String loginName, int loginNameType, int expireAfterSeconds, Callable<V> callable) {
+        String lockName = "USER_" + loginName + "_" + loginNameType;
+        return synchronize(lockName, expireAfterSeconds, callable);
+    }
+
+
 }

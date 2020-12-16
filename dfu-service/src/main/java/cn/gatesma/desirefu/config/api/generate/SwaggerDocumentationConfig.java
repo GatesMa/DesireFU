@@ -43,6 +43,12 @@ public class SwaggerDocumentationConfig {
         return new Tag[]{
                 new Tag("测试", "测试", 100),
                 new Tag("用户", "用户", 200),
+                new Tag("账号", "账号", 300),
+                new Tag("普通账号", "普通账号", 300),
+                new Tag("登陆", "登陆", 400),
+                new Tag("元数据", "元数据", 500),
+                new Tag("高校", "高校", 600),
+                new Tag("学院", "学院", 700),
         };
     }
 
