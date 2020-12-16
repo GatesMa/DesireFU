@@ -91,3 +91,7 @@ Icon
 .svn
 .vscode
 .gradle
+
+gradlew
+gradlew.bat
+gradle
