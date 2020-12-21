@@ -4,6 +4,7 @@ import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.Global;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
+import cn.gatesma.desirefu.exception.RPCException;
 import cn.gatesma.desirefu.utils.CommonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -66,6 +67,13 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(CustomerApiException.class)
     public ResponseEntity<ReturnCode> handleException(CustomerApiException exception, HttpServletRequest request) {
+        LOGGER.error("Logic Error：", exception);
+        return new ResponseEntity<ReturnCode>(generateReturnCode(request, exception.getRetCode().code(), exception.getMessage(), false), HttpStatus.OK);
+    }
+
+    // RPCException
+    @ExceptionHandler(RPCException.class)
+    public ResponseEntity<ReturnCode> handleException(RPCException exception, HttpServletRequest request) {
         LOGGER.error("Logic Error：", exception);
         return new ResponseEntity<ReturnCode>(generateReturnCode(request, exception.getRetCode().code(), exception.getMessage(), false), HttpStatus.OK);
     }
