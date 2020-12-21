@@ -27,7 +27,7 @@ public class MpApiHelper {
     /**
      * 通过code获取微信的唯一openId
      */
-    private static String genOpenIdFromCodeByAppIdAndSecret(String appId, String appSecret, String code) {
+    public static String genOpenIdFromCodeByAppIdAndSecret(String appId, String appSecret, String code) {
 
 
         // 生成get地址
@@ -50,7 +50,7 @@ public class MpApiHelper {
                 success = false;
                 log.error("请求微信接口获取openID失败: " + e.getMessage());
                 if (retryTime == Constants.retryTimes - 1) {
-                    throw new RPCException(ApiReturnCode.REQUEST_HTTP_ERROR, "请求微信接口获取openID失败");
+                    throw new RPCException(ApiReturnCode.EXTERNAL_INTERFACE_ERROR, "请求微信接口获取openID失败");
                 }
             } finally {
                 if (success) {
@@ -79,10 +79,10 @@ public class MpApiHelper {
         } else {
             // 请求失败
             if (json.containsKey("errmsg")) {
-                throw new RPCException(ApiReturnCode.REQUEST_HTTP_ERROR,
+                throw new RPCException(ApiReturnCode.EXTERNAL_INTERFACE_ERROR,
                         json.getInteger("errcode") + ": " + json.getString("errmsg"));
             } else {
-                throw new RPCException(ApiReturnCode.REQUEST_HTTP_ERROR, "请求微信接口获取openID失败");
+                throw new RPCException(ApiReturnCode.EXTERNAL_INTERFACE_ERROR, "请求微信接口获取openID失败, ret={}", res);
             }
         }
     }

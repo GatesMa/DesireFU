@@ -31,7 +31,7 @@ public enum ApiReturnCode {
     INNER_ERROR(500),                           // 系统内部错误
 
 
-    REQUEST_HTTP_ERROR(600),                    // 请求外部接口失败
+    EXTERNAL_INTERFACE_ERROR(600),              // 请求外部接口失败
 
     // 通用错误
     UNKNOWN_ERROR(12000),                       // 未知错误

@@ -25,6 +25,8 @@ tags:
     description: 学院相关接口
   - name: Test
     description: 测试、健康检查
+  - name: ExternalInterface
+    description: 外部接口
 schemes:
   - http
 paths:
@@ -306,6 +308,33 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CanLoginAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /external/code_2_wx_openid:
+    post:
+      tags:
+        - ExternalInterface
+      summary: 通过code，调用微信接口获取微信账号的openId
+      description: 获取微信账号的openId
+      operationId: codeToWxOpenId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CodeToWxOpenIdRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CodeToWxOpenIdRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -841,6 +870,28 @@ definitions:
         type: string
         description: 角色名称
 
+  CodeToWxOpenIdRequest:
+    properties:
+      code:
+        type: string
+        example: 063UK5Ga1mTabA0qKAGa1aRBAv2UK5Ga
+        description: 临时登录凭证 code
+  CodeToWxOpenIdRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/CodeToWxOpenIdData'
+  CodeToWxOpenIdData:
+    properties:
+      code:
+        type: string
+        example: 063UK5Ga1mTabA0qKAGa1aRBAv2UK5Ga
+        description: 临时登录凭证 code
+      open_id:
+        type: string
+        example: oNMqH5BpVtDgoo7zdvcjej_w-mwE
+        description: WX账号的openId
 
   HelloRet:
     allOf:
