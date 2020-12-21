@@ -103,10 +103,6 @@ dependencies {
     // db pool
     compile 'com.zaxxer:HikariCP:3.4.1'
 
-    // logback
-    compile 'ch.qos.logback:logback-core:1.2.3'
-    compile 'ch.qos.logback:logback-classic:1.2.3'
-
     // JMX监控 版权问题，目前下载不了，先不用
     //compile 'com.sun.jdmk:jmxtools:1.2.1'
 
