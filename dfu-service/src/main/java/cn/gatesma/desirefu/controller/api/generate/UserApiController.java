@@ -88,7 +88,7 @@ public class UserApiController implements UserApi {
                 throw new CustomerApiException(ApiReturnCode.INVALID_ARGUMENT, "QQ号不合法");
             }
         } else if (LoginNameType.LOGIN_NAME_TYPE_WX == loginNameType) {
-            if (!StringUtils.isBlank(loginName)) {
+            if (StringUtils.isBlank(loginName)) {
                 throw new CustomerApiException(ApiReturnCode.INVALID_ARGUMENT, "WX号不合法");
             }
         }

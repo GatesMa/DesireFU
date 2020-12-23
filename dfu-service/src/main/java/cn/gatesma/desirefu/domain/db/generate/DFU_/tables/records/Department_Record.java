@@ -30,87 +30,87 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Department_Record extends UpdatableRecordImpl<Department_Record> implements Record6<Integer, Integer, String, Timestamp, Integer, Timestamp> {
 
-    private static final long serialVersionUID = -704688017;
+    private static final long serialVersionUID = 43413615;
 
     /**
-     * Setter for <code>dfu_.department_.departmentId</code>. 学院Id
+     * Setter for <code>DFU_.Department_.departmentId</code>. 学院Id
      */
     public void setDepartmentid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.departmentId</code>. 学院Id
+     * Getter for <code>DFU_.Department_.departmentId</code>. 学院Id
      */
     public Integer getDepartmentid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.department_.collegeId</code>. 高校id
+     * Setter for <code>DFU_.Department_.collegeId</code>. 高校id
      */
     public void setCollegeid(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.collegeId</code>. 高校id
+     * Getter for <code>DFU_.Department_.collegeId</code>. 高校id
      */
     public Integer getCollegeid() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.department_.name</code>. 学院名称
+     * Setter for <code>DFU_.Department_.name</code>. 学院名称
      */
     public void setName(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.name</code>. 学院名称
+     * Getter for <code>DFU_.Department_.name</code>. 学院名称
      */
     public String getName() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.department_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.Department_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.Department_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.department_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.Department_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.Department_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.department_.lastModifiedTime</code>. lastModifiedTime
+     * Setter for <code>DFU_.Department_.lastModifiedTime</code>. lastModifiedTime
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.department_.lastModifiedTime</code>. lastModifiedTime
+     * Getter for <code>DFU_.Department_.lastModifiedTime</code>. lastModifiedTime
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(5);

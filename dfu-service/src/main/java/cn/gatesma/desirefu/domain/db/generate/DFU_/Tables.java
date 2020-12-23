@@ -7,10 +7,13 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -18,7 +21,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in dfu_
+ * Convenience access to all tables in DFU_
  */
 @Generated(
     value = {
@@ -36,7 +39,7 @@ public class Tables {
     public static final Accountuserrole_ ACCOUNTUSERROLE_ = Accountuserrole_.ACCOUNTUSERROLE_;
 
     /**
-     * The table <code>dfu_.account_</code>.
+     * The table <code>DFU_.Account_</code>.
      */
     public static final Account_ ACCOUNT_ = Account_.ACCOUNT_;
 
@@ -46,12 +49,17 @@ public class Tables {
     public static final College_ COLLEGE_ = College_.COLLEGE_;
 
     /**
+     * 比赛创建者账号
+     */
+    public static final Competitioncreatoraccount_ COMPETITIONCREATORACCOUNT_ = Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_;
+
+    /**
      * 学院信息
      */
     public static final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>dfu_.normalaccount_</code>.
+     * 普通学生账号
      */
     public static final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 
@@ -66,12 +74,22 @@ public class Tables {
     public static final Openidwxidx_ OPENIDWXIDX_ = Openidwxidx_.OPENIDWXIDX_;
 
     /**
+     * OSS运营人员账号
+     */
+    public static final Ossaccount_ OSSACCOUNT_ = Ossaccount_.OSSACCOUNT_;
+
+    /**
+     * ROOT账号
+     */
+    public static final Rootaccount_ ROOTACCOUNT_ = Rootaccount_.ROOTACCOUNT_;
+
+    /**
      * 用户登录表
      */
     public static final Userlogin_ USERLOGIN_ = Userlogin_.USERLOGIN_;
 
     /**
-     * The table <code>dfu_.user_</code>.
+     * The table <code>DFU_.User_</code>.
      */
     public static final User_ USER_ = User_.USER_;
 }

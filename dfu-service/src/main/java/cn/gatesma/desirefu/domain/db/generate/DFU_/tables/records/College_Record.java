@@ -30,143 +30,143 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class College_Record extends UpdatableRecordImpl<College_Record> implements Record10<Integer, String, String, String, String, String, String, Timestamp, Integer, Timestamp> {
 
-    private static final long serialVersionUID = -897428649;
+    private static final long serialVersionUID = -2001054889;
 
     /**
-     * Setter for <code>dfu_.college_.collegeId</code>. 学校Id
+     * Setter for <code>DFU_.College_.collegeId</code>. 学校Id
      */
     public void setCollegeid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.collegeId</code>. 学校Id
+     * Getter for <code>DFU_.College_.collegeId</code>. 学校Id
      */
     public Integer getCollegeid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.college_.name</code>. 学校名称
+     * Setter for <code>DFU_.College_.name</code>. 学校名称
      */
     public void setName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.name</code>. 学校名称
+     * Getter for <code>DFU_.College_.name</code>. 学校名称
      */
     public String getName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.college_.ministry</code>. 主管部门
+     * Setter for <code>DFU_.College_.ministry</code>. 主管部门
      */
     public void setMinistry(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.ministry</code>. 主管部门
+     * Getter for <code>DFU_.College_.ministry</code>. 主管部门
      */
     public String getMinistry() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.college_.identification</code>. 学校标识码
+     * Setter for <code>DFU_.College_.identification</code>. 学校标识码
      */
     public void setIdentification(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.identification</code>. 学校标识码
+     * Getter for <code>DFU_.College_.identification</code>. 学校标识码
      */
     public String getIdentification() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.college_.location</code>. 所在地
+     * Setter for <code>DFU_.College_.location</code>. 所在地
      */
     public void setLocation(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.location</code>. 所在地
+     * Getter for <code>DFU_.College_.location</code>. 所在地
      */
     public String getLocation() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.college_.level</code>. 办学层次
+     * Setter for <code>DFU_.College_.level</code>. 办学层次
      */
     public void setLevel(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.level</code>. 办学层次
+     * Getter for <code>DFU_.College_.level</code>. 办学层次
      */
     public String getLevel() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>dfu_.college_.memo</code>. 备注
+     * Setter for <code>DFU_.College_.memo</code>. 备注
      */
     public void setMemo(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.memo</code>. 备注
+     * Getter for <code>DFU_.College_.memo</code>. 备注
      */
     public String getMemo() {
         return (String) get(6);
     }
 
     /**
-     * Setter for <code>dfu_.college_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.College_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.College_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(7);
     }
 
     /**
-     * Setter for <code>dfu_.college_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.College_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.College_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(8);
     }
 
     /**
-     * Setter for <code>dfu_.college_.lastModifiedTime</code>. lastModifiedTime
+     * Setter for <code>DFU_.College_.lastModifiedTime</code>. lastModifiedTime
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>dfu_.college_.lastModifiedTime</code>. lastModifiedTime
+     * Getter for <code>DFU_.College_.lastModifiedTime</code>. lastModifiedTime
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(9);

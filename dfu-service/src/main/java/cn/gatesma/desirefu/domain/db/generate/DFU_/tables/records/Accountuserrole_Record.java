@@ -30,143 +30,143 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Accountuserrole_Record extends UpdatableRecordImpl<Accountuserrole_Record> implements Record10<Long, Integer, Long, Long, Integer, Integer, Timestamp, Long, Long, Timestamp> {
 
-    private static final long serialVersionUID = -2022836717;
+    private static final long serialVersionUID = -412381805;
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.accountRoleId</code>. qq对应生成的openId
+     * Setter for <code>DFU_.AccountUserRole_.accountRoleId</code>. qq对应生成的openId
      */
     public void setAccountroleid(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.accountRoleId</code>. qq对应生成的openId
+     * Getter for <code>DFU_.AccountUserRole_.accountRoleId</code>. qq对应生成的openId
      */
     public Long getAccountroleid() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.accountType</code>. 账号类型
+     * Setter for <code>DFU_.AccountUserRole_.accountType</code>. 账号类型
      */
     public void setAccounttype(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.accountType</code>. 账号类型
+     * Getter for <code>DFU_.AccountUserRole_.accountType</code>. 账号类型
      */
     public Integer getAccounttype() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.userId</code>. 用户ID
+     * Setter for <code>DFU_.AccountUserRole_.userId</code>. 用户ID
      */
     public void setUserid(Long value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.userId</code>. 用户ID
+     * Getter for <code>DFU_.AccountUserRole_.userId</code>. 用户ID
      */
     public Long getUserid() {
         return (Long) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.accountId</code>. 账号ID
+     * Setter for <code>DFU_.AccountUserRole_.accountId</code>. 账号ID
      */
     public void setAccountid(Long value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.accountId</code>. 账号ID
+     * Getter for <code>DFU_.AccountUserRole_.accountId</code>. 账号ID
      */
     public Long getAccountid() {
         return (Long) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.role</code>. 系统角色
+     * Setter for <code>DFU_.AccountUserRole_.role</code>. 系统角色
      */
     public void setRole(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.role</code>. 系统角色
+     * Getter for <code>DFU_.AccountUserRole_.role</code>. 系统角色
      */
     public Integer getRole() {
         return (Integer) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.AccountUserRole_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.AccountUserRole_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(5);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.AccountUserRole_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.AccountUserRole_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(6);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.createdUserId</code>. 创建人ID
+     * Setter for <code>DFU_.AccountUserRole_.createdUserId</code>. 创建人ID
      */
     public void setCreateduserid(Long value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.createdUserId</code>. 创建人ID
+     * Getter for <code>DFU_.AccountUserRole_.createdUserId</code>. 创建人ID
      */
     public Long getCreateduserid() {
         return (Long) get(7);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.lastModifiedUserId</code>. 最后修改人userId
+     * Setter for <code>DFU_.AccountUserRole_.lastModifiedUserId</code>. 最后修改人userId
      */
     public void setLastmodifieduserid(Long value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.lastModifiedUserId</code>. 最后修改人userId
+     * Getter for <code>DFU_.AccountUserRole_.lastModifiedUserId</code>. 最后修改人userId
      */
     public Long getLastmodifieduserid() {
         return (Long) get(8);
     }
 
     /**
-     * Setter for <code>dfu_.accountuserrole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Setter for <code>DFU_.AccountUserRole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>dfu_.accountuserrole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Getter for <code>DFU_.AccountUserRole_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(9);

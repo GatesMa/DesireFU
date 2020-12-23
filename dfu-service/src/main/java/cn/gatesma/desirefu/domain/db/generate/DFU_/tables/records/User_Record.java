@@ -30,129 +30,129 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User_Record extends UpdatableRecordImpl<User_Record> implements Record9<Long, String, String, String, Timestamp, Integer, Long, Timestamp, Long> {
 
-    private static final long serialVersionUID = 1435021429;
+    private static final long serialVersionUID = -1933488011;
 
     /**
-     * Setter for <code>dfu_.user_.userId</code>. 用户ID
+     * Setter for <code>DFU_.User_.userId</code>. 用户ID
      */
     public void setUserid(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.userId</code>. 用户ID
+     * Getter for <code>DFU_.User_.userId</code>. 用户ID
      */
     public Long getUserid() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.user_.userName</code>. userName
+     * Setter for <code>DFU_.User_.userName</code>. userName
      */
     public void setUsername(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.userName</code>. userName
+     * Getter for <code>DFU_.User_.userName</code>. userName
      */
     public String getUsername() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.user_.cellphone</code>. 手机号
+     * Setter for <code>DFU_.User_.cellphone</code>. 手机号
      */
     public void setCellphone(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.cellphone</code>. 手机号
+     * Getter for <code>DFU_.User_.cellphone</code>. 手机号
      */
     public String getCellphone() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.user_.email</code>. 邮箱地址
+     * Setter for <code>DFU_.User_.email</code>. 邮箱地址
      */
     public void setEmail(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.email</code>. 邮箱地址
+     * Getter for <code>DFU_.User_.email</code>. 邮箱地址
      */
     public String getEmail() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.user_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.User_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.User_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.user_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.User_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.User_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(5);
     }
 
     /**
-     * Setter for <code>dfu_.user_.lastModifiedUserId</code>. 最后修改人userId
+     * Setter for <code>DFU_.User_.lastModifiedUserId</code>. 最后修改人userId
      */
     public void setLastmodifieduserid(Long value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.lastModifiedUserId</code>. 最后修改人userId
+     * Getter for <code>DFU_.User_.lastModifiedUserId</code>. 最后修改人userId
      */
     public Long getLastmodifieduserid() {
         return (Long) get(6);
     }
 
     /**
-     * Setter for <code>dfu_.user_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Setter for <code>DFU_.User_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Getter for <code>DFU_.User_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(7);
     }
 
     /**
-     * Setter for <code>dfu_.user_.createdUserId</code>. 创建者userId
+     * Setter for <code>DFU_.User_.createdUserId</code>. 创建者userId
      */
     public void setCreateduserid(Long value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>dfu_.user_.createdUserId</code>. 创建者userId
+     * Getter for <code>DFU_.User_.createdUserId</code>. 创建者userId
      */
     public Long getCreateduserid() {
         return (Long) get(8);

@@ -9,6 +9,7 @@ import cn.gatesma.desirefu.service.NormalAccountService;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -90,6 +91,10 @@ public class NormalAccountApiController implements NormalAccountApi {
 
         if (request.getStuId() == null) {
             throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "学号必须传");
+        }
+
+        if (StringUtils.isBlank(request.getRealName())) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "真实姓名需要传");
         }
 
         // 校验accountType

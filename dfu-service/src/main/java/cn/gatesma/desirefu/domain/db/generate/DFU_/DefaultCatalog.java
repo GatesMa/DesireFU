@@ -27,7 +27,7 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = 237718793;
+    private static final long serialVersionUID = 1811418409;
 
     /**
      * The reference instance of <code></code>
@@ -35,7 +35,7 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>dfu_</code>.
+     * The schema <code>DFU_</code>.
      */
     public final Dfu_ DFU_ = Dfu_.DFU_;
 

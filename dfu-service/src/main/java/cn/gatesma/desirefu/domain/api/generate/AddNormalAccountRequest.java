@@ -30,6 +30,9 @@ public class AddNormalAccountRequest extends AddAccountRequest implements Serial
   @JsonProperty("stu_id")
   private String stuId = null;
 
+  @JsonProperty("real_name")
+  private String realName = null;
+
   public AddNormalAccountRequest collegeId(Integer collegeId) {
     this.collegeId = collegeId;
     return this;
@@ -106,6 +109,25 @@ public class AddNormalAccountRequest extends AddAccountRequest implements Serial
     this.stuId = stuId;
   }
 
+  public AddNormalAccountRequest realName(String realName) {
+    this.realName = realName;
+    return this;
+  }
+
+  /**
+   * 真实姓名
+   * @return realName
+  **/
+  @ApiModelProperty(example = "马保国", value = "真实姓名")
+
+  public String getRealName() {
+    return realName;
+  }
+
+  public void setRealName(String realName) {
+    this.realName = realName;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -120,12 +142,13 @@ public class AddNormalAccountRequest extends AddAccountRequest implements Serial
         Objects.equals(this.departmentId, addNormalAccountRequest.departmentId) &&
         Objects.equals(this.major, addNormalAccountRequest.major) &&
         Objects.equals(this.stuId, addNormalAccountRequest.stuId) &&
+        Objects.equals(this.realName, addNormalAccountRequest.realName) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(collegeId, departmentId, major, stuId, super.hashCode());
+    return Objects.hash(collegeId, departmentId, major, stuId, realName, super.hashCode());
   }
 
   @Override
@@ -137,6 +160,7 @@ public class AddNormalAccountRequest extends AddAccountRequest implements Serial
     sb.append("    departmentId: ").append(toIndentedString(departmentId)).append("\n");
     sb.append("    major: ").append(toIndentedString(major)).append("\n");
     sb.append("    stuId: ").append(toIndentedString(stuId)).append("\n");
+    sb.append("    realName: ").append(toIndentedString(realName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

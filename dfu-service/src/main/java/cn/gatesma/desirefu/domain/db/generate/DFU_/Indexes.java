@@ -7,10 +7,13 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -22,7 +25,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>dfu_</code> schema.
+ * A class modelling indexes of tables of the <code>DFU_</code> schema.
  */
 @Generated(
     value = {
@@ -41,10 +44,13 @@ public class Indexes {
     public static final Index ACCOUNTUSERROLE__PRIMARY = Indexes0.ACCOUNTUSERROLE__PRIMARY;
     public static final Index ACCOUNT__PRIMARY = Indexes0.ACCOUNT__PRIMARY;
     public static final Index COLLEGE__PRIMARY = Indexes0.COLLEGE__PRIMARY;
+    public static final Index COMPETITIONCREATORACCOUNT__PRIMARY = Indexes0.COMPETITIONCREATORACCOUNT__PRIMARY;
     public static final Index DEPARTMENT__PRIMARY = Indexes0.DEPARTMENT__PRIMARY;
     public static final Index NORMALACCOUNT__PRIMARY = Indexes0.NORMALACCOUNT__PRIMARY;
     public static final Index OPENIDQQIDX__PRIMARY = Indexes0.OPENIDQQIDX__PRIMARY;
     public static final Index OPENIDWXIDX__PRIMARY = Indexes0.OPENIDWXIDX__PRIMARY;
+    public static final Index OSSACCOUNT__PRIMARY = Indexes0.OSSACCOUNT__PRIMARY;
+    public static final Index ROOTACCOUNT__PRIMARY = Indexes0.ROOTACCOUNT__PRIMARY;
     public static final Index USERLOGIN__PRIMARY = Indexes0.USERLOGIN__PRIMARY;
     public static final Index USER__PRIMARY = Indexes0.USER__PRIMARY;
 
@@ -56,10 +62,13 @@ public class Indexes {
         public static Index ACCOUNTUSERROLE__PRIMARY = Internal.createIndex("PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_, new OrderField[] { Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID }, true);
         public static Index ACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Account_.ACCOUNT_, new OrderField[] { Account_.ACCOUNT_.ACCOUNTID }, true);
         public static Index COLLEGE__PRIMARY = Internal.createIndex("PRIMARY", College_.COLLEGE_, new OrderField[] { College_.COLLEGE_.COLLEGEID }, true);
+        public static Index COMPETITIONCREATORACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_, new OrderField[] { Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_.ACCOUNTID }, true);
         public static Index DEPARTMENT__PRIMARY = Internal.createIndex("PRIMARY", Department_.DEPARTMENT_, new OrderField[] { Department_.DEPARTMENT_.DEPARTMENTID }, true);
         public static Index NORMALACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Normalaccount_.NORMALACCOUNT_, new OrderField[] { Normalaccount_.NORMALACCOUNT_.ACCOUNTID }, true);
         public static Index OPENIDQQIDX__PRIMARY = Internal.createIndex("PRIMARY", Openidqqidx_.OPENIDQQIDX_, new OrderField[] { Openidqqidx_.OPENIDQQIDX_.OPENID }, true);
         public static Index OPENIDWXIDX__PRIMARY = Internal.createIndex("PRIMARY", Openidwxidx_.OPENIDWXIDX_, new OrderField[] { Openidwxidx_.OPENIDWXIDX_.OPENID }, true);
+        public static Index OSSACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Ossaccount_.OSSACCOUNT_, new OrderField[] { Ossaccount_.OSSACCOUNT_.ACCOUNTID }, true);
+        public static Index ROOTACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Rootaccount_.ROOTACCOUNT_, new OrderField[] { Rootaccount_.ROOTACCOUNT_.ACCOUNTID }, true);
         public static Index USERLOGIN__PRIMARY = Internal.createIndex("PRIMARY", Userlogin_.USERLOGIN_, new OrderField[] { Userlogin_.USERLOGIN_.ID }, true);
         public static Index USER__PRIMARY = Internal.createIndex("PRIMARY", User_.USER_, new OrderField[] { User_.USER_.USERID }, true);
     }
