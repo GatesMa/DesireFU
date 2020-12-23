@@ -7,10 +7,13 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -38,10 +41,10 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -553046388;
+    private static final long serialVersionUID = -464005967;
 
     /**
-     * The reference instance of <code>dfu_</code>
+     * The reference instance of <code>DFU_</code>
      */
     public static final Dfu_ DFU_ = new Dfu_();
 
@@ -51,7 +54,7 @@ public class Dfu_ extends SchemaImpl {
     public final Accountuserrole_ ACCOUNTUSERROLE_ = Accountuserrole_.ACCOUNTUSERROLE_;
 
     /**
-     * The table <code>dfu_.account_</code>.
+     * The table <code>DFU_.Account_</code>.
      */
     public final Account_ ACCOUNT_ = Account_.ACCOUNT_;
 
@@ -61,12 +64,17 @@ public class Dfu_ extends SchemaImpl {
     public final College_ COLLEGE_ = College_.COLLEGE_;
 
     /**
+     * 比赛创建者账号
+     */
+    public final Competitioncreatoraccount_ COMPETITIONCREATORACCOUNT_ = Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_;
+
+    /**
      * 学院信息
      */
     public final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>dfu_.normalaccount_</code>.
+     * The table <code>DFU_.NormalAccount_</code>.
      */
     public final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 
@@ -81,12 +89,22 @@ public class Dfu_ extends SchemaImpl {
     public final Openidwxidx_ OPENIDWXIDX_ = Openidwxidx_.OPENIDWXIDX_;
 
     /**
+     * OSS运营人员账号
+     */
+    public final Ossaccount_ OSSACCOUNT_ = Ossaccount_.OSSACCOUNT_;
+
+    /**
+     * ROOT账号
+     */
+    public final Rootaccount_ ROOTACCOUNT_ = Rootaccount_.ROOTACCOUNT_;
+
+    /**
      * 用户登录表
      */
     public final Userlogin_ USERLOGIN_ = Userlogin_.USERLOGIN_;
 
     /**
-     * The table <code>dfu_.user_</code>.
+     * The table <code>DFU_.User_</code>.
      */
     public final User_ USER_ = User_.USER_;
 
@@ -94,7 +112,7 @@ public class Dfu_ extends SchemaImpl {
      * No further instances allowed
      */
     private Dfu_() {
-        super("dfu_", null);
+        super("DFU_", null);
     }
 
 
@@ -118,10 +136,13 @@ public class Dfu_ extends SchemaImpl {
             Accountuserrole_.ACCOUNTUSERROLE_,
             Account_.ACCOUNT_,
             College_.COLLEGE_,
+            Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_,
             Department_.DEPARTMENT_,
             Normalaccount_.NORMALACCOUNT_,
             Openidqqidx_.OPENIDQQIDX_,
             Openidwxidx_.OPENIDWXIDX_,
+            Ossaccount_.OSSACCOUNT_,
+            Rootaccount_.ROOTACCOUNT_,
             Userlogin_.USERLOGIN_,
             User_.USER_);
     }

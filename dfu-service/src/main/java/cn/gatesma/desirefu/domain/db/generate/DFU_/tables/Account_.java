@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Account_ extends TableImpl<Account_Record> {
 
-    private static final long serialVersionUID = 1914778875;
+    private static final long serialVersionUID = -1625912101;
 
     /**
-     * The reference instance of <code>dfu_.account_</code>
+     * The reference instance of <code>DFU_.Account_</code>
      */
     public static final Account_ ACCOUNT_ = new Account_();
 
@@ -56,91 +56,91 @@ public class Account_ extends TableImpl<Account_Record> {
     }
 
     /**
-     * The column <code>dfu_.account_.accountId</code>. 帐号ID
+     * The column <code>DFU_.Account_.accountId</code>. 帐号ID
      */
     public final TableField<Account_Record, Long> ACCOUNTID = createField("accountId", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "帐号ID");
 
     /**
-     * The column <code>dfu_.account_.accountType</code>. 账号类型
+     * The column <code>DFU_.Account_.accountType</code>. 账号类型
      */
     public final TableField<Account_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "账号类型");
 
     /**
-     * The column <code>dfu_.account_.nickName</code>. 账号昵称
+     * The column <code>DFU_.Account_.nickName</code>. 账号昵称
      */
     public final TableField<Account_Record, String> NICKNAME = createField("nickName", org.jooq.impl.SQLDataType.VARCHAR(256).nullable(false), this, "账号昵称");
 
     /**
-     * The column <code>dfu_.account_.accountStatus</code>. 账号状态
+     * The column <code>DFU_.Account_.accountStatus</code>. 账号状态
      */
     public final TableField<Account_Record, Integer> ACCOUNTSTATUS = createField("accountStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "账号状态");
 
     /**
-     * The column <code>dfu_.account_.approvalStatus</code>. 审核状态
+     * The column <code>DFU_.Account_.approvalStatus</code>. 审核状态
      */
     public final TableField<Account_Record, Integer> APPROVALSTATUS = createField("approvalStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "审核状态");
 
     /**
-     * The column <code>dfu_.account_.memo</code>. 备注
+     * The column <code>DFU_.Account_.memo</code>. 备注
      */
     public final TableField<Account_Record, String> MEMO = createField("memo", org.jooq.impl.SQLDataType.VARCHAR(1024).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "备注");
 
     /**
-     * The column <code>dfu_.account_.auditUserId</code>. 审核人userId
+     * The column <code>DFU_.Account_.auditUserId</code>. 审核人userId
      */
     public final TableField<Account_Record, Long> AUDITUSERID = createField("auditUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "审核人userId");
 
     /**
-     * The column <code>dfu_.account_.auditMsg</code>. 审核结果信息
+     * The column <code>DFU_.Account_.auditMsg</code>. 审核结果信息
      */
     public final TableField<Account_Record, String> AUDITMSG = createField("auditMsg", org.jooq.impl.SQLDataType.VARCHAR(2048), this, "审核结果信息");
 
     /**
-     * The column <code>dfu_.account_.auditedTime</code>. 审核时间
+     * The column <code>DFU_.Account_.auditedTime</code>. 审核时间
      */
     public final TableField<Account_Record, Timestamp> AUDITEDTIME = createField("auditedTime", org.jooq.impl.SQLDataType.TIMESTAMP, this, "审核时间");
 
     /**
-     * The column <code>dfu_.account_.rootUserId</code>. 创建人userId
+     * The column <code>DFU_.Account_.rootUserId</code>. 创建人userId
      */
     public final TableField<Account_Record, Long> ROOTUSERID = createField("rootUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建人userId");
 
     /**
-     * The column <code>dfu_.account_.createdTime</code>. 创建时间
+     * The column <code>DFU_.Account_.createdTime</code>. 创建时间
      */
     public final TableField<Account_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>dfu_.account_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>DFU_.Account_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<Account_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>dfu_.account_.lastModifiedUserId</code>. 最后修改人userId
+     * The column <code>DFU_.Account_.lastModifiedUserId</code>. 最后修改人userId
      */
     public final TableField<Account_Record, Long> LASTMODIFIEDUSERID = createField("lastModifiedUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "最后修改人userId");
 
     /**
-     * The column <code>dfu_.account_.lastModifiedTime</code>. lastModifiedTime
+     * The column <code>DFU_.Account_.lastModifiedTime</code>. lastModifiedTime
      */
     public final TableField<Account_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "lastModifiedTime");
 
     /**
-     * Create a <code>dfu_.account_</code> table reference
+     * Create a <code>DFU_.Account_</code> table reference
      */
     public Account_() {
-        this(DSL.name("account_"), null);
+        this(DSL.name("Account_"), null);
     }
 
     /**
-     * Create an aliased <code>dfu_.account_</code> table reference
+     * Create an aliased <code>DFU_.Account_</code> table reference
      */
     public Account_(String alias) {
         this(DSL.name(alias), ACCOUNT_);
     }
 
     /**
-     * Create an aliased <code>dfu_.account_</code> table reference
+     * Create an aliased <code>DFU_.Account_</code> table reference
      */
     public Account_(Name alias) {
         this(alias, ACCOUNT_);

@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Openidwxidx_ extends TableImpl<Openidwxidx_Record> {
 
-    private static final long serialVersionUID = 956229281;
+    private static final long serialVersionUID = -1413659711;
 
     /**
-     * The reference instance of <code>dfu_.openidwxidx_</code>
+     * The reference instance of <code>DFU_.OpenIdWXIdx_</code>
      */
     public static final Openidwxidx_ OPENIDWXIDX_ = new Openidwxidx_();
 
@@ -54,36 +54,36 @@ public class Openidwxidx_ extends TableImpl<Openidwxidx_Record> {
     }
 
     /**
-     * The column <code>dfu_.openidwxidx_.openId</code>. wx对应生成的openId
+     * The column <code>DFU_.OpenIdWXIdx_.openId</code>. wx对应生成的openId
      */
     public final TableField<Openidwxidx_Record, String> OPENID = createField("openId", org.jooq.impl.SQLDataType.VARCHAR(128).nullable(false), this, "wx对应生成的openId");
 
     /**
-     * The column <code>dfu_.openidwxidx_.wxId</code>. 微信ID
+     * The column <code>DFU_.OpenIdWXIdx_.wxId</code>. 微信ID
      */
     public final TableField<Openidwxidx_Record, String> WXID = createField("wxId", org.jooq.impl.SQLDataType.VARCHAR(128).nullable(false), this, "微信ID");
 
     /**
-     * The column <code>dfu_.openidwxidx_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>DFU_.OpenIdWXIdx_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<Openidwxidx_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * Create a <code>dfu_.openidwxidx_</code> table reference
+     * Create a <code>DFU_.OpenIdWXIdx_</code> table reference
      */
     public Openidwxidx_() {
-        this(DSL.name("openidwxidx_"), null);
+        this(DSL.name("OpenIdWXIdx_"), null);
     }
 
     /**
-     * Create an aliased <code>dfu_.openidwxidx_</code> table reference
+     * Create an aliased <code>DFU_.OpenIdWXIdx_</code> table reference
      */
     public Openidwxidx_(String alias) {
         this(DSL.name(alias), OPENIDWXIDX_);
     }
 
     /**
-     * Create an aliased <code>dfu_.openidwxidx_</code> table reference
+     * Create an aliased <code>DFU_.OpenIdWXIdx_</code> table reference
      */
     public Openidwxidx_(Name alias) {
         this(alias, OPENIDWXIDX_);

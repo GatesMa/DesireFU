@@ -30,157 +30,157 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Normalaccount_Record extends UpdatableRecordImpl<Normalaccount_Record> implements Record11<Long, Integer, Integer, Integer, String, String, Long, Timestamp, Integer, Long, Timestamp> {
 
-    private static final long serialVersionUID = -758166151;
+    private static final long serialVersionUID = -2060576391;
 
     /**
-     * Setter for <code>dfu_.normalaccount_.accountId</code>. 帐号ID
+     * Setter for <code>DFU_.NormalAccount_.accountId</code>. 帐号ID
      */
     public void setAccountid(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.accountId</code>. 帐号ID
+     * Getter for <code>DFU_.NormalAccount_.accountId</code>. 帐号ID
      */
     public Long getAccountid() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.accountType</code>. 账号类型
+     * Setter for <code>DFU_.NormalAccount_.accountType</code>. 账号类型
      */
     public void setAccounttype(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.accountType</code>. 账号类型
+     * Getter for <code>DFU_.NormalAccount_.accountType</code>. 账号类型
      */
     public Integer getAccounttype() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.collegeId</code>. 学校Id
+     * Setter for <code>DFU_.NormalAccount_.collegeId</code>. 学校Id
      */
     public void setCollegeid(Integer value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.collegeId</code>. 学校Id
+     * Getter for <code>DFU_.NormalAccount_.collegeId</code>. 学校Id
      */
     public Integer getCollegeid() {
         return (Integer) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.departmentId</code>. 学院Id
+     * Setter for <code>DFU_.NormalAccount_.departmentId</code>. 学院Id
      */
     public void setDepartmentid(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.departmentId</code>. 学院Id
+     * Getter for <code>DFU_.NormalAccount_.departmentId</code>. 学院Id
      */
     public Integer getDepartmentid() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.major</code>. 专业
+     * Setter for <code>DFU_.NormalAccount_.major</code>. 专业
      */
     public void setMajor(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.major</code>. 专业
+     * Getter for <code>DFU_.NormalAccount_.major</code>. 专业
      */
     public String getMajor() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.stuId</code>. 学号
+     * Setter for <code>DFU_.NormalAccount_.stuId</code>. 学号
      */
     public void setStuid(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.stuId</code>. 学号
+     * Getter for <code>DFU_.NormalAccount_.stuId</code>. 学号
      */
     public String getStuid() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.createdUserId</code>. 创建人userId
+     * Setter for <code>DFU_.NormalAccount_.createdUserId</code>. 创建人userId
      */
     public void setCreateduserid(Long value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.createdUserId</code>. 创建人userId
+     * Getter for <code>DFU_.NormalAccount_.createdUserId</code>. 创建人userId
      */
     public Long getCreateduserid() {
         return (Long) get(6);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.NormalAccount_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.NormalAccount_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(7);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.NormalAccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.NormalAccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(8);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.lastModifiedUserId</code>. 最后修改人userId
+     * Setter for <code>DFU_.NormalAccount_.lastModifiedUserId</code>. 最后修改人userId
      */
     public void setLastmodifieduserid(Long value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.lastModifiedUserId</code>. 最后修改人userId
+     * Getter for <code>DFU_.NormalAccount_.lastModifiedUserId</code>. 最后修改人userId
      */
     public Long getLastmodifieduserid() {
         return (Long) get(9);
     }
 
     /**
-     * Setter for <code>dfu_.normalaccount_.lastModifiedTime</code>. lastModifiedTime
+     * Setter for <code>DFU_.NormalAccount_.lastModifiedTime</code>. lastModifiedTime
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>dfu_.normalaccount_.lastModifiedTime</code>. lastModifiedTime
+     * Getter for <code>DFU_.NormalAccount_.lastModifiedTime</code>. lastModifiedTime
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(10);

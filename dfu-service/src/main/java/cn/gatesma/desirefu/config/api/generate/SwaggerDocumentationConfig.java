@@ -50,6 +50,9 @@ public class SwaggerDocumentationConfig {
                 new Tag("高校", "高校", 600),
                 new Tag("学院", "学院", 700),
                 new Tag("外部接口", "外部接口", 700),
+                new Tag("比赛创建者", "比赛创建者", 700),
+                new Tag("OSS运营人员", "OSS运营人员", 700),
+                new Tag("ROOT账号", "ROOT账号", 700),
         };
     }
 

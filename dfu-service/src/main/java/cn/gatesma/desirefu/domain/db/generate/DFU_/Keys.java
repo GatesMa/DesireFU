@@ -7,19 +7,25 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitioncreatoraccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidqqidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidwxidx_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Ossaccount_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Rootaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Userlogin_Record;
 
@@ -32,7 +38,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>dfu_</code> schema.
+ * the <code>DFU_</code> schema.
  */
 @Generated(
     value = {
@@ -62,10 +68,13 @@ public class Keys {
     public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = UniqueKeys0.KEY_ACCOUNTUSERROLE__PRIMARY;
     public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = UniqueKeys0.KEY_ACCOUNT__PRIMARY;
     public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = UniqueKeys0.KEY_COLLEGE__PRIMARY;
+    public static final UniqueKey<Competitioncreatoraccount_Record> KEY_COMPETITIONCREATORACCOUNT__PRIMARY = UniqueKeys0.KEY_COMPETITIONCREATORACCOUNT__PRIMARY;
     public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = UniqueKeys0.KEY_DEPARTMENT__PRIMARY;
     public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = UniqueKeys0.KEY_NORMALACCOUNT__PRIMARY;
     public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = UniqueKeys0.KEY_OPENIDQQIDX__PRIMARY;
     public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = UniqueKeys0.KEY_OPENIDWXIDX__PRIMARY;
+    public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = UniqueKeys0.KEY_OSSACCOUNT__PRIMARY;
+    public static final UniqueKey<Rootaccount_Record> KEY_ROOTACCOUNT__PRIMARY = UniqueKeys0.KEY_ROOTACCOUNT__PRIMARY;
     public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = UniqueKeys0.KEY_USERLOGIN__PRIMARY;
     public static final UniqueKey<User_Record> KEY_USER__PRIMARY = UniqueKeys0.KEY_USER__PRIMARY;
 
@@ -88,14 +97,17 @@ public class Keys {
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = Internal.createUniqueKey(Accountuserrole_.ACCOUNTUSERROLE_, "KEY_accountuserrole__PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
-        public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
-        public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_college__PRIMARY", College_.COLLEGE_.COLLEGEID);
-        public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
-        public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_normalaccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
-        public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_openidqqidx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
-        public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_openidwxidx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
-        public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = Internal.createUniqueKey(Userlogin_.USERLOGIN_, "KEY_userlogin__PRIMARY", Userlogin_.USERLOGIN_.ID);
-        public static final UniqueKey<User_Record> KEY_USER__PRIMARY = Internal.createUniqueKey(User_.USER_, "KEY_user__PRIMARY", User_.USER_.USERID);
+        public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = Internal.createUniqueKey(Accountuserrole_.ACCOUNTUSERROLE_, "KEY_AccountUserRole__PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
+        public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_Account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_College__PRIMARY", College_.COLLEGE_.COLLEGEID);
+        public static final UniqueKey<Competitioncreatoraccount_Record> KEY_COMPETITIONCREATORACCOUNT__PRIMARY = Internal.createUniqueKey(Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_, "KEY_CompetitionCreatorAccount__PRIMARY", Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_Department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
+        public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_NormalAccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
+        public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_OpenIdWXIdx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
+        public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = Internal.createUniqueKey(Ossaccount_.OSSACCOUNT_, "KEY_OSSAccount__PRIMARY", Ossaccount_.OSSACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Rootaccount_Record> KEY_ROOTACCOUNT__PRIMARY = Internal.createUniqueKey(Rootaccount_.ROOTACCOUNT_, "KEY_RootAccount__PRIMARY", Rootaccount_.ROOTACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Userlogin_Record> KEY_USERLOGIN__PRIMARY = Internal.createUniqueKey(Userlogin_.USERLOGIN_, "KEY_UserLogin__PRIMARY", Userlogin_.USERLOGIN_.ID);
+        public static final UniqueKey<User_Record> KEY_USER__PRIMARY = Internal.createUniqueKey(User_.USER_, "KEY_User__PRIMARY", User_.USER_.USERID);
     }
 }

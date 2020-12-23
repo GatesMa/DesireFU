@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Department_ extends TableImpl<Department_Record> {
 
-    private static final long serialVersionUID = 943494446;
+    private static final long serialVersionUID = 1279872270;
 
     /**
-     * The reference instance of <code>dfu_.department_</code>
+     * The reference instance of <code>DFU_.Department_</code>
      */
     public static final Department_ DEPARTMENT_ = new Department_();
 
@@ -56,51 +56,51 @@ public class Department_ extends TableImpl<Department_Record> {
     }
 
     /**
-     * The column <code>dfu_.department_.departmentId</code>. 学院Id
+     * The column <code>DFU_.Department_.departmentId</code>. 学院Id
      */
     public final TableField<Department_Record, Integer> DEPARTMENTID = createField("departmentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "学院Id");
 
     /**
-     * The column <code>dfu_.department_.collegeId</code>. 高校id
+     * The column <code>DFU_.Department_.collegeId</code>. 高校id
      */
     public final TableField<Department_Record, Integer> COLLEGEID = createField("collegeId", org.jooq.impl.SQLDataType.INTEGER.defaultValue(DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "高校id");
 
     /**
-     * The column <code>dfu_.department_.name</code>. 学院名称
+     * The column <code>DFU_.Department_.name</code>. 学院名称
      */
     public final TableField<Department_Record, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(1024).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "学院名称");
 
     /**
-     * The column <code>dfu_.department_.createdTime</code>. 创建时间
+     * The column <code>DFU_.Department_.createdTime</code>. 创建时间
      */
     public final TableField<Department_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>dfu_.department_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>DFU_.Department_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<Department_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>dfu_.department_.lastModifiedTime</code>. lastModifiedTime
+     * The column <code>DFU_.Department_.lastModifiedTime</code>. lastModifiedTime
      */
     public final TableField<Department_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "lastModifiedTime");
 
     /**
-     * Create a <code>dfu_.department_</code> table reference
+     * Create a <code>DFU_.Department_</code> table reference
      */
     public Department_() {
-        this(DSL.name("department_"), null);
+        this(DSL.name("Department_"), null);
     }
 
     /**
-     * Create an aliased <code>dfu_.department_</code> table reference
+     * Create an aliased <code>DFU_.Department_</code> table reference
      */
     public Department_(String alias) {
         this(DSL.name(alias), DEPARTMENT_);
     }
 
     /**
-     * Create an aliased <code>dfu_.department_</code> table reference
+     * Create an aliased <code>DFU_.Department_</code> table reference
      */
     public Department_(Name alias) {
         this(alias, DEPARTMENT_);

@@ -30,129 +30,129 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Userlogin_Record extends UpdatableRecordImpl<Userlogin_Record> implements Record9<Long, Long, String, Integer, Integer, Timestamp, Long, Long, Timestamp> {
 
-    private static final long serialVersionUID = 1984674724;
+    private static final long serialVersionUID = 139202468;
 
     /**
-     * Setter for <code>dfu_.userlogin_.id</code>. ID
+     * Setter for <code>DFU_.UserLogin_.id</code>. ID
      */
     public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.id</code>. ID
+     * Getter for <code>DFU_.UserLogin_.id</code>. ID
      */
     public Long getId() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.userId</code>. 用户ID
+     * Setter for <code>DFU_.UserLogin_.userId</code>. 用户ID
      */
     public void setUserid(Long value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.userId</code>. 用户ID
+     * Getter for <code>DFU_.UserLogin_.userId</code>. 用户ID
      */
     public Long getUserid() {
         return (Long) get(1);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.loginName</code>. 请求帐号时的登录名字或者Id
+     * Setter for <code>DFU_.UserLogin_.loginName</code>. 请求帐号时的登录名字或者Id
      */
     public void setLoginname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.loginName</code>. 请求帐号时的登录名字或者Id
+     * Getter for <code>DFU_.UserLogin_.loginName</code>. 请求帐号时的登录名字或者Id
      */
     public String getLoginname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.loginNameType</code>. 用户登录账号类型
+     * Setter for <code>DFU_.UserLogin_.loginNameType</code>. 用户登录账号类型
      */
     public void setLoginnametype(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.loginNameType</code>. 用户登录账号类型
+     * Getter for <code>DFU_.UserLogin_.loginNameType</code>. 用户登录账号类型
      */
     public Integer getLoginnametype() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Setter for <code>DFU_.UserLogin_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public void setDeletestatus(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * Getter for <code>DFU_.UserLogin_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public Integer getDeletestatus() {
         return (Integer) get(4);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.createdTime</code>. 创建时间
+     * Setter for <code>DFU_.UserLogin_.createdTime</code>. 创建时间
      */
     public void setCreatedtime(Timestamp value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.createdTime</code>. 创建时间
+     * Getter for <code>DFU_.UserLogin_.createdTime</code>. 创建时间
      */
     public Timestamp getCreatedtime() {
         return (Timestamp) get(5);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.createdUserId</code>. 创建人ID
+     * Setter for <code>DFU_.UserLogin_.createdUserId</code>. 创建人ID
      */
     public void setCreateduserid(Long value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.createdUserId</code>. 创建人ID
+     * Getter for <code>DFU_.UserLogin_.createdUserId</code>. 创建人ID
      */
     public Long getCreateduserid() {
         return (Long) get(6);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.lastModifiedUserId</code>. 最后修改人userId
+     * Setter for <code>DFU_.UserLogin_.lastModifiedUserId</code>. 最后修改人userId
      */
     public void setLastmodifieduserid(Long value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.lastModifiedUserId</code>. 最后修改人userId
+     * Getter for <code>DFU_.UserLogin_.lastModifiedUserId</code>. 最后修改人userId
      */
     public Long getLastmodifieduserid() {
         return (Long) get(7);
     }
 
     /**
-     * Setter for <code>dfu_.userlogin_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Setter for <code>DFU_.UserLogin_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public void setLastmodifiedtime(Timestamp value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>dfu_.userlogin_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * Getter for <code>DFU_.UserLogin_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public Timestamp getLastmodifiedtime() {
         return (Timestamp) get(8);

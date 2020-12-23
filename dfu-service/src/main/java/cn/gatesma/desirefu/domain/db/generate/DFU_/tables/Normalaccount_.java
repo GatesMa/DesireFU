@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Normalaccount_ extends TableImpl<Normalaccount_Record> {
 
-    private static final long serialVersionUID = 196781164;
+    private static final long serialVersionUID = -906771252;
 
     /**
-     * The reference instance of <code>dfu_.normalaccount_</code>
+     * The reference instance of <code>DFU_.NormalAccount_</code>
      */
     public static final Normalaccount_ NORMALACCOUNT_ = new Normalaccount_();
 
@@ -55,76 +55,76 @@ public class Normalaccount_ extends TableImpl<Normalaccount_Record> {
     }
 
     /**
-     * The column <code>dfu_.normalaccount_.accountId</code>. 帐号ID
+     * The column <code>DFU_.NormalAccount_.accountId</code>. 帐号ID
      */
     public final TableField<Normalaccount_Record, Long> ACCOUNTID = createField("accountId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "帐号ID");
 
     /**
-     * The column <code>dfu_.normalaccount_.accountType</code>. 账号类型
+     * The column <code>DFU_.NormalAccount_.accountType</code>. 账号类型
      */
     public final TableField<Normalaccount_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "账号类型");
 
     /**
-     * The column <code>dfu_.normalaccount_.collegeId</code>. 学校Id
+     * The column <code>DFU_.NormalAccount_.collegeId</code>. 学校Id
      */
     public final TableField<Normalaccount_Record, Integer> COLLEGEID = createField("collegeId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "学校Id");
 
     /**
-     * The column <code>dfu_.normalaccount_.departmentId</code>. 学院Id
+     * The column <code>DFU_.NormalAccount_.departmentId</code>. 学院Id
      */
     public final TableField<Normalaccount_Record, Integer> DEPARTMENTID = createField("departmentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "学院Id");
 
     /**
-     * The column <code>dfu_.normalaccount_.major</code>. 专业
+     * The column <code>DFU_.NormalAccount_.major</code>. 专业
      */
     public final TableField<Normalaccount_Record, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "专业");
 
     /**
-     * The column <code>dfu_.normalaccount_.stuId</code>. 学号
+     * The column <code>DFU_.NormalAccount_.stuId</code>. 学号
      */
     public final TableField<Normalaccount_Record, String> STUID = createField("stuId", org.jooq.impl.SQLDataType.VARCHAR(255), this, "学号");
 
     /**
-     * The column <code>dfu_.normalaccount_.createdUserId</code>. 创建人userId
+     * The column <code>DFU_.NormalAccount_.createdUserId</code>. 创建人userId
      */
     public final TableField<Normalaccount_Record, Long> CREATEDUSERID = createField("createdUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建人userId");
 
     /**
-     * The column <code>dfu_.normalaccount_.createdTime</code>. 创建时间
+     * The column <code>DFU_.NormalAccount_.createdTime</code>. 创建时间
      */
     public final TableField<Normalaccount_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>dfu_.normalaccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>DFU_.NormalAccount_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<Normalaccount_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>dfu_.normalaccount_.lastModifiedUserId</code>. 最后修改人userId
+     * The column <code>DFU_.NormalAccount_.lastModifiedUserId</code>. 最后修改人userId
      */
     public final TableField<Normalaccount_Record, Long> LASTMODIFIEDUSERID = createField("lastModifiedUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "最后修改人userId");
 
     /**
-     * The column <code>dfu_.normalaccount_.lastModifiedTime</code>. lastModifiedTime
+     * The column <code>DFU_.NormalAccount_.lastModifiedTime</code>. lastModifiedTime
      */
     public final TableField<Normalaccount_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "lastModifiedTime");
 
     /**
-     * Create a <code>dfu_.normalaccount_</code> table reference
+     * Create a <code>DFU_.NormalAccount_</code> table reference
      */
     public Normalaccount_() {
-        this(DSL.name("normalaccount_"), null);
+        this(DSL.name("NormalAccount_"), null);
     }
 
     /**
-     * Create an aliased <code>dfu_.normalaccount_</code> table reference
+     * Create an aliased <code>DFU_.NormalAccount_</code> table reference
      */
     public Normalaccount_(String alias) {
         this(DSL.name(alias), NORMALACCOUNT_);
     }
 
     /**
-     * Create an aliased <code>dfu_.normalaccount_</code> table reference
+     * Create an aliased <code>DFU_.NormalAccount_</code> table reference
      */
     public Normalaccount_(Name alias) {
         this(alias, NORMALACCOUNT_);

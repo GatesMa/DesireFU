@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User_ extends TableImpl<User_Record> {
 
-    private static final long serialVersionUID = 3331478;
+    private static final long serialVersionUID = -1841188426;
 
     /**
-     * The reference instance of <code>dfu_.user_</code>
+     * The reference instance of <code>DFU_.User_</code>
      */
     public static final User_ USER_ = new User_();
 
@@ -56,66 +56,66 @@ public class User_ extends TableImpl<User_Record> {
     }
 
     /**
-     * The column <code>dfu_.user_.userId</code>. 用户ID
+     * The column <code>DFU_.User_.userId</code>. 用户ID
      */
     public final TableField<User_Record, Long> USERID = createField("userId", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "用户ID");
 
     /**
-     * The column <code>dfu_.user_.userName</code>. userName
+     * The column <code>DFU_.User_.userName</code>. userName
      */
     public final TableField<User_Record, String> USERNAME = createField("userName", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "userName");
 
     /**
-     * The column <code>dfu_.user_.cellphone</code>. 手机号
+     * The column <code>DFU_.User_.cellphone</code>. 手机号
      */
     public final TableField<User_Record, String> CELLPHONE = createField("cellphone", org.jooq.impl.SQLDataType.VARCHAR(128).nullable(false), this, "手机号");
 
     /**
-     * The column <code>dfu_.user_.email</code>. 邮箱地址
+     * The column <code>DFU_.User_.email</code>. 邮箱地址
      */
     public final TableField<User_Record, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "邮箱地址");
 
     /**
-     * The column <code>dfu_.user_.createdTime</code>. 创建时间
+     * The column <code>DFU_.User_.createdTime</code>. 创建时间
      */
     public final TableField<User_Record, Timestamp> CREATEDTIME = createField("createdTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "创建时间");
 
     /**
-     * The column <code>dfu_.user_.deleteStatus</code>. 删除状态，0-正常，1-删除
+     * The column <code>DFU_.User_.deleteStatus</code>. 删除状态，0-正常，1-删除
      */
     public final TableField<User_Record, Integer> DELETESTATUS = createField("deleteStatus", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "删除状态，0-正常，1-删除");
 
     /**
-     * The column <code>dfu_.user_.lastModifiedUserId</code>. 最后修改人userId
+     * The column <code>DFU_.User_.lastModifiedUserId</code>. 最后修改人userId
      */
     public final TableField<User_Record, Long> LASTMODIFIEDUSERID = createField("lastModifiedUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "最后修改人userId");
 
     /**
-     * The column <code>dfu_.user_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+     * The column <code>DFU_.User_.lastModifiedTime</code>. CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
     public final TableField<User_Record, Timestamp> LASTMODIFIEDTIME = createField("lastModifiedTime", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
     /**
-     * The column <code>dfu_.user_.createdUserId</code>. 创建者userId
+     * The column <code>DFU_.User_.createdUserId</code>. 创建者userId
      */
     public final TableField<User_Record, Long> CREATEDUSERID = createField("createdUserId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "创建者userId");
 
     /**
-     * Create a <code>dfu_.user_</code> table reference
+     * Create a <code>DFU_.User_</code> table reference
      */
     public User_() {
-        this(DSL.name("user_"), null);
+        this(DSL.name("User_"), null);
     }
 
     /**
-     * Create an aliased <code>dfu_.user_</code> table reference
+     * Create an aliased <code>DFU_.User_</code> table reference
      */
     public User_(String alias) {
         this(DSL.name(alias), USER_);
     }
 
     /**
-     * Create an aliased <code>dfu_.user_</code> table reference
+     * Create an aliased <code>DFU_.User_</code> table reference
      */
     public User_(Name alias) {
         this(alias, USER_);
