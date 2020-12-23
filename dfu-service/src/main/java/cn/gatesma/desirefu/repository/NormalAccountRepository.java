@@ -45,7 +45,7 @@ public class NormalAccountRepository {
      * 新增 NormalAccount
      */
     public boolean addNormalAccount(Long accountId, Integer accountType, Integer collegeId, Integer departmentId,
-                                 String major, String stuId, Long createdUserId) {
+                                 String major, String stuId, String realName, Long createdUserId) {
         Timestamp now = TimeUtils.now();
         int res = dslContext
                 .insertInto(
@@ -56,6 +56,7 @@ public class NormalAccountRepository {
                         NORMALACCOUNT_.DEPARTMENTID,
                         NORMALACCOUNT_.MAJOR,
                         NORMALACCOUNT_.STUID,
+                        NORMALACCOUNT_.REALNAME,
                         NORMALACCOUNT_.CREATEDUSERID,
                         NORMALACCOUNT_.CREATEDTIME,
                         NORMALACCOUNT_.DELETESTATUS,
@@ -69,6 +70,7 @@ public class NormalAccountRepository {
                         departmentId,
                         major,
                         stuId,
+                        realName,
                         createdUserId,
                         now,
                         DeleteStatus.NORMAL.code(),

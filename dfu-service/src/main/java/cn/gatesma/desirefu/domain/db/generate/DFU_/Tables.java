@@ -59,7 +59,7 @@ public class Tables {
     public static final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>DFU_.NormalAccount_</code>.
+     * 普通学生账号
      */
     public static final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 

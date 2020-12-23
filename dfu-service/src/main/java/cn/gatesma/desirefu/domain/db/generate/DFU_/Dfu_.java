@@ -41,7 +41,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -464005967;
+    private static final long serialVersionUID = -1894719488;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -74,7 +74,7 @@ public class Dfu_ extends SchemaImpl {
     public final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
 
     /**
-     * The table <code>DFU_.NormalAccount_</code>.
+     * 普通学生账号
      */
     public final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
 

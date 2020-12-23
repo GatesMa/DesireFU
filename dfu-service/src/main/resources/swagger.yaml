@@ -548,6 +548,10 @@ definitions:
             type: string
             example: 2017141461189
             description: 学号
+          real_name:
+            type: string
+            example: 马保国
+            description: 真实姓名
 
   AddNormalAccountRet:
     allOf:

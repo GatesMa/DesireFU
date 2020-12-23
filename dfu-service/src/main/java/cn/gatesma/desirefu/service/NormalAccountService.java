@@ -46,13 +46,14 @@ public class NormalAccountService {
         String major = request.getMajor();
         @NotNull Long rootUserId = request.getRootUserId();
         String stuId = request.getStuId();
+        String realName = request.getRealName();
 
 
         // 1. 先创建一个common账号
         long accountId = accountService.createAccount(request);
 
         // 2. 创建一个NormalAccount表记录
-        normalAccountRepository.addNormalAccount(accountId, accountType, collegeId, departmentId, major, stuId, rootUserId);
+        normalAccountRepository.addNormalAccount(accountId, accountType, collegeId, departmentId, major, stuId, realName, rootUserId);
 
         return accountId;
     }
