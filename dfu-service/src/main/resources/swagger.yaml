@@ -1047,6 +1047,16 @@ definitions:
       role_name:
         type: string
         description: 角色名称
+      account_status:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号状态
+      account_status_str:
+        type: string
+        example: 有效
+        description: 账号状态
+
 
   CodeToWxOpenIdRequest:
     properties:

@@ -86,6 +86,26 @@ public class AccountService {
         }
     }
 
+    /**
+     * 通过账号列表获取账号record
+     */
+    public Map<Long, Account_Record> getAccountRecordMap(List<Long> accountIds) {
+
+
+        if (CollectionUtils.isEmpty(accountIds)) {
+            return null;
+        }
+
+        List<Account_Record> records = accountRepository.batchGetAccountById(accountIds);
+
+        if (CollectionUtils.isNotEmpty(records)) {
+            return records.stream().collect(Collectors.toMap(Account_Record::getAccountid,
+                    it -> it));
+        } else {
+            return null;
+        }
+    }
+
 
     /**
      * 获取Account

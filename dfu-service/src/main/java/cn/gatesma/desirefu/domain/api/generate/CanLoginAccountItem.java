@@ -32,6 +32,12 @@ public class CanLoginAccountItem  implements Serializable {
   @JsonProperty("role_name")
   private String roleName = null;
 
+  @JsonProperty("account_status")
+  private Integer accountStatus = null;
+
+  @JsonProperty("account_status_str")
+  private String accountStatusStr = null;
+
   public CanLoginAccountItem accountId(Long accountId) {
     this.accountId = accountId;
     return this;
@@ -127,6 +133,44 @@ public class CanLoginAccountItem  implements Serializable {
     this.roleName = roleName;
   }
 
+  public CanLoginAccountItem accountStatus(Integer accountStatus) {
+    this.accountStatus = accountStatus;
+    return this;
+  }
+
+  /**
+   * 账号状态
+   * @return accountStatus
+  **/
+  @ApiModelProperty(example = "1", value = "账号状态")
+
+  public Integer getAccountStatus() {
+    return accountStatus;
+  }
+
+  public void setAccountStatus(Integer accountStatus) {
+    this.accountStatus = accountStatus;
+  }
+
+  public CanLoginAccountItem accountStatusStr(String accountStatusStr) {
+    this.accountStatusStr = accountStatusStr;
+    return this;
+  }
+
+  /**
+   * 账号状态
+   * @return accountStatusStr
+  **/
+  @ApiModelProperty(example = "有效", value = "账号状态")
+
+  public String getAccountStatusStr() {
+    return accountStatusStr;
+  }
+
+  public void setAccountStatusStr(String accountStatusStr) {
+    this.accountStatusStr = accountStatusStr;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -141,12 +185,14 @@ public class CanLoginAccountItem  implements Serializable {
         Objects.equals(this.accountType, canLoginAccountItem.accountType) &&
         Objects.equals(this.accountName, canLoginAccountItem.accountName) &&
         Objects.equals(this.role, canLoginAccountItem.role) &&
-        Objects.equals(this.roleName, canLoginAccountItem.roleName);
+        Objects.equals(this.roleName, canLoginAccountItem.roleName) &&
+        Objects.equals(this.accountStatus, canLoginAccountItem.accountStatus) &&
+        Objects.equals(this.accountStatusStr, canLoginAccountItem.accountStatusStr);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountType, accountName, role, roleName);
+    return Objects.hash(accountId, accountType, accountName, role, roleName, accountStatus, accountStatusStr);
   }
 
   @Override
@@ -159,6 +205,8 @@ public class CanLoginAccountItem  implements Serializable {
     sb.append("    accountName: ").append(toIndentedString(accountName)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
+    sb.append("    accountStatus: ").append(toIndentedString(accountStatus)).append("\n");
+    sb.append("    accountStatusStr: ").append(toIndentedString(accountStatusStr)).append("\n");
     sb.append("}");
     return sb.toString();
   }

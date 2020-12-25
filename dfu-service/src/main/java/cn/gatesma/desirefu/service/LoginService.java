@@ -7,9 +7,11 @@ import cn.gatesma.desirefu.constants.type.OperatorRole;
 import cn.gatesma.desirefu.constants.type.PlatformType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
 import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
 import cn.gatesma.desirefu.repository.NormalAccountRepository;
+import cn.gatesma.desirefu.utils.AccountUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
@@ -81,7 +83,8 @@ public class LoginService {
         }
 
         List<Long> accountIds = records.stream().map(Accountuserrole_Record::getAccountid).collect(Collectors.toList());
-        Map<Long, String> uidNameMap = accountService.getAccountNameMap(accountIds);
+
+        Map<Long, Account_Record> accountRecordMap = accountService.getAccountRecordMap(accountIds);
 
         // 保存accountType的账号列表
         Map<Integer, CanLoginAccountData> map = Maps.newHashMap();
@@ -91,9 +94,15 @@ public class LoginService {
             CanLoginAccountItem item = new CanLoginAccountItem();
             item.setAccountId(record.getAccountid());
             item.setAccountType(record.getAccounttype());
-            item.setAccountName(uidNameMap.get(record.getAccountid()));
             item.setRole(record.getRole());
             item.setRoleName(OperatorRole.parseCodeToVal(record.getRole()));
+
+            Account_Record account_record = accountRecordMap.get(record.getAccountid());
+            if (account_record != null) {
+                item.setAccountName(account_record.getNickname());
+                item.setAccountStatus(account_record.getAccountstatus());
+                item.setAccountStatusStr(AccountUtils.accountStatusToStr(account_record.getAccountstatus()));
+            }
 
             // 已经包含该类型账号列表
             if (map.containsKey(record.getAccounttype())) {
