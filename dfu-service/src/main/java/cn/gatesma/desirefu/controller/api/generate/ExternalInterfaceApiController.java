@@ -5,6 +5,7 @@ import cn.gatesma.desirefu.constants.type.LoginNameType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.service.ExternalInterfaceService;
+import cn.gatesma.desirefu.utils.EnvUtil;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
@@ -58,10 +59,17 @@ public class ExternalInterfaceApiController implements ExternalInterfaceApi {
 
     private CodeToWxOpenIdRet get(CodeToWxOpenIdRequest body) {
 
-        String openId = externalInterfaceService.code2WXOpenId(body);
 
         CodeToWxOpenIdRet ret = RetCodeUtils.ok(new CodeToWxOpenIdRet());
-        ret.setData(new CodeToWxOpenIdData().code(body.getCode()).openId(openId));
+
+        // 开发环境直接返回我的微信号即可
+        if (EnvUtil.isDevEnv()) {
+            ret.setData(new CodeToWxOpenIdData().code(body.getCode()).openId("oNMqH5BpVtDgoo7zdvcjej_w-mwE"));
+        } else {
+            String openId = externalInterfaceService.code2WXOpenId(body);
+            ret.setData(new CodeToWxOpenIdData().code(body.getCode()).openId(openId));
+        }
+
         return ret;
     }
 
