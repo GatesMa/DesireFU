@@ -7,7 +7,9 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
@@ -45,6 +47,8 @@ public class Indexes {
     public static final Index ACCOUNT__PRIMARY = Indexes0.ACCOUNT__PRIMARY;
     public static final Index COLLEGE__PRIMARY = Indexes0.COLLEGE__PRIMARY;
     public static final Index COMPETITIONCREATORACCOUNT__PRIMARY = Indexes0.COMPETITIONCREATORACCOUNT__PRIMARY;
+    public static final Index COMPETITIONVISIBLE__PRIMARY = Indexes0.COMPETITIONVISIBLE__PRIMARY;
+    public static final Index COMPETITION__PRIMARY = Indexes0.COMPETITION__PRIMARY;
     public static final Index DEPARTMENT__PRIMARY = Indexes0.DEPARTMENT__PRIMARY;
     public static final Index NORMALACCOUNT__PRIMARY = Indexes0.NORMALACCOUNT__PRIMARY;
     public static final Index OPENIDQQIDX__PRIMARY = Indexes0.OPENIDQQIDX__PRIMARY;
@@ -63,6 +67,8 @@ public class Indexes {
         public static Index ACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Account_.ACCOUNT_, new OrderField[] { Account_.ACCOUNT_.ACCOUNTID }, true);
         public static Index COLLEGE__PRIMARY = Internal.createIndex("PRIMARY", College_.COLLEGE_, new OrderField[] { College_.COLLEGE_.COLLEGEID }, true);
         public static Index COMPETITIONCREATORACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_, new OrderField[] { Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_.ACCOUNTID }, true);
+        public static Index COMPETITIONVISIBLE__PRIMARY = Internal.createIndex("PRIMARY", Competitionvisible_.COMPETITIONVISIBLE_, new OrderField[] { Competitionvisible_.COMPETITIONVISIBLE_.COMPETITIONID, Competitionvisible_.COMPETITIONVISIBLE_.COLLEGEID }, true);
+        public static Index COMPETITION__PRIMARY = Internal.createIndex("PRIMARY", Competition_.COMPETITION_, new OrderField[] { Competition_.COMPETITION_.COMPETITIONID }, true);
         public static Index DEPARTMENT__PRIMARY = Internal.createIndex("PRIMARY", Department_.DEPARTMENT_, new OrderField[] { Department_.DEPARTMENT_.DEPARTMENTID }, true);
         public static Index NORMALACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Normalaccount_.NORMALACCOUNT_, new OrderField[] { Normalaccount_.NORMALACCOUNT_.ACCOUNTID }, true);
         public static Index OPENIDQQIDX__PRIMARY = Internal.createIndex("PRIMARY", Openidqqidx_.OPENIDQQIDX_, new OrderField[] { Openidqqidx_.OPENIDQQIDX_.OPENID }, true);

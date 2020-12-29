@@ -7,7 +7,9 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
@@ -41,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -1894719488;
+    private static final long serialVersionUID = -1336487477;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -67,6 +69,16 @@ public class Dfu_ extends SchemaImpl {
      * 比赛创建者账号
      */
     public final Competitioncreatoraccount_ COMPETITIONCREATORACCOUNT_ = Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_;
+
+    /**
+     * 高校可见比赛表
+     */
+    public final Competitionvisible_ COMPETITIONVISIBLE_ = Competitionvisible_.COMPETITIONVISIBLE_;
+
+    /**
+     * 比赛
+     */
+    public final Competition_ COMPETITION_ = Competition_.COMPETITION_;
 
     /**
      * 学院信息
@@ -137,6 +149,8 @@ public class Dfu_ extends SchemaImpl {
             Account_.ACCOUNT_,
             College_.COLLEGE_,
             Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_,
+            Competitionvisible_.COMPETITIONVISIBLE_,
+            Competition_.COMPETITION_,
             Department_.DEPARTMENT_,
             Normalaccount_.NORMALACCOUNT_,
             Openidqqidx_.OPENIDQQIDX_,

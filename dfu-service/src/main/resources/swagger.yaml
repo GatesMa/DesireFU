@@ -33,6 +33,8 @@ tags:
     description: OSS运营人员
   - name: RootAccount
     description: ROOT账号
+  - name: Competition
+    description: 比赛相关接口
 schemes:
   - http
 paths:
@@ -429,6 +431,34 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CodeToWxOpenIdRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /competition/add:
+    post:
+      tags:
+        - Competition
+      summary: 创建比赛信息
+      description: 创建比赛信息
+      operationId: addCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/AddCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddCompetitionRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -1080,6 +1110,55 @@ definitions:
         type: string
         example: oNMqH5BpVtDgoo7zdvcjej_w-mwE
         description: WX账号的openId
+  AddCompetitionRequest:
+    required:
+      - account_type
+      - root_user_id
+    title: AddCompetitionRequest
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛类型 - 省级、校级等(枚举值)
+      title:
+        type: string
+        example: 互联网+
+        description: 比赛名称
+      founder:
+        type: string
+        example: 教育部
+        description: 创办方
+      content:
+        type: string
+        example: 富文本
+        description: 具体通知内容，富文本
+      begin_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      end_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      user_id:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 创建者userId
+  AddCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
 
   HelloRet:
     allOf:
