@@ -52,4 +52,14 @@ public class CompetitionApiController implements CompetitionApi {
         }
     }
 
+    public ResponseEntity<SelectCompetitionRet> selectScrollCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectCompetitionRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            SelectCompetitionRet response = competitionService.selectCompetition(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
 }

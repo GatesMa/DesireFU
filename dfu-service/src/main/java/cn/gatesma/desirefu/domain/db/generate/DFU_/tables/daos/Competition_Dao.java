@@ -80,6 +80,13 @@ public class Competition_Dao extends DAOImpl<Competition_Record, cn.gatesma.desi
     }
 
     /**
+     * Fetch records that have <code>status IN (values)</code>
+     */
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Competition_> fetchByStatus(Integer... values) {
+        return fetch(Competition_.COMPETITION_.STATUS, values);
+    }
+
+    /**
      * Fetch records that have <code>type IN (values)</code>
      */
     public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Competition_> fetchByType(Integer... values) {

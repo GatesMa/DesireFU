@@ -7,6 +7,8 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.domain.api.generate.AddCompetitionRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddCompetitionRet;
+import cn.gatesma.desirefu.domain.api.generate.SelectCompetitionRequest;
+import cn.gatesma.desirefu.domain.api.generate.SelectCompetitionRet;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,5 +38,18 @@ public interface CompetitionApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<AddCompetitionRet> addCompetition(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddCompetitionRequest body);
+
+
+    @ApiOperation(value = "获取比赛信息", nickname = "selectScrollCompetition", notes = "获取比赛信息", response = SelectCompetitionRet.class, tags={ "比赛", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = SelectCompetitionRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/competition/select_scroll",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<SelectCompetitionRet> selectScrollCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectCompetitionRequest body);
+
 
 }

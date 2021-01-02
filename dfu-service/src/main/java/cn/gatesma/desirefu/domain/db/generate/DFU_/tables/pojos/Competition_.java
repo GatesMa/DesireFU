@@ -23,11 +23,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Competition_ implements Serializable {
 
-    private static final long serialVersionUID = 1147237727;
+    private static final long serialVersionUID = 800533175;
 
     private Long      competitionid;
     private Long      accountid;
     private Integer   accounttype;
+    private Integer   status;
     private Integer   type;
     private String    title;
     private String    founder;
@@ -47,6 +48,7 @@ public class Competition_ implements Serializable {
         this.competitionid = value.competitionid;
         this.accountid = value.accountid;
         this.accounttype = value.accounttype;
+        this.status = value.status;
         this.type = value.type;
         this.title = value.title;
         this.founder = value.founder;
@@ -65,6 +67,7 @@ public class Competition_ implements Serializable {
         Long      competitionid,
         Long      accountid,
         Integer   accounttype,
+        Integer   status,
         Integer   type,
         String    title,
         String    founder,
@@ -81,6 +84,7 @@ public class Competition_ implements Serializable {
         this.competitionid = competitionid;
         this.accountid = accountid;
         this.accounttype = accounttype;
+        this.status = status;
         this.type = type;
         this.title = title;
         this.founder = founder;
@@ -117,6 +121,14 @@ public class Competition_ implements Serializable {
 
     public void setAccounttype(Integer accounttype) {
         this.accounttype = accounttype;
+    }
+
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getType() {
@@ -222,6 +234,7 @@ public class Competition_ implements Serializable {
         sb.append(competitionid);
         sb.append(", ").append(accountid);
         sb.append(", ").append(accounttype);
+        sb.append(", ").append(status);
         sb.append(", ").append(type);
         sb.append(", ").append(title);
         sb.append(", ").append(founder);

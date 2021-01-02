@@ -61,6 +61,7 @@ public class Keys {
     public static final Identity<Accountuserrole_Record, Long> IDENTITY_ACCOUNTUSERROLE_ = Identities0.IDENTITY_ACCOUNTUSERROLE_;
     public static final Identity<Account_Record, Long> IDENTITY_ACCOUNT_ = Identities0.IDENTITY_ACCOUNT_;
     public static final Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Identities0.IDENTITY_COLLEGE_;
+    public static final Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Identities0.IDENTITY_COMPETITION_;
     public static final Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Identities0.IDENTITY_DEPARTMENT_;
     public static final Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Identities0.IDENTITY_USERLOGIN_;
     public static final Identity<User_Record, Long> IDENTITY_USER_ = Identities0.IDENTITY_USER_;
@@ -97,6 +98,7 @@ public class Keys {
         public static Identity<Accountuserrole_Record, Long> IDENTITY_ACCOUNTUSERROLE_ = Internal.createIdentity(Accountuserrole_.ACCOUNTUSERROLE_, Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
         public static Identity<Account_Record, Long> IDENTITY_ACCOUNT_ = Internal.createIdentity(Account_.ACCOUNT_, Account_.ACCOUNT_.ACCOUNTID);
         public static Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Internal.createIdentity(College_.COLLEGE_, College_.COLLEGE_.COLLEGEID);
+        public static Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Internal.createIdentity(Competition_.COMPETITION_, Competition_.COMPETITION_.COMPETITIONID);
         public static Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Internal.createIdentity(Department_.DEPARTMENT_, Department_.DEPARTMENT_.DEPARTMENTID);
         public static Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Internal.createIdentity(Userlogin_.USERLOGIN_, Userlogin_.USERLOGIN_.ID);
         public static Identity<User_Record, Long> IDENTITY_USER_ = Internal.createIdentity(User_.USER_, User_.USER_.USERID);

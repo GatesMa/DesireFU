@@ -29,6 +29,9 @@ public class AddCompetitionRequest  implements Serializable {
   @JsonProperty("title")
   private String title = null;
 
+  @JsonProperty("status")
+  private Integer status = null;
+
   @JsonProperty("founder")
   private String founder = null;
 
@@ -119,6 +122,25 @@ public class AddCompetitionRequest  implements Serializable {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public AddCompetitionRequest status(Integer status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * 比赛状态
+   * @return status
+  **/
+  @ApiModelProperty(example = "1", value = "比赛状态")
+
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
   }
 
   public AddCompetitionRequest founder(String founder) {
@@ -230,6 +252,7 @@ public class AddCompetitionRequest  implements Serializable {
         Objects.equals(this.accountType, addCompetitionRequest.accountType) &&
         Objects.equals(this.type, addCompetitionRequest.type) &&
         Objects.equals(this.title, addCompetitionRequest.title) &&
+        Objects.equals(this.status, addCompetitionRequest.status) &&
         Objects.equals(this.founder, addCompetitionRequest.founder) &&
         Objects.equals(this.content, addCompetitionRequest.content) &&
         Objects.equals(this.beginTime, addCompetitionRequest.beginTime) &&
@@ -239,7 +262,7 @@ public class AddCompetitionRequest  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountType, type, title, founder, content, beginTime, endTime, userId);
+    return Objects.hash(accountId, accountType, type, title, status, founder, content, beginTime, endTime, userId);
   }
 
   @Override
@@ -251,6 +274,7 @@ public class AddCompetitionRequest  implements Serializable {
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    founder: ").append(toIndentedString(founder)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    beginTime: ").append(toIndentedString(beginTime)).append("\n");

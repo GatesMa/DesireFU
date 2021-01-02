@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Schema;
@@ -39,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Competition_ extends TableImpl<Competition_Record> {
 
-    private static final long serialVersionUID = 814624989;
+    private static final long serialVersionUID = -705408481;
 
     /**
      * The reference instance of <code>DFU_.Competition_</code>
@@ -57,7 +58,7 @@ public class Competition_ extends TableImpl<Competition_Record> {
     /**
      * The column <code>DFU_.Competition_.competitionId</code>. 帐号ID
      */
-    public final TableField<Competition_Record, Long> COMPETITIONID = createField("competitionId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "帐号ID");
+    public final TableField<Competition_Record, Long> COMPETITIONID = createField("competitionId", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "帐号ID");
 
     /**
      * The column <code>DFU_.Competition_.accountId</code>. 比赛归属帐号ID
@@ -68,6 +69,11 @@ public class Competition_ extends TableImpl<Competition_Record> {
      * The column <code>DFU_.Competition_.accountType</code>. 比赛归属账号类型
      */
     public final TableField<Competition_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "比赛归属账号类型");
+
+    /**
+     * The column <code>DFU_.Competition_.status</code>. 0-草稿，1-可见
+     */
+    public final TableField<Competition_Record, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "0-草稿，1-可见");
 
     /**
      * The column <code>DFU_.Competition_.type</code>. 比赛类型 - 省级、校级等
@@ -87,7 +93,7 @@ public class Competition_ extends TableImpl<Competition_Record> {
     /**
      * The column <code>DFU_.Competition_.content</code>. 具体通知内容，富文本
      */
-    public final TableField<Competition_Record, String> CONTENT = createField("content", org.jooq.impl.SQLDataType.VARCHAR(4096), this, "具体通知内容，富文本");
+    public final TableField<Competition_Record, String> CONTENT = createField("content", org.jooq.impl.SQLDataType.CLOB, this, "具体通知内容，富文本");
 
     /**
      * The column <code>DFU_.Competition_.pv</code>. 浏览人数
@@ -172,6 +178,14 @@ public class Competition_ extends TableImpl<Competition_Record> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.COMPETITION__PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<Competition_Record, Long> getIdentity() {
+        return Keys.IDENTITY_COMPETITION_;
     }
 
     /**

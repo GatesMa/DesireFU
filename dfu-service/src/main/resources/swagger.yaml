@@ -464,6 +464,33 @@ paths:
         404:
           description: RequestBody not found
 
+  /competition/select_scroll:
+    post:
+      tags:
+        - Competition
+      summary: 获取比赛信息
+      description: 获取比赛信息
+      operationId: selectScrollCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SelectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
@@ -1135,6 +1162,11 @@ definitions:
         type: string
         example: 互联网+
         description: 比赛名称
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛状态
       founder:
         type: string
         example: 教育部
@@ -1159,6 +1191,127 @@ definitions:
   AddCompetitionRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
+
+  SelectCompetitionRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      competition_ids:
+        type: array
+        example:
+          - 177953
+          - 177954
+          - 177955
+        items:
+          type: integer
+          format: int64
+      account_id:
+        type: integer
+        format: int64
+        example: 100001
+        description: 创建比赛的账号Id, 用于筛选
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛类型
+      title:
+        type: string
+        example: 大创
+        description: 比赛名称（支持模糊查询）
+      founder:
+        type: string
+        example: 教育部
+        description: 创办方（支持模糊查询）
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 是否草稿
+      state:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛状态，0 - 未开始，1 - 进行中，2 - 已结束
+      sort_field:
+        type: string
+        example: createTime
+        description: 排序字段
+      sort_seq:
+        type: string
+        example: asc
+        description: 排序方式
+
+  SelectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/SelectCompetitionRetData'
+
+  SelectCompetitionRetData:
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/SelectCompetitionData'
+
+  SelectCompetitionData:
+    properties:
+      competition_id:
+        type: integer
+        format: int64
+        example: 3939494
+        description: 比赛id
+      account_id:
+        type: integer
+        format: int64
+        example: 3939494
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛类型
+      title:
+        type: string
+        example: 大创
+        description: 比赛名称
+      founder:
+        type: string
+        example: 教育部
+        description: 创办方
+      content:
+        type: string
+        example: 内容
+        description: 内容
+      pv:
+        type: integer
+        format: int32
+        example: 1
+        description: 浏览量
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 比赛通知状态
+      begin_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 开始时间，格式：yyyy-MM-dd HH:mm:ss
+      end_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 结束时间，格式：yyyy-MM-dd HH:mm:ss
+      created_ime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
 
   HelloRet:
     allOf:
