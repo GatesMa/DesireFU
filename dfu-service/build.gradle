@@ -110,6 +110,10 @@ dependencies {
     compile 'org.elasticsearch.client:transport:5.4.1'
     compile 'org.elasticsearch:elasticsearch:5.4.1'
 
+    // COS文件
+    compile group: 'com.qcloud', name: 'cos_api', version: '5.6.28'
+
+
 }
 
 

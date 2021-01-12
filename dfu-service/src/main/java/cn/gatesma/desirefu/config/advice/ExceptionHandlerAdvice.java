@@ -1,4 +1,4 @@
-package cn.gatesma.desirefu.config.Advice;
+package cn.gatesma.desirefu.config.advice;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.Global;

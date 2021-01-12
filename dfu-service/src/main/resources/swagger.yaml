@@ -35,6 +35,8 @@ tags:
     description: ROOT账号
   - name: Competition
     description: 比赛相关接口
+  - name: Upload
+    description: 上传
 schemes:
   - http
 paths:
