@@ -16,6 +16,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -94,6 +95,11 @@ public class Tables {
      * ROOT账号
      */
     public static final Rootaccount_ ROOTACCOUNT_ = Rootaccount_.ROOTACCOUNT_;
+
+    /**
+     * 文件上传表
+     */
+    public static final Uploadfile_ UPLOADFILE_ = Uploadfile_.UPLOADFILE_;
 
     /**
      * 用户登录表

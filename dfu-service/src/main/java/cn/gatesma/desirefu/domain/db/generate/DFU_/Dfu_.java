@@ -16,6 +16,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -43,7 +44,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -1336487477;
+    private static final long serialVersionUID = -2093526189;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -111,6 +112,11 @@ public class Dfu_ extends SchemaImpl {
     public final Rootaccount_ ROOTACCOUNT_ = Rootaccount_.ROOTACCOUNT_;
 
     /**
+     * 文件上传表
+     */
+    public final Uploadfile_ UPLOADFILE_ = Uploadfile_.UPLOADFILE_;
+
+    /**
      * 用户登录表
      */
     public final Userlogin_ USERLOGIN_ = Userlogin_.USERLOGIN_;
@@ -157,6 +163,7 @@ public class Dfu_ extends SchemaImpl {
             Openidwxidx_.OPENIDWXIDX_,
             Ossaccount_.OSSACCOUNT_,
             Rootaccount_.ROOTACCOUNT_,
+            Uploadfile_.UPLOADFILE_,
             Userlogin_.USERLOGIN_,
             User_.USER_);
     }

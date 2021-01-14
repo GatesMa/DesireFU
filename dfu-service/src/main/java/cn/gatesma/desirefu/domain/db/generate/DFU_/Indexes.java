@@ -16,6 +16,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 
@@ -55,6 +56,7 @@ public class Indexes {
     public static final Index OPENIDWXIDX__PRIMARY = Indexes0.OPENIDWXIDX__PRIMARY;
     public static final Index OSSACCOUNT__PRIMARY = Indexes0.OSSACCOUNT__PRIMARY;
     public static final Index ROOTACCOUNT__PRIMARY = Indexes0.ROOTACCOUNT__PRIMARY;
+    public static final Index UPLOADFILE__PRIMARY = Indexes0.UPLOADFILE__PRIMARY;
     public static final Index USERLOGIN__PRIMARY = Indexes0.USERLOGIN__PRIMARY;
     public static final Index USER__PRIMARY = Indexes0.USER__PRIMARY;
 
@@ -75,6 +77,7 @@ public class Indexes {
         public static Index OPENIDWXIDX__PRIMARY = Internal.createIndex("PRIMARY", Openidwxidx_.OPENIDWXIDX_, new OrderField[] { Openidwxidx_.OPENIDWXIDX_.OPENID }, true);
         public static Index OSSACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Ossaccount_.OSSACCOUNT_, new OrderField[] { Ossaccount_.OSSACCOUNT_.ACCOUNTID }, true);
         public static Index ROOTACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Rootaccount_.ROOTACCOUNT_, new OrderField[] { Rootaccount_.ROOTACCOUNT_.ACCOUNTID }, true);
+        public static Index UPLOADFILE__PRIMARY = Internal.createIndex("PRIMARY", Uploadfile_.UPLOADFILE_, new OrderField[] { Uploadfile_.UPLOADFILE_.FILEID }, true);
         public static Index USERLOGIN__PRIMARY = Internal.createIndex("PRIMARY", Userlogin_.USERLOGIN_, new OrderField[] { Userlogin_.USERLOGIN_.ID }, true);
         public static Index USER__PRIMARY = Internal.createIndex("PRIMARY", User_.USER_, new OrderField[] { User_.USER_.USERID }, true);
     }
