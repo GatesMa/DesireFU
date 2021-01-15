@@ -52,7 +52,7 @@ public class CompetitionRepository {
      * 新增 COMPETITION_
      */
     public boolean addCompetition(Long accountId, Integer accountType, Integer type, String title, String founder,
-                                  String content, Integer status, Timestamp beginTime, Timestamp endTime, Long createdUserId) {
+                                  String content, Integer status, Timestamp beginTime, Timestamp endTime, Long createdUserId, String overviewImg, String overviewText) {
         Timestamp now = TimeUtils.now();
         int res = dslContext
                 .insertInto(
@@ -71,7 +71,9 @@ public class CompetitionRepository {
                         COMPETITION_.CREATEDTIME,
                         COMPETITION_.DELETESTATUS,
                         COMPETITION_.LASTMODIFIEDUSERID,
-                        COMPETITION_.LASTMODIFIEDTIME
+                        COMPETITION_.LASTMODIFIEDTIME,
+                        COMPETITION_.OVERVIEWIMG,
+                        COMPETITION_.OVERVIEWTEXT
                 )
                 .values(
                         accountId,
@@ -88,7 +90,9 @@ public class CompetitionRepository {
                         now,
                         DeleteStatus.NORMAL.code(),
                         createdUserId,
-                        now
+                        now,
+                        overviewImg,
+                        overviewText
                 ).execute();
         return res == 1;
     }

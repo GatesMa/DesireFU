@@ -47,6 +47,12 @@ public class AddCompetitionRequest  implements Serializable {
   @JsonProperty("user_id")
   private Long userId = null;
 
+  @JsonProperty("overview_img")
+  private String overviewImg = null;
+
+  @JsonProperty("overview_text")
+  private String overviewText = null;
+
   public AddCompetitionRequest accountId(Long accountId) {
     this.accountId = accountId;
     return this;
@@ -238,6 +244,44 @@ public class AddCompetitionRequest  implements Serializable {
     this.userId = userId;
   }
 
+  public AddCompetitionRequest overviewImg(String overviewImg) {
+    this.overviewImg = overviewImg;
+    return this;
+  }
+
+  /**
+   * 概览图片URL
+   * @return overviewImg
+  **/
+  @ApiModelProperty(example = "https://xxxx", value = "概览图片URL")
+
+  public String getOverviewImg() {
+    return overviewImg;
+  }
+
+  public void setOverviewImg(String overviewImg) {
+    this.overviewImg = overviewImg;
+  }
+
+  public AddCompetitionRequest overviewText(String overviewText) {
+    this.overviewText = overviewText;
+    return this;
+  }
+
+  /**
+   * 概览文本
+   * @return overviewText
+  **/
+  @ApiModelProperty(example = "概览文本", value = "概览文本")
+
+  public String getOverviewText() {
+    return overviewText;
+  }
+
+  public void setOverviewText(String overviewText) {
+    this.overviewText = overviewText;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -257,12 +301,14 @@ public class AddCompetitionRequest  implements Serializable {
         Objects.equals(this.content, addCompetitionRequest.content) &&
         Objects.equals(this.beginTime, addCompetitionRequest.beginTime) &&
         Objects.equals(this.endTime, addCompetitionRequest.endTime) &&
-        Objects.equals(this.userId, addCompetitionRequest.userId);
+        Objects.equals(this.userId, addCompetitionRequest.userId) &&
+        Objects.equals(this.overviewImg, addCompetitionRequest.overviewImg) &&
+        Objects.equals(this.overviewText, addCompetitionRequest.overviewText);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountType, type, title, status, founder, content, beginTime, endTime, userId);
+    return Objects.hash(accountId, accountType, type, title, status, founder, content, beginTime, endTime, userId, overviewImg, overviewText);
   }
 
   @Override
@@ -280,6 +326,8 @@ public class AddCompetitionRequest  implements Serializable {
     sb.append("    beginTime: ").append(toIndentedString(beginTime)).append("\n");
     sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    overviewImg: ").append(toIndentedString(overviewImg)).append("\n");
+    sb.append("    overviewText: ").append(toIndentedString(overviewText)).append("\n");
     sb.append("}");
     return sb.toString();
   }
