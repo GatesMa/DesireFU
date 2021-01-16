@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Competition_ extends TableImpl<Competition_Record> {
 
-    private static final long serialVersionUID = -705408481;
+    private static final long serialVersionUID = 132650206;
 
     /**
      * The reference instance of <code>DFU_.Competition_</code>
@@ -99,6 +99,16 @@ public class Competition_ extends TableImpl<Competition_Record> {
      * The column <code>DFU_.Competition_.pv</code>. 浏览人数
      */
     public final TableField<Competition_Record, Integer> PV = createField("pv", org.jooq.impl.SQLDataType.INTEGER.defaultValue(DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "浏览人数");
+
+    /**
+     * The column <code>DFU_.Competition_.overviewText</code>. 概览文字
+     */
+    public final TableField<Competition_Record, String> OVERVIEWTEXT = createField("overviewText", org.jooq.impl.SQLDataType.VARCHAR(255), this, "概览文字");
+
+    /**
+     * The column <code>DFU_.Competition_.overviewImg</code>. 概览图片url
+     */
+    public final TableField<Competition_Record, String> OVERVIEWIMG = createField("overviewImg", org.jooq.impl.SQLDataType.VARCHAR(1024), this, "概览图片url");
 
     /**
      * The column <code>DFU_.Competition_.beginTime</code>. 比赛开始时间

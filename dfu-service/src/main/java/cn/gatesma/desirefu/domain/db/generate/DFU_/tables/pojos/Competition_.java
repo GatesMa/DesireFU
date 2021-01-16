@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Competition_ implements Serializable {
 
-    private static final long serialVersionUID = 800533175;
+    private static final long serialVersionUID = -43183779;
 
     private Long      competitionid;
     private Long      accountid;
@@ -34,6 +34,8 @@ public class Competition_ implements Serializable {
     private String    founder;
     private String    content;
     private Integer   pv;
+    private String    overviewtext;
+    private String    overviewimg;
     private Timestamp begintime;
     private Timestamp endtime;
     private Integer   deletestatus;
@@ -54,6 +56,8 @@ public class Competition_ implements Serializable {
         this.founder = value.founder;
         this.content = value.content;
         this.pv = value.pv;
+        this.overviewtext = value.overviewtext;
+        this.overviewimg = value.overviewimg;
         this.begintime = value.begintime;
         this.endtime = value.endtime;
         this.deletestatus = value.deletestatus;
@@ -73,6 +77,8 @@ public class Competition_ implements Serializable {
         String    founder,
         String    content,
         Integer   pv,
+        String    overviewtext,
+        String    overviewimg,
         Timestamp begintime,
         Timestamp endtime,
         Integer   deletestatus,
@@ -90,6 +96,8 @@ public class Competition_ implements Serializable {
         this.founder = founder;
         this.content = content;
         this.pv = pv;
+        this.overviewtext = overviewtext;
+        this.overviewimg = overviewimg;
         this.begintime = begintime;
         this.endtime = endtime;
         this.deletestatus = deletestatus;
@@ -171,6 +179,22 @@ public class Competition_ implements Serializable {
         this.pv = pv;
     }
 
+    public String getOverviewtext() {
+        return this.overviewtext;
+    }
+
+    public void setOverviewtext(String overviewtext) {
+        this.overviewtext = overviewtext;
+    }
+
+    public String getOverviewimg() {
+        return this.overviewimg;
+    }
+
+    public void setOverviewimg(String overviewimg) {
+        this.overviewimg = overviewimg;
+    }
+
     public Timestamp getBegintime() {
         return this.begintime;
     }
@@ -240,6 +264,8 @@ public class Competition_ implements Serializable {
         sb.append(", ").append(founder);
         sb.append(", ").append(content);
         sb.append(", ").append(pv);
+        sb.append(", ").append(overviewtext);
+        sb.append(", ").append(overviewimg);
         sb.append(", ").append(begintime);
         sb.append(", ").append(endtime);
         sb.append(", ").append(deletestatus);

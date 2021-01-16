@@ -9,6 +9,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competition_Re
 import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
 import cn.gatesma.desirefu.repository.CompetitionRepository;
 import cn.gatesma.desirefu.repository.NormalAccountRepository;
+import cn.gatesma.desirefu.utils.HtmlUtils;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,11 @@ public class CompetitionService {
 
         checkParam(request);
 
+        // 如果概览文本是空的，从正文中提取文字
+        if (StringUtils.isBlank(request.getOverviewText())) {
+            fillOverviewText(request);
+        }
+
         competitionRepository.addCompetition(
                 request.getAccountId(),
                 request.getAccountType(),
@@ -53,8 +59,21 @@ public class CompetitionService {
                 request.getStatus(),
                 TimeUtils.convertStringToTimestamp(request.getBeginTime()),
                 TimeUtils.convertStringToTimestamp(request.getEndTime()),
-                request.getUserId());
+                request.getUserId(),
+                request.getOverviewImg(),
+                request.getOverviewText());
 
+    }
+
+    private void fillOverviewText(AddCompetitionRequest request) {
+        // 正文提取文本
+        if (StringUtils.isBlank(request.getContent())) {
+            request.setOverviewText(StringUtils.EMPTY);
+        } else {
+            String htmlStr = HtmlUtils.html2Str(request.getContent());
+            htmlStr = htmlStr.substring(0, 100) + "...";
+            request.setOverviewText(htmlStr);
+        }
     }
 
     public SelectCompetitionRet selectCompetition(SelectCompetitionRequest request) {
@@ -108,7 +127,9 @@ public class CompetitionService {
                     .status(record.getStatus())
                     .beginTime(TimeUtils.convertDateToString(record.getBegintime(), TimeFmt.getTimeFmt()))
                     .endTime(TimeUtils.convertDateToString(record.getEndtime(), TimeFmt.getTimeFmt()))
-                    .createdIme(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+                    .createdIme(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()))
+                    .overviewImg(record.getOverviewimg())
+                    .overviewText(record.getOverviewtext());
             ret.add(item);
         }
         return ret;

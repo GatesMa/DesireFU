@@ -66,7 +66,12 @@ public class UploadService {
 
         // 获取上传的文件后缀名
         String originalFilename = fileModel.getUpfile().getOriginalFilename();
-        String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
+        int idx = originalFilename.lastIndexOf(".");
+        String suffixName = "";
+        // 防止有些图片，没有后缀名，但是确实是张图片
+        if (idx != -1) {
+            suffixName = originalFilename.substring(idx);
+        }
 
         // 1。 上传至COS
         // filename: 如果没传，就使用uuid.后缀名，如果名字重复会覆盖

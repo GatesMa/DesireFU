@@ -122,6 +122,20 @@ public class Competition_Dao extends DAOImpl<Competition_Record, cn.gatesma.desi
     }
 
     /**
+     * Fetch records that have <code>overviewText IN (values)</code>
+     */
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Competition_> fetchByOverviewtext(String... values) {
+        return fetch(Competition_.COMPETITION_.OVERVIEWTEXT, values);
+    }
+
+    /**
+     * Fetch records that have <code>overviewImg IN (values)</code>
+     */
+    public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Competition_> fetchByOverviewimg(String... values) {
+        return fetch(Competition_.COMPETITION_.OVERVIEWIMG, values);
+    }
+
+    /**
      * Fetch records that have <code>beginTime IN (values)</code>
      */
     public List<cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Competition_> fetchByBegintime(Timestamp... values) {

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Uploadfile_ extends TableImpl<Uploadfile_Record> {
 
-    private static final long serialVersionUID = 1393043347;
+    private static final long serialVersionUID = -727174986;
 
     /**
      * The reference instance of <code>DFU_.UploadFile_</code>
@@ -63,17 +63,17 @@ public class Uploadfile_ extends TableImpl<Uploadfile_Record> {
     /**
      * The column <code>DFU_.UploadFile_.fileType</code>. 文件类型
      */
-    public final TableField<Uploadfile_Record, String> FILETYPE = createField("fileType", org.jooq.impl.SQLDataType.VARCHAR(32).nullable(false), this, "文件类型");
+    public final TableField<Uploadfile_Record, String> FILETYPE = createField("fileType", org.jooq.impl.SQLDataType.VARCHAR(32), this, "文件类型");
 
     /**
      * The column <code>DFU_.UploadFile_.accountId</code>. 比赛归属帐号ID
      */
-    public final TableField<Uploadfile_Record, Long> ACCOUNTID = createField("accountId", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "比赛归属帐号ID");
+    public final TableField<Uploadfile_Record, Long> ACCOUNTID = createField("accountId", org.jooq.impl.SQLDataType.BIGINT, this, "比赛归属帐号ID");
 
     /**
      * The column <code>DFU_.UploadFile_.accountType</code>. 比赛归属账号类型
      */
-    public final TableField<Uploadfile_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "比赛归属账号类型");
+    public final TableField<Uploadfile_Record, Integer> ACCOUNTTYPE = createField("accountType", org.jooq.impl.SQLDataType.INTEGER, this, "比赛归属账号类型");
 
     /**
      * The column <code>DFU_.UploadFile_.fileName</code>. 文件名称
