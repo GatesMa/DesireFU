@@ -5,6 +5,7 @@ import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
 import org.jooq.SelectConditionStep;
 import org.jooq.UpdateSetMoreStep;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.List;
 
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.NORMALACCOUNT_;
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.NORMALACCOUNT_;
+import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.*;
+import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.COMPETITION_;
 
 
 /**
@@ -39,6 +41,41 @@ public class NormalAccountRepository {
             stmt.and(NORMALACCOUNT_.DELETESTATUS.eq(deleteStatus.code()));
         }
         return stmt.fetchOne();
+    }
+
+    public List<Normalaccount_Record> queryNormalAccount(Long accountId, Integer collegeId, Integer departmentId,
+                                                         String major, String stuId, String realName) {
+
+        SelectConditionStep<Normalaccount_Record> conditionStep = dslContext.selectFrom(NORMALACCOUNT_)
+                .where(NORMALACCOUNT_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
+
+        if (accountId != null) {
+            conditionStep.and(NORMALACCOUNT_.ACCOUNTID.eq(accountId));
+        }
+
+        if (collegeId != null) {
+            conditionStep.and(NORMALACCOUNT_.COLLEGEID.eq(collegeId));
+        }
+
+        if (departmentId != null) {
+            conditionStep.and(NORMALACCOUNT_.DEPARTMENTID.eq(departmentId));
+        }
+
+        if (StringUtils.isNotBlank(major)) {
+            conditionStep.and(NORMALACCOUNT_.MAJOR.like("%" + major + "%"));
+        }
+
+        // 学号精准查询
+        if (StringUtils.isNotBlank(stuId)) {
+            conditionStep.and(NORMALACCOUNT_.STUID.eq(stuId));
+        }
+
+        if (StringUtils.isNotBlank(realName)) {
+            conditionStep.and(NORMALACCOUNT_.REALNAME.like("%" + realName + "%"));
+        }
+
+        return conditionStep.fetch();
+
     }
 
     /**

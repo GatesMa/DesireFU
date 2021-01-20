@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
 
+import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.COLLEGE_;
 import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.DEPARTMENT_;
 
 
@@ -26,6 +28,19 @@ public class DepartmentRepository {
 
     @Resource
     private DSLContext dslContext;
+
+    /**
+     * 获取一个College
+     */
+    public Department_Record getDepartmentById(int departmentId, DeleteStatus deleteStatus) {
+        SelectConditionStep<Department_Record> stmt = dslContext
+                .selectFrom(DEPARTMENT_)
+                .where(DEPARTMENT_.DEPARTMENTID.eq(departmentId));
+        if (deleteStatus != null) {
+            stmt.and(DEPARTMENT_.DELETESTATUS.eq(deleteStatus.code()));
+        }
+        return stmt.fetchOne();
+    }
 
     /**
      * 查询学校，名称和部门模糊，标识码精确
