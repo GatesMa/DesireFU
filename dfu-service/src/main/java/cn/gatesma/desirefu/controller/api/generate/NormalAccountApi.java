@@ -7,6 +7,8 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.domain.api.generate.AddNormalAccountRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddNormalAccountRet;
+import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountRequest;
+import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountRet;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,5 +38,18 @@ public interface NormalAccountApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<AddNormalAccountRet> addNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddNormalAccountRequest body);
+
+    @ApiOperation(value = "搜索学生账号", nickname = "getNormalAccount", notes = "搜索学生账号", response = GetNormalAccountRet.class, tags={ "普通账号", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetNormalAccountRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/normal_account/get",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetNormalAccountRet> getNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body);
+
+
 
 }

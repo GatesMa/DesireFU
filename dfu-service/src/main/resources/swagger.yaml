@@ -178,6 +178,33 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /normal_account/get:
+    post:
+      tags:
+        - NormalAccount
+      summary: 搜索学生账号
+      description: 搜索学生账号
+      operationId: getNormalAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetNormalAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetNormalAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /competition_creator_account/add:
     post:
@@ -1389,6 +1416,87 @@ definitions:
       file_url:
         type: string
         description: 文件URL
+
+  GetNormalAccountRequest:
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+      department_id:
+        type: integer
+        format: int32
+        example: 1111
+        description: 学院ID
+      major:
+        type: string
+        example: 计算机科学与技术
+        description: 专业
+      stu_id:
+        type: string
+        example: 2017141461189
+        description: 学号
+      real_name:
+        type: string
+        example: 马保国
+        description: 真实姓名
+
+  GetNormalAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetNormalAccountData'
+  GetNormalAccountData:
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        example: 3939494
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      college_id:
+        type: integer
+        format: int32
+        example: 2211
+        description: 学校ID
+      college_name:
+        type: string
+        description: 学校中文
+      department_id:
+        type: integer
+        format: int32
+        example: 1111
+        description: 学院ID
+      department_name:
+        type: string
+        description: 学院中文
+      major:
+        type: string
+        example: 计算机科学与技术
+        description: 专业
+      stu_id:
+        type: string
+        example: 2017141461189
+        description: 学号
+      real_name:
+        type: string
+        example: 马保国
+        description: 真实姓名
+
+
 
   HelloRet:
     allOf:
