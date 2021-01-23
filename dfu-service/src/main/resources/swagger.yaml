@@ -35,6 +35,8 @@ tags:
     description: ROOT账号
   - name: Competition
     description: 比赛相关接口
+  - name: Notification
+    description: 公告
 
 schemes:
   - http
@@ -561,6 +563,60 @@ paths:
           description: Ok
           schema:
             $ref: '#/definitions/UploadFileRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /notification/add:
+    post:
+      tags:
+        - Notification
+      summary: 创建公告
+      description: 创建公告
+      operationId: addNotification
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/AddNotificationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddNotificationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+  /notification/select:
+    post:
+      tags:
+        - Notification
+      summary: 获取公告
+      description: 获取公告
+      operationId: selectNotification
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectNotificationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SelectNotificationRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -1495,6 +1551,84 @@ definitions:
         type: string
         example: 马保国
         description: 真实姓名
+
+  AddNotificationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  AddNotificationRequest:
+    properties:
+      front_img:
+        type: string
+        example: http://xxx
+        description: 图片url
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 公告类型
+      content:
+        type: string
+        example: 1
+        description: 内容
+
+  SelectNotificationRequest:
+    properties:
+      noticeId:
+        type: integer
+        format: int32
+        example: 100001
+        description: 公告Id, 用于筛选
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 类型
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 是否草稿
+
+  SelectNotificationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/SelectNotificationRetData'
+
+  SelectNotificationRetData:
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/SelectNotificationData'
+
+  SelectNotificationData:
+    properties:
+      noticeId:
+        type: integer
+        format: int32
+        example: 100001
+        description: 公告Id, 用于筛选
+      front_img:
+        type: string
+        example: http://xxx
+        description: 图片url
+      type:
+        type: integer
+        format: int32
+        example: 1
+        description: 公告类型
+      content:
+        type: string
+        example: 1
+        description: 内容
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 状态
 
 
 

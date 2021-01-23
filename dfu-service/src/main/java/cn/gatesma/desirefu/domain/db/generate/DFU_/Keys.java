@@ -12,6 +12,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoracco
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
@@ -27,6 +28,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitioncre
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitionvisible_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Notification_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidqqidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidwxidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Ossaccount_Record;
@@ -65,6 +67,7 @@ public class Keys {
     public static final Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Identities0.IDENTITY_COLLEGE_;
     public static final Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Identities0.IDENTITY_COMPETITION_;
     public static final Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Identities0.IDENTITY_DEPARTMENT_;
+    public static final Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Identities0.IDENTITY_NOTIFICATION_;
     public static final Identity<Uploadfile_Record, Integer> IDENTITY_UPLOADFILE_ = Identities0.IDENTITY_UPLOADFILE_;
     public static final Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Identities0.IDENTITY_USERLOGIN_;
     public static final Identity<User_Record, Long> IDENTITY_USER_ = Identities0.IDENTITY_USER_;
@@ -81,6 +84,7 @@ public class Keys {
     public static final UniqueKey<Competition_Record> KEY_COMPETITION__PRIMARY = UniqueKeys0.KEY_COMPETITION__PRIMARY;
     public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = UniqueKeys0.KEY_DEPARTMENT__PRIMARY;
     public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = UniqueKeys0.KEY_NORMALACCOUNT__PRIMARY;
+    public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = UniqueKeys0.KEY_NOTIFICATION__PRIMARY;
     public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = UniqueKeys0.KEY_OPENIDQQIDX__PRIMARY;
     public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = UniqueKeys0.KEY_OPENIDWXIDX__PRIMARY;
     public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = UniqueKeys0.KEY_OSSACCOUNT__PRIMARY;
@@ -104,6 +108,7 @@ public class Keys {
         public static Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Internal.createIdentity(College_.COLLEGE_, College_.COLLEGE_.COLLEGEID);
         public static Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Internal.createIdentity(Competition_.COMPETITION_, Competition_.COMPETITION_.COMPETITIONID);
         public static Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Internal.createIdentity(Department_.DEPARTMENT_, Department_.DEPARTMENT_.DEPARTMENTID);
+        public static Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Internal.createIdentity(Notification_.NOTIFICATION_, Notification_.NOTIFICATION_.NOTICEID);
         public static Identity<Uploadfile_Record, Integer> IDENTITY_UPLOADFILE_ = Internal.createIdentity(Uploadfile_.UPLOADFILE_, Uploadfile_.UPLOADFILE_.FILEID);
         public static Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Internal.createIdentity(Userlogin_.USERLOGIN_, Userlogin_.USERLOGIN_.ID);
         public static Identity<User_Record, Long> IDENTITY_USER_ = Internal.createIdentity(User_.USER_, User_.USER_.USERID);
@@ -118,6 +123,7 @@ public class Keys {
         public static final UniqueKey<Competition_Record> KEY_COMPETITION__PRIMARY = Internal.createUniqueKey(Competition_.COMPETITION_, "KEY_Competition__PRIMARY", Competition_.COMPETITION_.COMPETITIONID);
         public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_Department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
         public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_NormalAccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = Internal.createUniqueKey(Notification_.NOTIFICATION_, "KEY_Notification__PRIMARY", Notification_.NOTIFICATION_.NOTICEID);
         public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
         public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_OpenIdWXIdx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
         public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = Internal.createUniqueKey(Ossaccount_.OSSACCOUNT_, "KEY_OSSAccount__PRIMARY", Ossaccount_.OSSACCOUNT_.ACCOUNTID);
