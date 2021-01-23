@@ -12,6 +12,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoracco
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
@@ -75,6 +76,11 @@ public class Tables {
      * 普通学生账号
      */
     public static final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
+
+    /**
+     * 公告
+     */
+    public static final Notification_ NOTIFICATION_ = Notification_.NOTIFICATION_;
 
     /**
      * 用于存储openId对应qq关联关系

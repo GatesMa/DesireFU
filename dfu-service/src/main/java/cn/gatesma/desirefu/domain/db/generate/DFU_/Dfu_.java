@@ -12,6 +12,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoracco
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
@@ -44,7 +45,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -2093526189;
+    private static final long serialVersionUID = -820296002;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -90,6 +91,11 @@ public class Dfu_ extends SchemaImpl {
      * 普通学生账号
      */
     public final Normalaccount_ NORMALACCOUNT_ = Normalaccount_.NORMALACCOUNT_;
+
+    /**
+     * 公告
+     */
+    public final Notification_ NOTIFICATION_ = Notification_.NOTIFICATION_;
 
     /**
      * 用于存储openId对应qq关联关系
@@ -159,6 +165,7 @@ public class Dfu_ extends SchemaImpl {
             Competition_.COMPETITION_,
             Department_.DEPARTMENT_,
             Normalaccount_.NORMALACCOUNT_,
+            Notification_.NOTIFICATION_,
             Openidqqidx_.OPENIDQQIDX_,
             Openidwxidx_.OPENIDWXIDX_,
             Ossaccount_.OSSACCOUNT_,
