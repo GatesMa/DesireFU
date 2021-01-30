@@ -17,8 +17,9 @@ public enum PlatformType {
     NORMAL(1, "组队账号"), // NORMAL类型的账号，可以参与组队
     COMPETITION_CREATOR(2, "比赛信息管理"),// 比赛创建者账号
     OSS(3, "运营账号"), // 运营人员账号
-    SUPER_USER(4, "SUPER_USER");// 最高权限账号，原则上只有一个，用于OSS账户、比赛创建者账户任免等顶级权限操作
-
+    SUPER_USER(4, "SUPER_USER"),// 最高权限账号，原则上只有一个，用于OSS账户、比赛创建者账户任免等顶级权限操作
+    ORGANIZE(5, "队伍")
+    ;
     private Integer value;
     private String desc;
 
