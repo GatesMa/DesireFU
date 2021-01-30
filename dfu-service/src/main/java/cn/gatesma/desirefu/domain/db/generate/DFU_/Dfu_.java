@@ -15,6 +15,9 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organize_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountapplication_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountrelation_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
@@ -45,7 +48,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = -820296002;
+    private static final long serialVersionUID = -1705163070;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -108,6 +111,21 @@ public class Dfu_ extends SchemaImpl {
     public final Openidwxidx_ OPENIDWXIDX_ = Openidwxidx_.OPENIDWXIDX_;
 
     /**
+     * 圈子申请信息表
+     */
+    public final Organizeaccountapplication_ ORGANIZEACCOUNTAPPLICATION_ = Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_;
+
+    /**
+     * OrganizeAccount关系表
+     */
+    public final Organizeaccountrelation_ ORGANIZEACCOUNTRELATION_ = Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_;
+
+    /**
+     * 组织
+     */
+    public final Organize_ ORGANIZE_ = Organize_.ORGANIZE_;
+
+    /**
      * OSS运营人员账号
      */
     public final Ossaccount_ OSSACCOUNT_ = Ossaccount_.OSSACCOUNT_;
@@ -168,6 +186,9 @@ public class Dfu_ extends SchemaImpl {
             Notification_.NOTIFICATION_,
             Openidqqidx_.OPENIDQQIDX_,
             Openidwxidx_.OPENIDWXIDX_,
+            Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_,
+            Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_,
+            Organize_.ORGANIZE_,
             Ossaccount_.OSSACCOUNT_,
             Rootaccount_.ROOTACCOUNT_,
             Uploadfile_.UPLOADFILE_,

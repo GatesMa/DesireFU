@@ -37,6 +37,9 @@ tags:
     description: 比赛相关接口
   - name: Notification
     description: 公告
+  - name: Organize
+    description: 队伍
+
 
 schemes:
   - http
@@ -617,6 +620,34 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SelectNotificationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize/add:
+    post:
+      tags:
+        - Organize
+      summary: 创建组织
+      description: 创建组织，返回"账号ID"
+      operationId: addOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/AddOrganizeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddOrganizeRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -1630,6 +1661,34 @@ definitions:
         example: 1
         description: 状态
 
+  AddOrganizeRequest:
+    title: AddOrganizeRequest
+    allOf:
+      - $ref: '#/definitions/AddAccountRequest'
+      - properties:
+          competitionId:
+            type: integer
+            format: int64
+            example: 1
+            description: 比赛ID
+          srcAccountId:
+            type: integer
+            format: int64
+            example: 1
+            description: 比赛ID
+  AddOrganizeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/AddOrganizeRetData'
+  AddOrganizeRetData:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
 
 
   HelloRet:

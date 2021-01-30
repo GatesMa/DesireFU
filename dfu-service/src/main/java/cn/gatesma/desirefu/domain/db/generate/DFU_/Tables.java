@@ -15,6 +15,9 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organize_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountapplication_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountrelation_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
@@ -91,6 +94,21 @@ public class Tables {
      * 用于存储openId对应wx关联关系
      */
     public static final Openidwxidx_ OPENIDWXIDX_ = Openidwxidx_.OPENIDWXIDX_;
+
+    /**
+     * 圈子申请信息表
+     */
+    public static final Organizeaccountapplication_ ORGANIZEACCOUNTAPPLICATION_ = Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_;
+
+    /**
+     * OrganizeAccount关系表
+     */
+    public static final Organizeaccountrelation_ ORGANIZEACCOUNTRELATION_ = Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_;
+
+    /**
+     * 组织
+     */
+    public static final Organize_ ORGANIZE_ = Organize_.ORGANIZE_;
 
     /**
      * OSS运营人员账号
