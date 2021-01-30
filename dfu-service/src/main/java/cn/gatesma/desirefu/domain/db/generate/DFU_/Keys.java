@@ -15,6 +15,9 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidwxidx_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organize_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountapplication_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Organizeaccountrelation_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Ossaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Rootaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Uploadfile_;
@@ -31,6 +34,9 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Notification_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidqqidx_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidwxidx_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountrelation_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Ossaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Rootaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Uploadfile_Record;
@@ -68,6 +74,8 @@ public class Keys {
     public static final Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Identities0.IDENTITY_COMPETITION_;
     public static final Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Identities0.IDENTITY_DEPARTMENT_;
     public static final Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Identities0.IDENTITY_NOTIFICATION_;
+    public static final Identity<Organizeaccountapplication_Record, Long> IDENTITY_ORGANIZEACCOUNTAPPLICATION_ = Identities0.IDENTITY_ORGANIZEACCOUNTAPPLICATION_;
+    public static final Identity<Organizeaccountrelation_Record, Long> IDENTITY_ORGANIZEACCOUNTRELATION_ = Identities0.IDENTITY_ORGANIZEACCOUNTRELATION_;
     public static final Identity<Uploadfile_Record, Integer> IDENTITY_UPLOADFILE_ = Identities0.IDENTITY_UPLOADFILE_;
     public static final Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Identities0.IDENTITY_USERLOGIN_;
     public static final Identity<User_Record, Long> IDENTITY_USER_ = Identities0.IDENTITY_USER_;
@@ -87,6 +95,9 @@ public class Keys {
     public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = UniqueKeys0.KEY_NOTIFICATION__PRIMARY;
     public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = UniqueKeys0.KEY_OPENIDQQIDX__PRIMARY;
     public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = UniqueKeys0.KEY_OPENIDWXIDX__PRIMARY;
+    public static final UniqueKey<Organizeaccountapplication_Record> KEY_ORGANIZEACCOUNTAPPLICATION__PRIMARY = UniqueKeys0.KEY_ORGANIZEACCOUNTAPPLICATION__PRIMARY;
+    public static final UniqueKey<Organizeaccountrelation_Record> KEY_ORGANIZEACCOUNTRELATION__PRIMARY = UniqueKeys0.KEY_ORGANIZEACCOUNTRELATION__PRIMARY;
+    public static final UniqueKey<Organize_Record> KEY_ORGANIZE__PRIMARY = UniqueKeys0.KEY_ORGANIZE__PRIMARY;
     public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = UniqueKeys0.KEY_OSSACCOUNT__PRIMARY;
     public static final UniqueKey<Rootaccount_Record> KEY_ROOTACCOUNT__PRIMARY = UniqueKeys0.KEY_ROOTACCOUNT__PRIMARY;
     public static final UniqueKey<Uploadfile_Record> KEY_UPLOADFILE__PRIMARY = UniqueKeys0.KEY_UPLOADFILE__PRIMARY;
@@ -109,6 +120,8 @@ public class Keys {
         public static Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Internal.createIdentity(Competition_.COMPETITION_, Competition_.COMPETITION_.COMPETITIONID);
         public static Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Internal.createIdentity(Department_.DEPARTMENT_, Department_.DEPARTMENT_.DEPARTMENTID);
         public static Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Internal.createIdentity(Notification_.NOTIFICATION_, Notification_.NOTIFICATION_.NOTICEID);
+        public static Identity<Organizeaccountapplication_Record, Long> IDENTITY_ORGANIZEACCOUNTAPPLICATION_ = Internal.createIdentity(Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_, Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_.ID);
+        public static Identity<Organizeaccountrelation_Record, Long> IDENTITY_ORGANIZEACCOUNTRELATION_ = Internal.createIdentity(Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_, Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_.ID);
         public static Identity<Uploadfile_Record, Integer> IDENTITY_UPLOADFILE_ = Internal.createIdentity(Uploadfile_.UPLOADFILE_, Uploadfile_.UPLOADFILE_.FILEID);
         public static Identity<Userlogin_Record, Long> IDENTITY_USERLOGIN_ = Internal.createIdentity(Userlogin_.USERLOGIN_, Userlogin_.USERLOGIN_.ID);
         public static Identity<User_Record, Long> IDENTITY_USER_ = Internal.createIdentity(User_.USER_, User_.USER_.USERID);
@@ -126,6 +139,9 @@ public class Keys {
         public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = Internal.createUniqueKey(Notification_.NOTIFICATION_, "KEY_Notification__PRIMARY", Notification_.NOTIFICATION_.NOTICEID);
         public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
         public static final UniqueKey<Openidwxidx_Record> KEY_OPENIDWXIDX__PRIMARY = Internal.createUniqueKey(Openidwxidx_.OPENIDWXIDX_, "KEY_OpenIdWXIdx__PRIMARY", Openidwxidx_.OPENIDWXIDX_.OPENID);
+        public static final UniqueKey<Organizeaccountapplication_Record> KEY_ORGANIZEACCOUNTAPPLICATION__PRIMARY = Internal.createUniqueKey(Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_, "KEY_OrganizeAccountApplication__PRIMARY", Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_.ID);
+        public static final UniqueKey<Organizeaccountrelation_Record> KEY_ORGANIZEACCOUNTRELATION__PRIMARY = Internal.createUniqueKey(Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_, "KEY_OrganizeAccountRelation__PRIMARY", Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_.ID);
+        public static final UniqueKey<Organize_Record> KEY_ORGANIZE__PRIMARY = Internal.createUniqueKey(Organize_.ORGANIZE_, "KEY_Organize__PRIMARY", Organize_.ORGANIZE_.ORGANIZEID);
         public static final UniqueKey<Ossaccount_Record> KEY_OSSACCOUNT__PRIMARY = Internal.createUniqueKey(Ossaccount_.OSSACCOUNT_, "KEY_OSSAccount__PRIMARY", Ossaccount_.OSSACCOUNT_.ACCOUNTID);
         public static final UniqueKey<Rootaccount_Record> KEY_ROOTACCOUNT__PRIMARY = Internal.createUniqueKey(Rootaccount_.ROOTACCOUNT_, "KEY_RootAccount__PRIMARY", Rootaccount_.ROOTACCOUNT_.ACCOUNTID);
         public static final UniqueKey<Uploadfile_Record> KEY_UPLOADFILE__PRIMARY = Internal.createUniqueKey(Uploadfile_.UPLOADFILE_, "KEY_UploadFile__PRIMARY", Uploadfile_.UPLOADFILE_.FILEID);

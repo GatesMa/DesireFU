@@ -17,8 +17,9 @@ public enum AccountType {
     NORMAL(1, "NORMAL"), // NORMAL类型的账号，可以参与组队
     COMPETITION_CREATOR(2, "COMPETITION_CREATOR"),// 比赛创建者账号
     OSS(3, "OSS"), // 运营人员账号
-    SUPER_USER(4, "SUPER_USER");// 最高权限账号，原则上只有一个，用于OSS账户、比赛创建者账户任免等顶级权限操作
-
+    SUPER_USER(4, "SUPER_USER"), // 最高权限账号，原则上只有一个，用于OSS账户、比赛创建者账户任免等顶级权限操作
+    ORGANIZE(5, "组队账号圈子")
+    ;
     private Integer value;
     private String desc;
 
