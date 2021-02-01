@@ -56,6 +56,20 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    public ResponseEntity<ListOrganizeRet> listOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            ListOrganizeRet response = organizeService.list(body);
+            return new ResponseEntity<ListOrganizeRet>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+
+
+
+
     private AddOrganizeRet add(AddOrganizeRequest request) {
 
         // 参数校验

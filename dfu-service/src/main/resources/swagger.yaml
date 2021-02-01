@@ -653,6 +653,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /organize/list:
+    post:
+      tags:
+        - Organize
+      summary: 搜索组织
+      description: 搜索组织
+      operationId: listOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
@@ -1689,6 +1717,64 @@ definitions:
         format: int64
         example: 100000
         description: 账号ID
+
+  ListOrganizeRequest:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 2211
+        description: 比赛ID
+      srcAccountId:
+        type: integer
+        format: int64
+        example: 1111
+        description: 队长账号ID
+
+  ListOrganizeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OrganizeData'
+  OrganizeData:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 2211
+        description: 比赛ID
+      srcAccountId:
+        type: integer
+        format: int64
+        example: 1111
+        description: 队长账号ID
+      nickName:
+        type: string
+        description: 队伍名称
+      created_ime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      memberNum:
+        type: integer
+        format: int32
+        example: 5
+        description: 队伍人数
+      captain:
+        $ref: '#/definitions/GetNormalAccountData'
 
 
   HelloRet:
