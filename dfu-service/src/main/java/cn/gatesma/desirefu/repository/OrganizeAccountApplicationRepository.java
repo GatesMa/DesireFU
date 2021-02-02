@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.jooq.DSLContext;
@@ -37,7 +38,7 @@ public class OrganizeAccountApplicationRepository {
     }
 
 
-    public List<Organizeaccountapplication_Record> queryOrganizeAccountApplication(Long organizeId, Long accountId, Integer accountType, Integer status) {
+    public List<Organizeaccountapplication_Record> queryOrganizeAccountApplication(Long organizeId, Long accountId, Integer accountType, Integer status, Page page) {
         SelectConditionStep<Organizeaccountapplication_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTAPPLICATION_)
                 .where(ORGANIZEACCOUNTAPPLICATION_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
@@ -53,6 +54,11 @@ public class OrganizeAccountApplicationRepository {
         if (status != null) {
             stmt.and(ORGANIZEACCOUNTAPPLICATION_.STATUS.eq(status));
         }
+        // 翻页
+        if (page != null) {
+            stmt.limit(page.getPageSize()).offset(page.getPageSize() * (page.getPageNum() - 1));
+        }
+
         return stmt.fetch();
     }
 

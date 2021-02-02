@@ -108,4 +108,31 @@ public class NormalAccountService {
                 .message(ApiReturnCode.OK.name());
     }
 
+    public GetNormalAccountData getNormalAccountById(Long accountId) {
+
+        Normalaccount_Record record = normalAccountRepository.getAccountById(accountId, DeleteStatus.NORMAL);
+
+        GetNormalAccountData data = new GetNormalAccountData()
+                .accountId(record.getAccountid())
+                .accountType(record.getAccounttype())
+                .collegeId(record.getCollegeid())
+                .departmentId(record.getDepartmentid())
+                .major(record.getMajor())
+                .stuId(record.getStuid())
+                .realName(record.getRealname());
+
+        // 填充学校名称和学院名称
+        College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
+        if (college != null) {
+            data.setCollegeName(college.getName());
+        }
+        Department_Record department = departmentRepository.getDepartmentById(record.getDepartmentid(), DeleteStatus.NORMAL);
+        if (department != null) {
+            data.setDepartmentName(department.getName());
+        }
+
+        return data;
+
+    }
+
 }

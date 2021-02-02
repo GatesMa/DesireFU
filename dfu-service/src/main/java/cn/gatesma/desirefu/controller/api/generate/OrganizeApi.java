@@ -7,6 +7,8 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.domain.api.generate.AddOrganizeRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddOrganizeRet;
+import cn.gatesma.desirefu.domain.api.generate.ListOrganizeRequest;
+import cn.gatesma.desirefu.domain.api.generate.ListOrganizeRet;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,5 +38,16 @@ public interface OrganizeApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<AddOrganizeRet> addOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddOrganizeRequest body);
+
+    @ApiOperation(value = "搜索组织", nickname = "listOrganize", notes = "搜索组织", response = ListOrganizeRet.class, tags={ "队伍", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ListOrganizeRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/organize/list",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ListOrganizeRet> listOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeRequest body);
 
 }

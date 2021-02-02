@@ -50,7 +50,8 @@ public enum ApiReturnCode {
     BREAK_BLACKLIST_RESTRICTION(12014),         // 违反黑名单约束
     NOT_SUPPORT_OPERATION(12015),               // 不支持的操作
     FAST_FAIL(12016),                           // 快速失败
-    ENCAPSULATION_ERROR(12017)                  // 封装其他异常到CustomerApiException
+    ENCAPSULATION_ERROR(12017),                 // 封装其他异常到CustomerApiException
+    LOGIC_ERROR(12018)
     ;
 
     public static final String INNER_ERROR_MSG = "系统错误，请稍后再试";

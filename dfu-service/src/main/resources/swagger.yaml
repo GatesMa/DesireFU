@@ -39,7 +39,10 @@ tags:
     description: 公告
   - name: Organize
     description: 队伍
-
+  - name: OrganizeAccountRelation
+    description: 队伍关系
+  - name: OrganizeAccountApplication
+    description: 队伍请求
 
 schemes:
   - http
@@ -653,6 +656,89 @@ paths:
         404:
           description: RequestBody not found
 
+  /organize/list:
+    post:
+      tags:
+        - Organize
+      summary: 搜索组织
+      description: 搜索组织
+      operationId: listOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize_application/add:
+    post:
+      tags:
+        - Organize
+      summary: 发起加入组织请求
+      description: 创建组织，返回"账号ID"
+      operationId: addOrganizeApplication
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/AddOrganizeApplicationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddOrganizeApplicationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize_application/select_scroll:
+    post:
+      tags:
+        - Organize
+      summary: 获取请求信息
+      description: 获取请求信息
+      operationId: selectOrganizeApplication
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectOrganizeApplicationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SelectOrganizeApplicationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
@@ -701,6 +787,102 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  SelectOrganizeApplicationRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 申请状态
+
+  SelectOrganizeApplicationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/SelectOrganizeApplicationData'
+
+  SelectOrganizeApplicationData:
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 100000
+        description: id
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_id:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      account_type:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      applicant:
+        $ref: '#/definitions/GetNormalAccountData'
+      status:
+        type: integer
+        format: int32
+        example: 1
+        description: 申请状态
+      created_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+
+  AddOrganizeApplicationRequest:
+    title: AddOrganizeApplicationRequest
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      accountType:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+      createdUserId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 创建者
+  AddOrganizeApplicationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
 
   AddAccountRequest:
     required:
@@ -1689,6 +1871,64 @@ definitions:
         format: int64
         example: 100000
         description: 账号ID
+
+  ListOrganizeRequest:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 2211
+        description: 比赛ID
+      srcAccountId:
+        type: integer
+        format: int64
+        example: 1111
+        description: 队长账号ID
+
+  ListOrganizeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OrganizeData'
+  OrganizeData:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 2211
+        description: 比赛ID
+      srcAccountId:
+        type: integer
+        format: int64
+        example: 1111
+        description: 队长账号ID
+      nickName:
+        type: string
+        description: 队伍名称
+      created_ime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+      memberNum:
+        type: integer
+        format: int32
+        example: 5
+        description: 队伍人数
+      captain:
+        $ref: '#/definitions/GetNormalAccountData'
 
 
   HelloRet:
