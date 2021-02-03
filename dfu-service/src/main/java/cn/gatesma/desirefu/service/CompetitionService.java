@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
+import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
@@ -133,6 +134,29 @@ public class CompetitionService {
             ret.add(item);
         }
         return ret;
+    }
+
+    public SelectCompetitionData getCompetitionById(Long competitionId) {
+        if (competitionId == null) {
+            return null;
+        }
+        Competition_Record record = competitionRepository.getCompetitionById(competitionId, DeleteStatus.NORMAL);
+        SelectCompetitionData data = new SelectCompetitionData()
+                .competitionId(record.getCompetitionid())
+                .accountId(record.getAccountid())
+                .accountType(record.getAccounttype())
+                .type(record.getType())
+                .title(record.getTitle())
+                .founder(record.getFounder())
+                .content(record.getContent())
+                .pv(record.getPv())
+                .status(record.getStatus())
+                .beginTime(TimeUtils.convertDateToString(record.getBegintime(), TimeFmt.getTimeFmt()))
+                .endTime(TimeUtils.convertDateToString(record.getEndtime(), TimeFmt.getTimeFmt()))
+                .createdIme(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()))
+                .overviewImg(record.getOverviewimg())
+                .overviewText(record.getOverviewtext());
+        return data;
     }
 
     private void fillPage(SelectCompetitionRequest request) {
