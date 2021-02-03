@@ -790,8 +790,11 @@ definitions:
 
   SelectOrganizeApplicationRequest:
     properties:
-      page:
-        $ref: '#/definitions/Page'
+      captainAccountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 队长的账号Id，如果传了这个字段，organizeId无效
       organizeId:
         type: integer
         format: int64

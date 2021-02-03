@@ -1,7 +1,6 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import cn.gatesma.desirefu.domain.api.generate.Page;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -18,8 +17,8 @@ import javax.validation.constraints.*;
 public class SelectOrganizeApplicationRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("page")
-  private Page page = null;
+  @JsonProperty("captainAccountId")
+  private Long captainAccountId = null;
 
   @JsonProperty("organizeId")
   private Long organizeId = null;
@@ -33,24 +32,23 @@ public class SelectOrganizeApplicationRequest  implements Serializable {
   @JsonProperty("status")
   private Integer status = null;
 
-  public SelectOrganizeApplicationRequest page(Page page) {
-    this.page = page;
+  public SelectOrganizeApplicationRequest captainAccountId(Long captainAccountId) {
+    this.captainAccountId = captainAccountId;
     return this;
   }
 
   /**
-   * Get page
-   * @return page
+   * 队长的账号Id，如果传了这个字段，organizeId无效
+   * @return captainAccountId
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "100000", value = "队长的账号Id，如果传了这个字段，organizeId无效")
 
-  @Valid
-  public Page getPage() {
-    return page;
+  public Long getCaptainAccountId() {
+    return captainAccountId;
   }
 
-  public void setPage(Page page) {
-    this.page = page;
+  public void setCaptainAccountId(Long captainAccountId) {
+    this.captainAccountId = captainAccountId;
   }
 
   public SelectOrganizeApplicationRequest organizeId(Long organizeId) {
@@ -139,7 +137,7 @@ public class SelectOrganizeApplicationRequest  implements Serializable {
       return false;
     }
     SelectOrganizeApplicationRequest selectOrganizeApplicationRequest = (SelectOrganizeApplicationRequest) o;
-    return Objects.equals(this.page, selectOrganizeApplicationRequest.page) &&
+    return Objects.equals(this.captainAccountId, selectOrganizeApplicationRequest.captainAccountId) &&
         Objects.equals(this.organizeId, selectOrganizeApplicationRequest.organizeId) &&
         Objects.equals(this.accountId, selectOrganizeApplicationRequest.accountId) &&
         Objects.equals(this.accountType, selectOrganizeApplicationRequest.accountType) &&
@@ -148,7 +146,7 @@ public class SelectOrganizeApplicationRequest  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(page, organizeId, accountId, accountType, status);
+    return Objects.hash(captainAccountId, organizeId, accountId, accountType, status);
   }
 
   @Override
@@ -156,7 +154,7 @@ public class SelectOrganizeApplicationRequest  implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class SelectOrganizeApplicationRequest {\n");
     
-    sb.append("    page: ").append(toIndentedString(page)).append("\n");
+    sb.append("    captainAccountId: ").append(toIndentedString(captainAccountId)).append("\n");
     sb.append("    organizeId: ").append(toIndentedString(organizeId)).append("\n");
     sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");

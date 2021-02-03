@@ -38,12 +38,12 @@ public class OrganizeAccountApplicationRepository {
     }
 
 
-    public List<Organizeaccountapplication_Record> queryOrganizeAccountApplication(Long organizeId, Long accountId, Integer accountType, Integer status, Page page) {
+    public List<Organizeaccountapplication_Record> queryOrganizeAccountApplication(List<Long> organizeId, Long accountId, Integer accountType, Integer status) {
         SelectConditionStep<Organizeaccountapplication_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTAPPLICATION_)
                 .where(ORGANIZEACCOUNTAPPLICATION_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
         if (organizeId != null) {
-            stmt.and(ORGANIZEACCOUNTAPPLICATION_.ORGANIZEID.eq(organizeId));
+            stmt.and(ORGANIZEACCOUNTAPPLICATION_.ORGANIZEID.in(organizeId));
         }
         if (accountId != null) {
             stmt.and(ORGANIZEACCOUNTAPPLICATION_.ACCOUNTID.eq(accountId));
@@ -53,10 +53,6 @@ public class OrganizeAccountApplicationRepository {
         }
         if (status != null) {
             stmt.and(ORGANIZEACCOUNTAPPLICATION_.STATUS.eq(status));
-        }
-        // 翻页
-        if (page != null) {
-            stmt.limit(page.getPageSize()).offset(page.getPageSize() * (page.getPageNum() - 1));
         }
 
         return stmt.fetch();

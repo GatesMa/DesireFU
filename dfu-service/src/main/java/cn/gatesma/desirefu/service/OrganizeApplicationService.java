@@ -24,7 +24,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -45,6 +48,9 @@ public class OrganizeApplicationService {
     @Resource
     private OrganizeService organizeService;
 
+    @Resource
+    private OrganizeRepository organizeRepository;
+
     private final static Integer DEFAULT_PAGE = 1;
     private final static Integer DEFAULT_PAGE_SIZE = 10;
 
@@ -57,7 +63,7 @@ public class OrganizeApplicationService {
         Long createdUserId = request.getCreatedUserId();
         // 判断是否存在已经发起的请求
         List<Organizeaccountapplication_Record> records = organizeAccountApplicationRepository.queryOrganizeAccountApplication(
-                organizeId, accountId, accountType, OrganizeApplicationStatus.APPLYING.code(), null);
+                Collections.singletonList(organizeId), accountId, accountType, OrganizeApplicationStatus.APPLYING.code());
 
         if (CollectionUtils.isNotEmpty(records)) {
             return (AddOrganizeApplicationRet) new AddOrganizeApplicationRet()
@@ -73,17 +79,27 @@ public class OrganizeApplicationService {
 
     public SelectOrganizeApplicationRet list(SelectOrganizeApplicationRequest request) {
 
-        fillPage(request);
-
         List<SelectOrganizeApplicationData> data = new ArrayList<>();
+
+        // 通过队长id筛选队伍
+        List<Long> organizeIds = new ArrayList<>();
+        if (request.getCaptainAccountId() != null) {
+            List<Organize_Record> organizes = organizeRepository.getOrganizeListBySrcAccountId(request.getCaptainAccountId());
+            if (CollectionUtils.isNotEmpty(organizes)) {
+                organizeIds = organizes.stream().map(Organize_Record::getOrganizeid).collect(Collectors.toList());
+            }
+        } else {
+            if (request.getOrganizeId() != null) {
+                organizeIds.add(request.getOrganizeId());
+            }
+        }
 
         // 通过这几个参数在OrganizeApplication表中找
         List<Organizeaccountapplication_Record> records = organizeAccountApplicationRepository.queryOrganizeAccountApplication(
-                request.getOrganizeId(),
+                organizeIds,
                 request.getAccountId(),
                 request.getAccountType(),
-                request.getStatus(),
-                request.getPage());
+                request.getStatus());
 
         for (Organizeaccountapplication_Record record : records) {
             SelectOrganizeApplicationData item = new SelectOrganizeApplicationData();
@@ -109,21 +125,6 @@ public class OrganizeApplicationService {
         return (SelectOrganizeApplicationRet) new SelectOrganizeApplicationRet().data(data)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
-    }
-
-    private void fillPage(SelectOrganizeApplicationRequest request) {
-        // 如果page是空，填充默认值
-        if (request.getPage() == null) {
-            Page page = new Page().pageNum(DEFAULT_PAGE).pageSize(DEFAULT_PAGE_SIZE);
-            request.setPage(page);
-        } else {
-            if (request.getPage().getPageNum() == null) {
-                request.getPage().setPageNum(DEFAULT_PAGE);
-            }
-            if (request.getPage().getPageSize() == null) {
-                request.getPage().setPageSize(DEFAULT_PAGE_SIZE);
-            }
-        }
     }
 
 }

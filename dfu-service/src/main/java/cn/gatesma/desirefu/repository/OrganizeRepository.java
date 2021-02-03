@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Organize_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.jooq.DSLContext;
@@ -95,6 +96,18 @@ public class OrganizeRepository {
                 .set(ORGANIZE_.DELETESTATUS, DeleteStatus.DELETED.code());
 
         return step.where(ORGANIZE_.ORGANIZEID.eq(organizeId)).execute();
+    }
+
+    /**
+     * 通过srcAccountId查找Oragnize
+     */
+    public List<Organize_Record> getOrganizeListBySrcAccountId(Long srcAccountId) {
+        SelectConditionStep<Organize_Record> stmt = dslContext
+                .selectFrom(ORGANIZE_)
+                .where(ORGANIZE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
+                .and(ORGANIZE_.SRCACCOUNTID.eq(srcAccountId));
+
+        return stmt.fetch();
     }
 
 }
