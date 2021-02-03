@@ -68,6 +68,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
         boolean ignore = path.matches(IGNORE_PATH_REGEX);
 
 
+
         if (ignore) {
             filterChain.doFilter(request, response);
         } else {
@@ -121,6 +122,9 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
         // 去掉两边空格
         String requestBody = StringUtils.trimToEmpty(getRequestBody(request));
         String responseBody = StringUtils.trimToEmpty(getResponseBody(response));
+
+        LOGGER.info("Receive request: path: {}, param: {}", request.getServletPath(), requestBody);
+
 
         int responseCode = response.getStatusCode();
         int apiCode = ApiReturnCode.OK.code();
@@ -186,6 +190,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
         try {
             // 打印者一条消息到日志文件里
             LOG.info(ACCESS, message.toString());
+            LOGGER.info("request over: {}", message.toString());
         } catch (Exception e) {
             LOGGER.error("api {} 生成Trace Log 异常 ", modName, e);
         }
