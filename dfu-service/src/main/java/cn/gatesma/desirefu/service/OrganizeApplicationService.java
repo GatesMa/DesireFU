@@ -59,7 +59,7 @@ public class OrganizeApplicationService {
         if (CollectionUtils.isNotEmpty(records)) {
             return (AddOrganizeApplicationRet) new AddOrganizeApplicationRet()
                     .code(ApiReturnCode.LOGIC_ERROR.code())
-                    .message("已经存在未处理的申请");
+                    .message("存在未处理申请");
         } else {
             // 创建一个申请记录
             organizeAccountApplicationRepository.addOrganizeAccountApplication(organizeId, accountId,
