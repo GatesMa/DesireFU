@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
 import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountData;
+import cn.gatesma.desirefu.domain.api.generate.OrganizeData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -23,6 +24,9 @@ public class SelectOrganizeApplicationData  implements Serializable {
 
   @JsonProperty("organizeId")
   private Long organizeId = null;
+
+  @JsonProperty("organize")
+  private OrganizeData organize = null;
 
   @JsonProperty("account_id")
   private Long accountId = null;
@@ -75,6 +79,26 @@ public class SelectOrganizeApplicationData  implements Serializable {
 
   public void setOrganizeId(Long organizeId) {
     this.organizeId = organizeId;
+  }
+
+  public SelectOrganizeApplicationData organize(OrganizeData organize) {
+    this.organize = organize;
+    return this;
+  }
+
+  /**
+   * Get organize
+   * @return organize
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+  public OrganizeData getOrganize() {
+    return organize;
+  }
+
+  public void setOrganize(OrganizeData organize) {
+    this.organize = organize;
   }
 
   public SelectOrganizeApplicationData accountId(Long accountId) {
@@ -185,6 +209,7 @@ public class SelectOrganizeApplicationData  implements Serializable {
     SelectOrganizeApplicationData selectOrganizeApplicationData = (SelectOrganizeApplicationData) o;
     return Objects.equals(this.id, selectOrganizeApplicationData.id) &&
         Objects.equals(this.organizeId, selectOrganizeApplicationData.organizeId) &&
+        Objects.equals(this.organize, selectOrganizeApplicationData.organize) &&
         Objects.equals(this.accountId, selectOrganizeApplicationData.accountId) &&
         Objects.equals(this.accountType, selectOrganizeApplicationData.accountType) &&
         Objects.equals(this.applicant, selectOrganizeApplicationData.applicant) &&
@@ -194,7 +219,7 @@ public class SelectOrganizeApplicationData  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, organizeId, accountId, accountType, applicant, status, createdTime);
+    return Objects.hash(id, organizeId, organize, accountId, accountType, applicant, status, createdTime);
   }
 
   @Override
@@ -204,6 +229,7 @@ public class SelectOrganizeApplicationData  implements Serializable {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    organizeId: ").append(toIndentedString(organizeId)).append("\n");
+    sb.append("    organize: ").append(toIndentedString(organize)).append("\n");
     sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
     sb.append("    applicant: ").append(toIndentedString(applicant)).append("\n");

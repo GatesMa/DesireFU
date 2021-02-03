@@ -47,6 +47,9 @@ public class OrganizeService {
     @Resource
     private OrganizeAccountRelationRepository organizeAccountRelationRepository;
 
+    @Resource
+    private CompetitionService competitionService;
+
 
     public Long createOrganize(AddOrganizeRequest request) {
 
@@ -76,37 +79,51 @@ public class OrganizeService {
                 .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
 
         for (Organize_Record organizeRecord : organizeRecords) {
-            OrganizeData item = new OrganizeData();
-            item.setOrganizeId(organizeRecord.getOrganizeid());
-            item.setCompetitionId(organizeRecord.getCompetitionid());
-            item.setSrcAccountId(organizeRecord.getSrcaccountid());
-            item.setCreatedIme(TimeUtils.convertDateToString(organizeRecord.getCreatedtime(), TimeFmt.getTimeFmt()));
-            
-            // 队伍名称：organizeId对应的nickName
-            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
-            if (account != null) {
-                item.setNickName(account.getNickname());
-            }
-            
-            // 队长信息，通过srcAccountId获取NormalAccount的数据
-            GetNormalAccountData captain = normalAccountService.getNormalAccountById(organizeRecord.getSrcaccountid());
-            item.setCaptain(captain);
-
-            // 查找队伍有多少人
-            List<Organizeaccountrelation_Record> relation =
-                    organizeAccountRelationRepository.queryOrganizeAccountRelation(organizeRecord.getOrganizeid(), null, null, null);
-            // 设置队伍人数
-            item.setMemberNum(relation.size());
-            data.add(item);
+            // 调用抽取的公共方法
+            data.add(recordToOrganizeData(organizeRecord));
         }
-
-
-
 
         // 返回结果
         return (ListOrganizeRet) new ListOrganizeRet().data(data)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
+    }
+
+    public OrganizeData getOrganizeById(Long organizeId) {
+        if (organizeId == null) {
+            return null;
+        }
+        Organize_Record record = organizeRepository.getOrganizeById(organizeId);
+
+        return recordToOrganizeData(record);
+    }
+
+    private OrganizeData recordToOrganizeData(Organize_Record record) {
+        OrganizeData item = new OrganizeData();
+        item.setOrganizeId(record.getOrganizeid());
+        item.setCompetitionId(record.getCompetitionid());
+        item.setSrcAccountId(record.getSrcaccountid());
+        item.setCreatedIme(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+
+        // 队伍名称：organizeId对应的nickName
+        Account_Record account = accountRepository.getAccountById(record.getOrganizeid(), DeleteStatus.NORMAL);
+        if (account != null) {
+            item.setNickName(account.getNickname());
+        }
+
+        // 队长信息，通过srcAccountId获取NormalAccount的数据
+        GetNormalAccountData captain = normalAccountService.getNormalAccountById(record.getSrcaccountid());
+        item.setCaptain(captain);
+
+        // 查找队伍有多少人
+        List<Organizeaccountrelation_Record> relation =
+                organizeAccountRelationRepository.queryOrganizeAccountRelation(record.getOrganizeid(), null, null, null);
+        // 设置队伍人数
+        item.setMemberNum(relation.size());
+
+        // 设置比赛数据
+        item.setCompetition(competitionService.getCompetitionById(record.getCompetitionid()));
+        return item;
     }
 
 }

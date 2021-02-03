@@ -42,6 +42,9 @@ public class OrganizeApplicationService {
     @Resource
     private NormalAccountService normalAccountService;
 
+    @Resource
+    private OrganizeService organizeService;
+
     private final static Integer DEFAULT_PAGE = 1;
     private final static Integer DEFAULT_PAGE_SIZE = 10;
 
@@ -94,6 +97,10 @@ public class OrganizeApplicationService {
             // 设置申请人的信息
             GetNormalAccountData applicant = normalAccountService.getNormalAccountById(record.getAccountid());
             item.setApplicant(applicant);
+
+            // 设置队伍信息
+            OrganizeData organize = organizeService.getOrganizeById(record.getOrganizeid());
+            item.setOrganize(organize);
 
             data.add(item);
         }

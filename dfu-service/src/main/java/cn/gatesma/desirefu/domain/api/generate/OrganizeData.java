@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
 import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountData;
+import cn.gatesma.desirefu.domain.api.generate.SelectCompetitionData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -23,6 +24,9 @@ public class OrganizeData  implements Serializable {
 
   @JsonProperty("competitionId")
   private Long competitionId = null;
+
+  @JsonProperty("competition")
+  private SelectCompetitionData competition = null;
 
   @JsonProperty("srcAccountId")
   private Long srcAccountId = null;
@@ -75,6 +79,26 @@ public class OrganizeData  implements Serializable {
 
   public void setCompetitionId(Long competitionId) {
     this.competitionId = competitionId;
+  }
+
+  public OrganizeData competition(SelectCompetitionData competition) {
+    this.competition = competition;
+    return this;
+  }
+
+  /**
+   * Get competition
+   * @return competition
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+  public SelectCompetitionData getCompetition() {
+    return competition;
+  }
+
+  public void setCompetition(SelectCompetitionData competition) {
+    this.competition = competition;
   }
 
   public OrganizeData srcAccountId(Long srcAccountId) {
@@ -185,6 +209,7 @@ public class OrganizeData  implements Serializable {
     OrganizeData organizeData = (OrganizeData) o;
     return Objects.equals(this.organizeId, organizeData.organizeId) &&
         Objects.equals(this.competitionId, organizeData.competitionId) &&
+        Objects.equals(this.competition, organizeData.competition) &&
         Objects.equals(this.srcAccountId, organizeData.srcAccountId) &&
         Objects.equals(this.nickName, organizeData.nickName) &&
         Objects.equals(this.createdIme, organizeData.createdIme) &&
@@ -194,7 +219,7 @@ public class OrganizeData  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(organizeId, competitionId, srcAccountId, nickName, createdIme, memberNum, captain);
+    return Objects.hash(organizeId, competitionId, competition, srcAccountId, nickName, createdIme, memberNum, captain);
   }
 
   @Override
@@ -204,6 +229,7 @@ public class OrganizeData  implements Serializable {
     
     sb.append("    organizeId: ").append(toIndentedString(organizeId)).append("\n");
     sb.append("    competitionId: ").append(toIndentedString(competitionId)).append("\n");
+    sb.append("    competition: ").append(toIndentedString(competition)).append("\n");
     sb.append("    srcAccountId: ").append(toIndentedString(srcAccountId)).append("\n");
     sb.append("    nickName: ").append(toIndentedString(nickName)).append("\n");
     sb.append("    createdIme: ").append(toIndentedString(createdIme)).append("\n");

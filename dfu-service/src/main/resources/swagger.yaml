@@ -834,6 +834,8 @@ definitions:
         format: int64
         example: 100000
         description: 账号ID
+      organize:
+        $ref: '#/definitions/OrganizeData'
       account_id:
         type: integer
         format: int64
@@ -1910,6 +1912,8 @@ definitions:
         format: int64
         example: 2211
         description: 比赛ID
+      competition:
+        $ref: '#/definitions/SelectCompetitionData'
       srcAccountId:
         type: integer
         format: int64
