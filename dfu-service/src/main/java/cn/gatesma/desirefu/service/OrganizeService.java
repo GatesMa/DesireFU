@@ -3,16 +3,16 @@ package cn.gatesma.desirefu.service;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountrelation_Record;
-import cn.gatesma.desirefu.repository.AccountRepository;
-import cn.gatesma.desirefu.repository.OrganizeAccountRelationRepository;
-import cn.gatesma.desirefu.repository.OrganizeRepository;
-import cn.gatesma.desirefu.repository.OssAccountRepository;
+import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,6 +46,9 @@ public class OrganizeService {
 
     @Resource
     private OrganizeAccountRelationRepository organizeAccountRelationRepository;
+
+    @Resource
+    private OrganizeAccountApplicationRepository organizeAccountApplicationRepository;
 
     @Resource
     private CompetitionService competitionService;
@@ -87,6 +90,40 @@ public class OrganizeService {
         return (ListOrganizeRet) new ListOrganizeRet().data(data)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 更新申请的状态
+     */
+    public UpdateOrganizeApplicationRet update(UpdateOrganizeApplicationRequest request) {
+
+        organizeAccountApplicationRepository.updateApplication(request.getId(), request.getStatus(), request.getUserId());
+
+        if (request.getStatus() == OrganizeApplicationStatus.PASSED.code()) {
+            // 如果更新后的状态是通过，需要把这条记录的账号添加到队伍中去
+            Organizeaccountapplication_Record record = organizeAccountApplicationRepository.getOrganizeAccountApplicationById(request.getId());
+
+            addOrganizeRelation(record.getOrganizeid(), record.getAccountid(), record.getAccounttype(), request.getUserId());
+        }
+
+        // 返回结果
+        return (UpdateOrganizeApplicationRet) new UpdateOrganizeApplicationRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+    // 把accountId添加到organizeId这个队伍中
+    public void addOrganizeRelation(Long organizeId, Long accountId, Integer accountType, Long userId) {
+
+        // 先看看是否已经在队伍里了
+        List<Organizeaccountrelation_Record> records = organizeAccountRelationRepository.queryOrganizeAccountRelation(organizeId, accountId, null, null);
+        if (CollectionUtils.isNotEmpty(records)) {
+            // 已经存在记录了，不做处理
+            return;
+        }
+
+        // 插入一条记录
+        organizeAccountRelationRepository.addOrganizeAccountRelation(organizeId, accountId, accountType, 0, userId);
     }
 
     public OrganizeData getOrganizeById(Long organizeId) {

@@ -66,6 +66,17 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    public ResponseEntity<UpdateOrganizeApplicationRet> updateOrganizeApplication(@ApiParam(value = "" ,required=true )  @Valid @RequestBody UpdateOrganizeApplicationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            UpdateOrganizeApplicationRet response = organizeService.update(body);
+            return new ResponseEntity<UpdateOrganizeApplicationRet>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+
 
 
 
