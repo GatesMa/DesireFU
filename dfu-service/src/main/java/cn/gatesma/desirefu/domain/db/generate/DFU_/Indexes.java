@@ -11,6 +11,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Message_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
@@ -55,6 +56,7 @@ public class Indexes {
     public static final Index COMPETITIONVISIBLE__PRIMARY = Indexes0.COMPETITIONVISIBLE__PRIMARY;
     public static final Index COMPETITION__PRIMARY = Indexes0.COMPETITION__PRIMARY;
     public static final Index DEPARTMENT__PRIMARY = Indexes0.DEPARTMENT__PRIMARY;
+    public static final Index MESSAGE__PRIMARY = Indexes0.MESSAGE__PRIMARY;
     public static final Index NORMALACCOUNT__PRIMARY = Indexes0.NORMALACCOUNT__PRIMARY;
     public static final Index NOTIFICATION__PRIMARY = Indexes0.NOTIFICATION__PRIMARY;
     public static final Index OPENIDQQIDX__PRIMARY = Indexes0.OPENIDQQIDX__PRIMARY;
@@ -80,6 +82,7 @@ public class Indexes {
         public static Index COMPETITIONVISIBLE__PRIMARY = Internal.createIndex("PRIMARY", Competitionvisible_.COMPETITIONVISIBLE_, new OrderField[] { Competitionvisible_.COMPETITIONVISIBLE_.COMPETITIONID, Competitionvisible_.COMPETITIONVISIBLE_.COLLEGEID }, true);
         public static Index COMPETITION__PRIMARY = Internal.createIndex("PRIMARY", Competition_.COMPETITION_, new OrderField[] { Competition_.COMPETITION_.COMPETITIONID }, true);
         public static Index DEPARTMENT__PRIMARY = Internal.createIndex("PRIMARY", Department_.DEPARTMENT_, new OrderField[] { Department_.DEPARTMENT_.DEPARTMENTID }, true);
+        public static Index MESSAGE__PRIMARY = Internal.createIndex("PRIMARY", Message_.MESSAGE_, new OrderField[] { Message_.MESSAGE_.ID }, true);
         public static Index NORMALACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Normalaccount_.NORMALACCOUNT_, new OrderField[] { Normalaccount_.NORMALACCOUNT_.ACCOUNTID }, true);
         public static Index NOTIFICATION__PRIMARY = Internal.createIndex("PRIMARY", Notification_.NOTIFICATION_, new OrderField[] { Notification_.NOTIFICATION_.NOTICEID }, true);
         public static Index OPENIDQQIDX__PRIMARY = Internal.createIndex("PRIMARY", Openidqqidx_.OPENIDQQIDX_, new OrderField[] { Openidqqidx_.OPENIDQQIDX_.OPENID }, true);
