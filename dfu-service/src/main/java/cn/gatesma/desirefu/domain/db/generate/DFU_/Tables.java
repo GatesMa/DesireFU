@@ -11,6 +11,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Message_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
@@ -74,6 +75,11 @@ public class Tables {
      * 学院信息
      */
     public static final Department_ DEPARTMENT_ = Department_.DEPARTMENT_;
+
+    /**
+     * 消息表
+     */
+    public static final Message_ MESSAGE_ = Message_.MESSAGE_;
 
     /**
      * 普通学生账号

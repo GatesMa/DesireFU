@@ -11,6 +11,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitionvisible_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Department_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Message_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Normalaccount_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Notification_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Openidqqidx_;
@@ -30,6 +31,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competition_Re
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitioncreatoraccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitionvisible_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Message_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Notification_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Openidqqidx_Record;
@@ -73,6 +75,7 @@ public class Keys {
     public static final Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Identities0.IDENTITY_COLLEGE_;
     public static final Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Identities0.IDENTITY_COMPETITION_;
     public static final Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Identities0.IDENTITY_DEPARTMENT_;
+    public static final Identity<Message_Record, Long> IDENTITY_MESSAGE_ = Identities0.IDENTITY_MESSAGE_;
     public static final Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Identities0.IDENTITY_NOTIFICATION_;
     public static final Identity<Organizeaccountapplication_Record, Long> IDENTITY_ORGANIZEACCOUNTAPPLICATION_ = Identities0.IDENTITY_ORGANIZEACCOUNTAPPLICATION_;
     public static final Identity<Organizeaccountrelation_Record, Long> IDENTITY_ORGANIZEACCOUNTRELATION_ = Identities0.IDENTITY_ORGANIZEACCOUNTRELATION_;
@@ -91,6 +94,7 @@ public class Keys {
     public static final UniqueKey<Competitionvisible_Record> KEY_COMPETITIONVISIBLE__PRIMARY = UniqueKeys0.KEY_COMPETITIONVISIBLE__PRIMARY;
     public static final UniqueKey<Competition_Record> KEY_COMPETITION__PRIMARY = UniqueKeys0.KEY_COMPETITION__PRIMARY;
     public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = UniqueKeys0.KEY_DEPARTMENT__PRIMARY;
+    public static final UniqueKey<Message_Record> KEY_MESSAGE__PRIMARY = UniqueKeys0.KEY_MESSAGE__PRIMARY;
     public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = UniqueKeys0.KEY_NORMALACCOUNT__PRIMARY;
     public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = UniqueKeys0.KEY_NOTIFICATION__PRIMARY;
     public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = UniqueKeys0.KEY_OPENIDQQIDX__PRIMARY;
@@ -119,6 +123,7 @@ public class Keys {
         public static Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Internal.createIdentity(College_.COLLEGE_, College_.COLLEGE_.COLLEGEID);
         public static Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Internal.createIdentity(Competition_.COMPETITION_, Competition_.COMPETITION_.COMPETITIONID);
         public static Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Internal.createIdentity(Department_.DEPARTMENT_, Department_.DEPARTMENT_.DEPARTMENTID);
+        public static Identity<Message_Record, Long> IDENTITY_MESSAGE_ = Internal.createIdentity(Message_.MESSAGE_, Message_.MESSAGE_.ID);
         public static Identity<Notification_Record, Integer> IDENTITY_NOTIFICATION_ = Internal.createIdentity(Notification_.NOTIFICATION_, Notification_.NOTIFICATION_.NOTICEID);
         public static Identity<Organizeaccountapplication_Record, Long> IDENTITY_ORGANIZEACCOUNTAPPLICATION_ = Internal.createIdentity(Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_, Organizeaccountapplication_.ORGANIZEACCOUNTAPPLICATION_.ID);
         public static Identity<Organizeaccountrelation_Record, Long> IDENTITY_ORGANIZEACCOUNTRELATION_ = Internal.createIdentity(Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_, Organizeaccountrelation_.ORGANIZEACCOUNTRELATION_.ID);
@@ -135,6 +140,7 @@ public class Keys {
         public static final UniqueKey<Competitionvisible_Record> KEY_COMPETITIONVISIBLE__PRIMARY = Internal.createUniqueKey(Competitionvisible_.COMPETITIONVISIBLE_, "KEY_CompetitionVisible__PRIMARY", Competitionvisible_.COMPETITIONVISIBLE_.COMPETITIONID, Competitionvisible_.COMPETITIONVISIBLE_.COLLEGEID);
         public static final UniqueKey<Competition_Record> KEY_COMPETITION__PRIMARY = Internal.createUniqueKey(Competition_.COMPETITION_, "KEY_Competition__PRIMARY", Competition_.COMPETITION_.COMPETITIONID);
         public static final UniqueKey<Department_Record> KEY_DEPARTMENT__PRIMARY = Internal.createUniqueKey(Department_.DEPARTMENT_, "KEY_Department__PRIMARY", Department_.DEPARTMENT_.DEPARTMENTID);
+        public static final UniqueKey<Message_Record> KEY_MESSAGE__PRIMARY = Internal.createUniqueKey(Message_.MESSAGE_, "KEY_Message__PRIMARY", Message_.MESSAGE_.ID);
         public static final UniqueKey<Normalaccount_Record> KEY_NORMALACCOUNT__PRIMARY = Internal.createUniqueKey(Normalaccount_.NORMALACCOUNT_, "KEY_NormalAccount__PRIMARY", Normalaccount_.NORMALACCOUNT_.ACCOUNTID);
         public static final UniqueKey<Notification_Record> KEY_NOTIFICATION__PRIMARY = Internal.createUniqueKey(Notification_.NOTIFICATION_, "KEY_Notification__PRIMARY", Notification_.NOTIFICATION_.NOTICEID);
         public static final UniqueKey<Openidqqidx_Record> KEY_OPENIDQQIDX__PRIMARY = Internal.createUniqueKey(Openidqqidx_.OPENIDQQIDX_, "KEY_OpenIdQQIdx__PRIMARY", Openidqqidx_.OPENIDQQIDX_.OPENID);
