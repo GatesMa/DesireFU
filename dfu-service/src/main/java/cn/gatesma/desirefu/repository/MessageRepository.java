@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Message_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -40,7 +41,7 @@ public class MessageRepository {
         return stmt.fetchOne();
     }
 
-    public List<Message_Record> queryMessage(Integer type, Integer status, Long accountId) {
+    public List<Message_Record> queryMessage(Integer type, Integer status, Long accountId, Page page) {
         SelectConditionStep<Message_Record> stmt = dslContext
                 .selectFrom(MESSAGE_)
                 .where(MESSAGE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
@@ -53,13 +54,20 @@ public class MessageRepository {
         if (accountId != null) {
             stmt.and(MESSAGE_.ACCOUNTID.eq(accountId));
         }
+        // 翻页
+        if (page != null) {
+            stmt.limit(page.getPageSize()).offset(page.getPageSize() * (page.getPageNum() - 1));
+        }
+
+        // 按时间倒序
+        stmt.orderBy(MESSAGE_.CREATEDTIME.desc());
         return stmt.fetch();
     }
 
     /**
      * 新增Message
      */
-    public int addMessage(Integer type, Integer status, Long accountId, String content, Long userId) {
+    public int addMessage(Integer type, Integer status, Long accountId, String content) {
 
         Timestamp createdTime = TimeUtils.now();
 
@@ -100,13 +108,13 @@ public class MessageRepository {
     /**
      * 更新状态
      */
-    public int updateMessage(Long id, Integer status) {
+    public int updateMessageStatus(List<Long> ids, Integer status) {
         Timestamp modifiedTime = TimeUtils.now();
         UpdateSetMoreStep<Message_Record> stmt = dslContext.update(MESSAGE_)
                 .set(MESSAGE_.LASTMODIFIEDTIME, modifiedTime)
                 .set(MESSAGE_.STATUS, status);
 
-        return stmt.where(MESSAGE_.ID.eq(id))
+        return stmt.where(MESSAGE_.ID.in(ids))
                 .and(MESSAGE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
                 .execute();
     }
