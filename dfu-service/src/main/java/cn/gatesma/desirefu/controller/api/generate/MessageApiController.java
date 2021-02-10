@@ -64,4 +64,25 @@ public class MessageApiController implements MessageApi {
         }
     }
 
+    public ResponseEntity<DeleteMessageRet> deleteMessage(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteMessageRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            DeleteMessageRet response = messageService.deleteMessage(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<ReadAllMessageRet> readAllMessage(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ReadAllMessageRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            ReadAllMessageRet response = messageService.readAllMessage(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+
 }

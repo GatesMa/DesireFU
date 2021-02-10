@@ -5,10 +5,7 @@
  */
 package cn.gatesma.desirefu.controller.api.generate;
 
-import cn.gatesma.desirefu.domain.api.generate.SelectMessageRequest;
-import cn.gatesma.desirefu.domain.api.generate.SelectMessageRet;
-import cn.gatesma.desirefu.domain.api.generate.UpdateMessageStatusRequest;
-import cn.gatesma.desirefu.domain.api.generate.UpdateMessageStatusRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -49,6 +46,29 @@ public interface MessageApi {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     ResponseEntity<UpdateMessageStatusRet> updateMessageStatus(@ApiParam(value = "" ,required=true )  @Valid @RequestBody UpdateMessageStatusRequest body);
+
+    @ApiOperation(value = "删除消息", nickname = "deleteMessage", notes = "删除消息", response = DeleteMessageRet.class, tags={ "Message", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = DeleteMessageRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/message/delete",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<DeleteMessageRet> deleteMessage(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteMessageRequest body);
+
+
+    @ApiOperation(value = "全读消息", nickname = "readAllMessage", notes = "全读消息", response = ReadAllMessageRet.class, tags={ "Message", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ReadAllMessageRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/message/read_all_mag",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ReadAllMessageRet> readAllMessage(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ReadAllMessageRequest body);
 
 
 }

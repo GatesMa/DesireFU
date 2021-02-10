@@ -101,6 +101,36 @@ public class MessageService {
                 .message(ApiReturnCode.OK.name());
     }
 
+    /**
+     * 删除消息
+     */
+    public DeleteMessageRet deleteMessage(DeleteMessageRequest request) {
+
+        if (CollectionUtils.isNotEmpty(request.getIds())) {
+            messageRepository.deleteMessage(request.getIds());
+        }
+
+        // 返回结果
+        return (DeleteMessageRet) new DeleteMessageRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 更新全部消息为已读
+     */
+    public ReadAllMessageRet readAllMessage(ReadAllMessageRequest request) {
+
+        if (request.getAccountId() != null) {
+            messageRepository.updateAllMessageStatus(request.getAccountId());
+        }
+
+        // 返回结果
+        return (ReadAllMessageRet) new ReadAllMessageRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
     public void sendMessage(Long accountId, Integer type, String content) {
         //
         if (accountId == null) {

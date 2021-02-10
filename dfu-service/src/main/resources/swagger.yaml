@@ -816,6 +816,58 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /message/delete:
+    post:
+      tags:
+        - Message
+      summary: 删除消息
+      description: 删除消息
+      operationId: deleteMessage
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMessageRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteMessageRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+  /message/read_all_mag:
+    post:
+      tags:
+        - Message
+      summary: 全读消息
+      description: 全读消息
+      operationId: readAllMessage
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReadAllMessageRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReadAllMessageRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
 definitions:
   Object:
@@ -865,6 +917,31 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  ReadAllMessageRequest:
+    title: ReadAllMessageRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+  ReadAllMessageRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+  DeleteMessageRequest:
+    title: DeleteMessageRequest
+    properties:
+      ids:
+        type: array
+        example:
+          - 177953
+        items:
+          type: integer
+          format: int64
+  DeleteMessageRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
 
   UpdateMessageStatusRequest:
     title: UpdateMessageStatusRequest

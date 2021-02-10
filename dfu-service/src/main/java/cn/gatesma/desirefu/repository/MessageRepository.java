@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.status.MessageStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Message_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
@@ -97,12 +98,12 @@ public class MessageRepository {
     /**
      * 删除Message_表数据
      */
-    public int deleteMessage(long id) {
+    public int deleteMessage(List<Long> ids) {
 
         UpdateSetMoreStep<Message_Record> step = dslContext.update(MESSAGE_)
                 .set(MESSAGE_.DELETESTATUS, DeleteStatus.DELETED.code());
 
-        return step.where(MESSAGE_.ID.eq(id)).execute();
+        return step.where(MESSAGE_.ID.in(ids)).execute();
     }
 
     /**
@@ -118,6 +119,23 @@ public class MessageRepository {
                 .and(MESSAGE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
                 .execute();
     }
+
+    /**
+     * 把accountId的全部消息设为已读
+     * @param accountId
+     */
+    public int updateAllMessageStatus(Long accountId) {
+        Timestamp modifiedTime = TimeUtils.now();
+        UpdateSetMoreStep<Message_Record> stmt = dslContext.update(MESSAGE_)
+                .set(MESSAGE_.LASTMODIFIEDTIME, modifiedTime)
+                .set(MESSAGE_.STATUS, MessageStatus.READ.code());
+
+        return stmt.where(MESSAGE_.ACCOUNTID.eq(accountId))
+                .and(MESSAGE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
+                .and(MESSAGE_.STATUS.eq(MessageStatus.NOT_READ.code()))
+                .execute();
+    }
+
 
 
 }
