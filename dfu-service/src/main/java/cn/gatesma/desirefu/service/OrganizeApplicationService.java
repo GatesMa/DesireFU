@@ -5,6 +5,7 @@ import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
+import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
@@ -51,6 +52,9 @@ public class OrganizeApplicationService {
     @Resource
     private OrganizeRepository organizeRepository;
 
+    @Resource
+    private MessageService messageService;
+
     private final static Integer DEFAULT_PAGE = 1;
     private final static Integer DEFAULT_PAGE_SIZE = 10;
 
@@ -73,8 +77,28 @@ public class OrganizeApplicationService {
             // 创建一个申请记录
             organizeAccountApplicationRepository.addOrganizeAccountApplication(organizeId, accountId,
                     accountType, OrganizeApplicationStatus.APPLYING.code(), createdUserId);
+
+            // 向队长发送一条消息
+            sendMessageToCaptain(organizeId, accountId);
+
+
             return RetCodeUtils.ok(new AddOrganizeApplicationRet());
         }
+    }
+
+    private void sendMessageToCaptain(Long organizeId, Long accountId) {
+        //  获取队伍信息
+        OrganizeData organize = organizeService.getOrganizeById(organizeId);
+        GetNormalAccountData account = normalAccountService.getNormalAccountById(accountId);
+
+        String name = account.getCollegeName() + account.getDepartmentName() + account.getMajor() + account.getRealName();
+
+        String content = "用户：" + name + "(ID: " + account.getAccountId() + ")"
+                + ", 想要加入你的队伍：" + organize.getNickName()
+                + ", 请到审批列表页面进行审批。";
+
+        messageService.sendMessage(organize.getSrcAccountId(), MessageType.JOIN_ORGANIZE.getValue(), content);
+
     }
 
     public SelectOrganizeApplicationRet list(SelectOrganizeApplicationRequest request) {

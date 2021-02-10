@@ -57,6 +57,7 @@ public class SwaggerDocumentationConfig {
                 new Tag("上传", "上传", 700),
                 new Tag("公告", "公告", 700),
                 new Tag("队伍", "队伍", 700),
+                new Tag("消息", "消息", 700),
         };
     }
 

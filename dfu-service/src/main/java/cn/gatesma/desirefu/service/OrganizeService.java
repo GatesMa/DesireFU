@@ -5,6 +5,7 @@ import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
+import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
@@ -52,6 +53,12 @@ public class OrganizeService {
 
     @Resource
     private CompetitionService competitionService;
+
+    @Resource
+    private OrganizeService organizeService;
+
+    @Resource
+    private MessageService messageService;
 
 
     public Long createOrganize(AddOrganizeRequest request) {
@@ -104,12 +111,50 @@ public class OrganizeService {
             Organizeaccountapplication_Record record = organizeAccountApplicationRepository.getOrganizeAccountApplicationById(request.getId());
 
             addOrganizeRelation(record.getOrganizeid(), record.getAccountid(), record.getAccounttype(), request.getUserId());
+
+            // 发送审批成功通知
+            sendSuccessMessage(request.getId());
+        } else if (request.getStatus() == OrganizeApplicationStatus.REJECT.code()) {
+            // 发送审批拒绝通知
+            sendFailMessage(request.getId());
         }
 
         // 返回结果
         return (UpdateOrganizeApplicationRet) new UpdateOrganizeApplicationRet()
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 发送审批失败的消息
+     * @param id application的主键
+     */
+    private void sendFailMessage(Long id) {
+
+        Organizeaccountapplication_Record application = organizeAccountApplicationRepository.getOrganizeAccountApplicationById(id);
+
+        OrganizeData organize = organizeService.getOrganizeById(application.getOrganizeid());
+
+        String content = "你申请加入的队伍：" + organize.getNickName() + "(ID: " + organize.getOrganizeId() + ")"
+                + ", 该请求被队长拒绝！";
+
+        messageService.sendMessage(application.getAccountid(), MessageType.JOIN_ORGANIZE_SUCCESS.getValue(), content);
+    }
+
+    /**
+     * 发送审批成功的消息
+     * @param id application的主键
+     */
+    private void sendSuccessMessage(Long id) {
+
+        Organizeaccountapplication_Record application = organizeAccountApplicationRepository.getOrganizeAccountApplicationById(id);
+
+        OrganizeData organize = organizeService.getOrganizeById(application.getOrganizeid());
+
+        String content = "你申请加入的队伍：" + organize.getNickName() + "(ID: " + organize.getOrganizeId() + ")"
+                + ", 该请求被队长审批通过，你已经是该队伍的成员了，可以到账号管理页面查看队伍信息！";
+
+        messageService.sendMessage(application.getAccountid(), MessageType.JOIN_ORGANIZE_FAIL.getValue(), content);
     }
 
     // 把accountId添加到organizeId这个队伍中
