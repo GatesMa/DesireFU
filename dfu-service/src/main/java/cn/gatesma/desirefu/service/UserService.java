@@ -91,6 +91,29 @@ public class UserService {
         Integer loginNameType = login.getLoginNameType();
         Timestamp createdTime = TimeUtils.now();
 
+        // 新增User_表
+        Long userId = insertUser(userName, cellphone, email, createdUserId, createdTime);
+
+        // 新增或者更新UserLogin_表
+        insertOrUpdateUserLogin(userId, createdUserId, login);
+
+        // 返回结果
+        return userId;
+    }
+
+    /**
+     * 创建User
+     */
+    public Long addUserWithLock(Login login, Long createdUserId, String cellphone, String email, String userName) {
+
+        if (null == login || Strings.isNullOrEmpty(login.getLoginName()) || null == login.getLoginNameType()) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数有误");
+        }
+
+        String loginName = login.getLoginName();
+        Integer loginNameType = login.getLoginNameType();
+        Timestamp createdTime = TimeUtils.now();
+
         // 加锁
         return synchronizer.synchronizeByUser(loginName, loginNameType, EXPIRE_AFTER_MIL_SEC, () -> {
             // 参数检查
