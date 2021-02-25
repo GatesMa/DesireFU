@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public enum NotificationType {
 
     FRONT_PAGE_SWIPER(1, "学生系统首页swiper"),
-    PARK_SWIPER(2, "广场swiper"),
-    PARK_NOTICE(3, "广场通知");
+    PARK_SWIPER(2, "广场通知"),
+    PARK_NOTICE(3, "广场swiper");
 
     private Integer value;
     private String desc;
