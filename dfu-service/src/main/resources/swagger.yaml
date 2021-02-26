@@ -869,6 +869,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /competition_creator_account/get_basic_number:
+    post:
+      tags:
+        - CompetitionCreatorAccount
+      summary: 比赛创建系统获取账号基本数据
+      description: 比赛创建系统获取账号基本数据
+      operationId: getCompetitionBasicData
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetCompetitionBasicDataRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetCompetitionBasicDataRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
@@ -917,6 +945,54 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  GetCompetitionBasicDataRequest:
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  GetCompetitionBasicDataRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/GetCompetitionBasicDataData'
+
+  GetCompetitionBasicDataData:
+    properties:
+      allCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 全部个数
+      validCnt:
+        type: integer
+        format: int32
+        example: 8
+        description: 有效个数
+      pv:
+        type: integer
+        format: int32
+        example: 124
+        description: 浏览量
+      notStartCnt:
+        type: integer
+        format: int32
+        example: 1
+        description: 未开始
+      startCnt:
+        type: integer
+        format: int32
+        example: 1
+        description: 进行中
+      endCnt:
+        type: integer
+        format: int32
+        example: 1
+        description: 已结束
 
   ReadAllMessageRequest:
     title: ReadAllMessageRequest

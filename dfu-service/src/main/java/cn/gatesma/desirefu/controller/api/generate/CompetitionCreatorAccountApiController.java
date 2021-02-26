@@ -56,6 +56,16 @@ public class CompetitionCreatorAccountApiController implements CompetitionCreato
         }
     }
 
+    public ResponseEntity<GetCompetitionBasicDataRet> getCompetitionBasicData(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetCompetitionBasicDataRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            GetCompetitionBasicDataRet response = competitionCreatorAccountService.getCompetitionBasicData(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
     private AddCompetitionCreatorAccountRet add(AddCompetitionCreatorAccountRequest request) {
 
         // 参数校验

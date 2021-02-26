@@ -178,6 +178,24 @@ public class CompetitionRepository {
         return stmt.fetch();
     }
 
+    /**
+     * 获取一个账号创建的比赛
+     * @param accountId
+     * @return
+     */
+    public List<Competition_Record> queryCompetition(Long accountId) {
+
+        SelectConditionStep<Competition_Record> stmt = dslContext
+                .selectFrom(COMPETITION_)
+                .where(COMPETITION_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
+
+        if (accountId != null) {
+            stmt.and(COMPETITION_.ACCOUNTID.eq(accountId));
+        }
+
+        return stmt.fetch();
+    }
+
     public int deleteCompetition(long competitionId) {
 
         UpdateSetMoreStep<Competition_Record> step = dslContext.update(COMPETITION_)
