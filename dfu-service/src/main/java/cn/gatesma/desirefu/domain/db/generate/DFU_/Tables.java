@@ -6,6 +6,7 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Collect_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
@@ -50,6 +51,11 @@ public class Tables {
      * The table <code>DFU_.Account_</code>.
      */
     public static final Account_ ACCOUNT_ = Account_.ACCOUNT_;
+
+    /**
+     * 收藏表
+     */
+    public static final Collect_ COLLECT_ = Collect_.COLLECT_;
 
     /**
      * 高校信息

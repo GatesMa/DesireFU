@@ -6,6 +6,7 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Collect_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
@@ -26,6 +27,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.User_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Userlogin_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Collect_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competition_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitioncreatoraccount_Record;
@@ -72,6 +74,7 @@ public class Keys {
 
     public static final Identity<Accountuserrole_Record, Long> IDENTITY_ACCOUNTUSERROLE_ = Identities0.IDENTITY_ACCOUNTUSERROLE_;
     public static final Identity<Account_Record, Long> IDENTITY_ACCOUNT_ = Identities0.IDENTITY_ACCOUNT_;
+    public static final Identity<Collect_Record, Long> IDENTITY_COLLECT_ = Identities0.IDENTITY_COLLECT_;
     public static final Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Identities0.IDENTITY_COLLEGE_;
     public static final Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Identities0.IDENTITY_COMPETITION_;
     public static final Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Identities0.IDENTITY_DEPARTMENT_;
@@ -89,6 +92,7 @@ public class Keys {
 
     public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = UniqueKeys0.KEY_ACCOUNTUSERROLE__PRIMARY;
     public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = UniqueKeys0.KEY_ACCOUNT__PRIMARY;
+    public static final UniqueKey<Collect_Record> KEY_COLLECT__PRIMARY = UniqueKeys0.KEY_COLLECT__PRIMARY;
     public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = UniqueKeys0.KEY_COLLEGE__PRIMARY;
     public static final UniqueKey<Competitioncreatoraccount_Record> KEY_COMPETITIONCREATORACCOUNT__PRIMARY = UniqueKeys0.KEY_COMPETITIONCREATORACCOUNT__PRIMARY;
     public static final UniqueKey<Competitionvisible_Record> KEY_COMPETITIONVISIBLE__PRIMARY = UniqueKeys0.KEY_COMPETITIONVISIBLE__PRIMARY;
@@ -120,6 +124,7 @@ public class Keys {
     private static class Identities0 {
         public static Identity<Accountuserrole_Record, Long> IDENTITY_ACCOUNTUSERROLE_ = Internal.createIdentity(Accountuserrole_.ACCOUNTUSERROLE_, Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
         public static Identity<Account_Record, Long> IDENTITY_ACCOUNT_ = Internal.createIdentity(Account_.ACCOUNT_, Account_.ACCOUNT_.ACCOUNTID);
+        public static Identity<Collect_Record, Long> IDENTITY_COLLECT_ = Internal.createIdentity(Collect_.COLLECT_, Collect_.COLLECT_.ID);
         public static Identity<College_Record, Integer> IDENTITY_COLLEGE_ = Internal.createIdentity(College_.COLLEGE_, College_.COLLEGE_.COLLEGEID);
         public static Identity<Competition_Record, Long> IDENTITY_COMPETITION_ = Internal.createIdentity(Competition_.COMPETITION_, Competition_.COMPETITION_.COMPETITIONID);
         public static Identity<Department_Record, Integer> IDENTITY_DEPARTMENT_ = Internal.createIdentity(Department_.DEPARTMENT_, Department_.DEPARTMENT_.DEPARTMENTID);
@@ -135,6 +140,7 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<Accountuserrole_Record> KEY_ACCOUNTUSERROLE__PRIMARY = Internal.createUniqueKey(Accountuserrole_.ACCOUNTUSERROLE_, "KEY_AccountUserRole__PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID);
         public static final UniqueKey<Account_Record> KEY_ACCOUNT__PRIMARY = Internal.createUniqueKey(Account_.ACCOUNT_, "KEY_Account__PRIMARY", Account_.ACCOUNT_.ACCOUNTID);
+        public static final UniqueKey<Collect_Record> KEY_COLLECT__PRIMARY = Internal.createUniqueKey(Collect_.COLLECT_, "KEY_Collect__PRIMARY", Collect_.COLLECT_.ID);
         public static final UniqueKey<College_Record> KEY_COLLEGE__PRIMARY = Internal.createUniqueKey(College_.COLLEGE_, "KEY_College__PRIMARY", College_.COLLEGE_.COLLEGEID);
         public static final UniqueKey<Competitioncreatoraccount_Record> KEY_COMPETITIONCREATORACCOUNT__PRIMARY = Internal.createUniqueKey(Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_, "KEY_CompetitionCreatorAccount__PRIMARY", Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_.ACCOUNTID);
         public static final UniqueKey<Competitionvisible_Record> KEY_COMPETITIONVISIBLE__PRIMARY = Internal.createUniqueKey(Competitionvisible_.COMPETITIONVISIBLE_, "KEY_CompetitionVisible__PRIMARY", Competitionvisible_.COMPETITIONVISIBLE_.COMPETITIONID, Competitionvisible_.COMPETITIONVISIBLE_.COLLEGEID);
