@@ -525,6 +525,88 @@ paths:
         404:
           description: RequestBody not found
 
+  /competition/collect:
+    post:
+      tags:
+        - Competition
+      summary: 收藏比赛
+      description: 收藏比赛
+      operationId: collectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CollectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+
+  /competition/get_collect:
+    post:
+      tags:
+        - Competition
+      summary: 获得收藏的比赛
+      description: 获得收藏的比赛
+      operationId: getCollectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetCollectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /competition/check_collect:
+    post:
+      tags:
+        - Competition
+      summary: 查看是否收藏
+      description: 查看是否收藏
+      operationId: checkCollectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CheckCollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckCollectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /upload/upload_file:
     post:
       tags:
@@ -945,6 +1027,98 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  CheckCollectCompetitionRequest:
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 比赛id
+
+  CheckCollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/CheckCollectCompetitionData'
+
+  CheckCollectCompetitionData:
+    properties:
+      isLiked:
+        type: integer
+        format: int32
+        example: 1
+        description: 是否收藏
+
+  CollectCompetitionRequest:
+    title: CollectCompetitionRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 比赛ID
+      like:
+        type: integer
+        format: int32
+        description: 是否收藏 0-收藏，1-取消
+  CollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  GetCollectCompetitionRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  GetCollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetCollectCompetitionData'
+
+  GetCollectCompetitionData:
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 100000
+        description: id
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 123
+        description: 比赛id
+      competition:
+        $ref: '#/definitions/SelectCompetitionData'
+      createdTime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
 
   GetCompetitionBasicDataRequest:
     properties:

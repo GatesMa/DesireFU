@@ -5,10 +5,7 @@
  */
 package cn.gatesma.desirefu.controller.api.generate;
 
-import cn.gatesma.desirefu.domain.api.generate.AddCompetitionRequest;
-import cn.gatesma.desirefu.domain.api.generate.AddCompetitionRet;
-import cn.gatesma.desirefu.domain.api.generate.SelectCompetitionRequest;
-import cn.gatesma.desirefu.domain.api.generate.SelectCompetitionRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -51,5 +48,38 @@ public interface CompetitionApi {
             method = RequestMethod.POST)
     ResponseEntity<SelectCompetitionRet> selectScrollCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectCompetitionRequest body);
 
+    @ApiOperation(value = "收藏比赛", nickname = "collectCompetition", notes = "收藏比赛", response = CollectCompetitionRet.class, tags={ "Competition", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = CollectCompetitionRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/competition/collect",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<CollectCompetitionRet> collectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CollectCompetitionRequest body);
+
+
+    @ApiOperation(value = "获得收藏的比赛", nickname = "getCollectCompetition", notes = "获得收藏的比赛", response = GetCollectCompetitionRet.class, tags={ "Competition", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetCollectCompetitionRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/competition/get_collect",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetCollectCompetitionRet> getCollectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody GetCollectCompetitionRequest body);
+
+    @ApiOperation(value = "查看是否收藏", nickname = "checkCollectCompetition", notes = "查看是否收藏", response = CheckCollectCompetitionRet.class, tags={ "Competition", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = CheckCollectCompetitionRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/competition/check_collect",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<CheckCollectCompetitionRet> checkCollectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CheckCollectCompetitionRequest body);
 
 }

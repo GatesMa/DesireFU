@@ -62,4 +62,34 @@ public class CompetitionApiController implements CompetitionApi {
         }
     }
 
+    public ResponseEntity<CollectCompetitionRet> collectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CollectCompetitionRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            CollectCompetitionRet response = competitionService.collectCompetition(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<GetCollectCompetitionRet> getCollectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody GetCollectCompetitionRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            GetCollectCompetitionRet response = competitionService.getCollectCompetition(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<CheckCollectCompetitionRet> checkCollectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CheckCollectCompetitionRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            CheckCollectCompetitionRet response = competitionService.checkCollectCompetition(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
 }
