@@ -1,8 +1,6 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
-import cn.gatesma.desirefu.domain.api.generate.SelectNotificationData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -13,33 +11,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * AddNotificationRet
+ * DeleteNotificationRequest
  */
 @Validated
-public class AddNotificationRet extends ReturnCode implements Serializable {
+public class DeleteNotificationRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("data")
-  private SelectNotificationData data = null;
+  @JsonProperty("noticeId")
+  private Integer noticeId = null;
 
-  public AddNotificationRet data(SelectNotificationData data) {
-    this.data = data;
+  public DeleteNotificationRequest noticeId(Integer noticeId) {
+    this.noticeId = noticeId;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * noticeId
+   * @return noticeId
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "noticeId")
 
-  @Valid
-  public SelectNotificationData getData() {
-    return data;
+  public Integer getNoticeId() {
+    return noticeId;
   }
 
-  public void setData(SelectNotificationData data) {
-    this.data = data;
+  public void setNoticeId(Integer noticeId) {
+    this.noticeId = noticeId;
   }
 
 
@@ -51,22 +48,21 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddNotificationRet addNotificationRet = (AddNotificationRet) o;
-    return Objects.equals(this.data, addNotificationRet.data) &&
-        super.equals(o);
+    DeleteNotificationRequest deleteNotificationRequest = (DeleteNotificationRequest) o;
+    return Objects.equals(this.noticeId, deleteNotificationRequest.noticeId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, super.hashCode());
+    return Objects.hash(noticeId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AddNotificationRet {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("class DeleteNotificationRequest {\n");
+    
+    sb.append("    noticeId: ").append(toIndentedString(noticeId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -48,8 +48,8 @@ public class NotificationApiController implements NotificationApi {
     public ResponseEntity<AddNotificationRet> addNotification(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddNotificationRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            notificationService.addNotification(body);
-            return new ResponseEntity<>(RetCodeUtils.ok(new AddNotificationRet()), HttpStatus.OK);
+            AddNotificationRet response = notificationService.addNotification(body);;
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
         }
@@ -59,6 +59,17 @@ public class NotificationApiController implements NotificationApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             SelectNotificationRet response = notificationService.selectNotification(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<DeleteNotificationRet> deleteNotification(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteNotificationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            DeleteNotificationRet response = notificationService.deleteNotification(body);
+            ;
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");

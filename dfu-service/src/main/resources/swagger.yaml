@@ -707,6 +707,32 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /notification/delete:
+    post:
+      tags:
+        - Notification
+      summary: 删除公告
+      description: 删除公告
+      operationId: deleteNotification
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNotificationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteNotificationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /organize/add:
     post:
@@ -1027,6 +1053,17 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  DeleteNotificationRequest:
+    title: DeleteNotificationRequest
+    properties:
+      noticeId:
+        type: integer
+        format: int32
+        description: noticeId
+  DeleteNotificationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
 
   CheckCollectCompetitionRequest:
     properties:
@@ -2294,6 +2331,10 @@ definitions:
   AddNotificationRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/SelectNotificationData'
+
 
   AddNotificationRequest:
     properties:
