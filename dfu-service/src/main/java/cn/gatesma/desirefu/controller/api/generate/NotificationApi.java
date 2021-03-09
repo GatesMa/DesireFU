@@ -47,7 +47,7 @@ public interface NotificationApi {
             method = RequestMethod.POST)
     ResponseEntity<SelectNotificationRet> selectNotification(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectNotificationRequest body);
 
-    @ApiOperation(value = "删除公告", nickname = "deleteNotification", notes = "删除公告", response = DeleteNotificationRet.class, tags={ "Notification", })
+    @ApiOperation(value = "删除公告", nickname = "deleteNotification", notes = "删除公告", response = DeleteNotificationRet.class, tags={ "公告", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = DeleteNotificationRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),

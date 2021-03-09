@@ -115,4 +115,16 @@ public class NormalAccountApiController implements NormalAccountApi {
         }
     }
 
+    public ResponseEntity<GetExamAccountRet> getExamList() {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            GetExamAccountRet response = normalAccountService.getExamList();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+
+
 }

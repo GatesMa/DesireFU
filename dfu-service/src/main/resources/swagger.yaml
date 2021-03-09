@@ -212,6 +212,55 @@ paths:
         404:
           description: RequestBody not found
 
+  /normal_account/getExamList:
+    post:
+      tags:
+        - NormalAccount
+      summary: 获取未审核学生账号
+      description: 获取未审核学生账号
+      operationId: getExamList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetExamAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /account/update:
+    post:
+      tags:
+        - Account
+      summary: 更新账号
+      description: 更新账号
+      operationId: updateAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 更新账号
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UpdateAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /competition_creator_account/add:
     post:
       tags:
@@ -1053,6 +1102,40 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  UpdateAccountRequest:
+    title: UpdateAccountRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      nickName:
+        type: string
+        example: gatesma
+        description: 账号名称
+      memo:
+        type: string
+        example: gatesma
+        description: 备注
+      accountStatus:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号状态
+  UpdateAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  GetExamAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetNormalAccountData'
 
   DeleteNotificationRequest:
     title: DeleteNotificationRequest
@@ -2327,6 +2410,10 @@ definitions:
         type: string
         example: 马保国
         description: 真实姓名
+      created_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
 
   AddNotificationRet:
     allOf:

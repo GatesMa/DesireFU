@@ -1,11 +1,15 @@
 package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
+import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.ApprovalStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.constants.type.OperatorRole;
+import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
@@ -22,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -35,6 +40,9 @@ public class NormalAccountService {
 
     @Resource
     private NormalAccountRepository normalAccountRepository;
+
+    @Resource
+    private AccountRepository accountRepository;
 
     @Resource
     private AccountService accountService;
@@ -80,27 +88,7 @@ public class NormalAccountService {
 
         List<GetNormalAccountData> ret = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(records)) {
-            for (Normalaccount_Record record : records) {
-                GetNormalAccountData data = new GetNormalAccountData()
-                        .accountId(record.getAccountid())
-                        .accountType(record.getAccounttype())
-                        .collegeId(record.getCollegeid())
-                        .departmentId(record.getDepartmentid())
-                        .major(record.getMajor())
-                        .stuId(record.getStuid())
-                        .realName(record.getRealname());
-
-                // 填充学校名称和学院名称
-                College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
-                if (college != null) {
-                    data.setCollegeName(college.getName());
-                }
-                Department_Record department = departmentRepository.getDepartmentById(record.getDepartmentid(), DeleteStatus.NORMAL);
-                if (department != null) {
-                    data.setDepartmentName(department.getName());
-                }
-                ret.add(data);
-            }
+            ret = toGetNormalAccountList(records);
         }
         // 返回结果
         return (GetNormalAccountRet) new GetNormalAccountRet().data(ret)
@@ -134,5 +122,62 @@ public class NormalAccountService {
         return data;
 
     }
+
+    public GetExamAccountRet getExamList() {
+
+        // 1。 获取全部的未审核的学生账号
+        List<Account_Record> records = accountRepository.getExamAccount(AccountType.NORMAL.getValue());
+
+        if (CollectionUtils.isEmpty(records)) {
+            // 返回结果
+            return (GetExamAccountRet) new GetExamAccountRet()
+                    .code(ApiReturnCode.OK.code())
+                    .message(ApiReturnCode.OK.name());
+        }
+
+        // 2。通过ids查找normal record
+        List<Normalaccount_Record> accountByIds =
+                normalAccountRepository.getAccountByIds(records.stream().map(Account_Record::getAccountid).collect(Collectors.toList()));
+
+        List<GetNormalAccountData> getNormalAccountData = toGetNormalAccountList(accountByIds);
+
+
+        // 返回结果
+        return (GetExamAccountRet) new GetExamAccountRet()
+                .data(getNormalAccountData)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
+
+
+    private List<GetNormalAccountData> toGetNormalAccountList(List<Normalaccount_Record> records) {
+        List<GetNormalAccountData> ret = new ArrayList<>();
+        for (Normalaccount_Record record : records) {
+            GetNormalAccountData data = new GetNormalAccountData()
+                    .accountId(record.getAccountid())
+                    .accountType(record.getAccounttype())
+                    .collegeId(record.getCollegeid())
+                    .departmentId(record.getDepartmentid())
+                    .major(record.getMajor())
+                    .stuId(record.getStuid())
+                    .realName(record.getRealname())
+                    .createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+
+            // 填充学校名称和学院名称
+            College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
+            if (college != null) {
+                data.setCollegeName(college.getName());
+            }
+            Department_Record department = departmentRepository.getDepartmentById(record.getDepartmentid(), DeleteStatus.NORMAL);
+            if (department != null) {
+                data.setDepartmentName(department.getName());
+            }
+            ret.add(data);
+        }
+        return ret;
+    }
+
+
 
 }

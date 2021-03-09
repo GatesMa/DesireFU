@@ -7,6 +7,8 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRet;
+import cn.gatesma.desirefu.domain.api.generate.UpdateAccountRequest;
+import cn.gatesma.desirefu.domain.api.generate.UpdateAccountRet;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,5 +38,17 @@ public interface AccountApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<AddAccountRet> addAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddAccountRequest body);
+
+    @ApiOperation(value = "更新账号", nickname = "updateAccount", notes = "更新账号", response = UpdateAccountRet.class, tags={ "账号", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = UpdateAccountRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/account/update",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<UpdateAccountRet> updateAccount(@ApiParam(value = "更新账号" ,required=true )  @Valid @RequestBody UpdateAccountRequest body);
+
 
 }
