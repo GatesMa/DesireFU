@@ -2,6 +2,7 @@ package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
+import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
@@ -89,6 +90,11 @@ public class OrganizeService {
                 .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
 
         for (Organize_Record organizeRecord : organizeRecords) {
+            // 只返回状态是已审核通过的
+            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
+            if (account.getAccountstatus() != AccountStatus.STATUS_NORMAL.code()) {
+                continue;
+            }
             // 调用抽取的公共方法
             data.add(recordToOrganizeData(organizeRecord));
         }
