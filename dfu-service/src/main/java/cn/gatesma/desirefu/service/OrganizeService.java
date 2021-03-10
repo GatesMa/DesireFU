@@ -7,6 +7,7 @@ import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.constants.type.MessageType;
+import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
@@ -244,5 +245,32 @@ public class OrganizeService {
 
     }
 
+    public ListOrganizeMemberRet listMember(ListOrganizeMemberRequest request) {
+
+        if (request.getOrganizeId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "OrganizeId必须传");
+        }
+
+        // 1。 获取全部的账号ID
+        List<Organizeaccountrelation_Record> records = organizeAccountRelationRepository.queryOrganizeAccountRelation(request.getOrganizeId(), null, null, null);
+
+        List<GetNormalAccountData> data = new ArrayList<>();
+
+        // 每一个账号添加到data里
+        if (CollectionUtils.isNotEmpty(records)) {
+            for (Organizeaccountrelation_Record record : records) {
+                GetNormalAccountData item = normalAccountService.getNormalAccountById(record.getAccountid());
+                item.createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+                data.add(item);
+            }
+        }
+
+        // 返回结果
+        return (ListOrganizeMemberRet) new ListOrganizeMemberRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
 
 }

@@ -44,6 +44,9 @@ public class OrganizeApplicationService {
     private OrganizeAccountApplicationRepository organizeAccountApplicationRepository;
 
     @Resource
+    private OrganizeAccountRelationRepository organizeAccountRelationRepository;
+
+    @Resource
     private NormalAccountService normalAccountService;
 
     @Resource
@@ -65,25 +68,46 @@ public class OrganizeApplicationService {
         Long accountId = request.getAccountId();
         Integer accountType = request.getAccountType();
         Long createdUserId = request.getCreatedUserId();
-        // 判断是否存在已经发起的请求
-        List<Organizeaccountapplication_Record> records = organizeAccountApplicationRepository.queryOrganizeAccountApplication(
-                Collections.singletonList(organizeId), accountId, accountType, OrganizeApplicationStatus.APPLYING.code());
 
-        if (CollectionUtils.isNotEmpty(records)) {
+        // 检查
+        String check = check(request);
+        if (check != null) {
+            // 返回结果
             return (AddOrganizeApplicationRet) new AddOrganizeApplicationRet()
                     .code(ApiReturnCode.LOGIC_ERROR.code())
-                    .message("存在未处理申请");
-        } else {
-            // 创建一个申请记录
-            organizeAccountApplicationRepository.addOrganizeAccountApplication(organizeId, accountId,
-                    accountType, OrganizeApplicationStatus.APPLYING.code(), createdUserId);
-
-            // 向队长发送一条消息
-            sendMessageToCaptain(organizeId, accountId);
-
-
-            return RetCodeUtils.ok(new AddOrganizeApplicationRet());
+                    .message(check);
         }
+
+        // 创建一个申请记录
+        organizeAccountApplicationRepository.addOrganizeAccountApplication(organizeId, accountId,
+                accountType, OrganizeApplicationStatus.APPLYING.code(), createdUserId);
+
+        // 向队长发送一条消息
+        sendMessageToCaptain(organizeId, accountId);
+
+
+        return RetCodeUtils.ok(new AddOrganizeApplicationRet());
+    }
+
+    private String check(AddOrganizeApplicationRequest request) {
+        Long organizeId = request.getOrganizeId();
+        Long accountId = request.getAccountId();
+        Integer accountType = request.getAccountType();
+//        Long createdUserId = request.getCreatedUserId();
+
+        List<Organizeaccountapplication_Record> records = organizeAccountApplicationRepository.queryOrganizeAccountApplication(
+                Collections.singletonList(organizeId), accountId, accountType, OrganizeApplicationStatus.APPLYING.code());
+        // 1. 检查是否有未处理申请
+        if (CollectionUtils.isNotEmpty(records)) {
+            return "存在未处理申请";
+        }
+
+        // 2. 判断是否已经在队伍里
+        List<Organizeaccountrelation_Record> relation = organizeAccountRelationRepository.queryOrganizeAccountRelation(organizeId, accountId, null, null);
+        if (CollectionUtils.isNotEmpty(relation)) {
+            return "你已经在队伍中了";
+        }
+        return null;
     }
 
     private void sendMessageToCaptain(Long organizeId, Long accountId) {

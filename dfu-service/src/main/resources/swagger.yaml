@@ -918,6 +918,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /organize/listMember:
+    post:
+      tags:
+        - Organize
+      summary: 获取组织成员
+      description: 获取组织成员
+      operationId: listMember
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeMemberRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeMemberRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /organize/getExamOrganizeList:
     post:
       tags:
@@ -1202,6 +1230,23 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  ListOrganizeMemberRequest:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  ListOrganizeMemberRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetNormalAccountData'
 
   DeleteRoleRelationRequest:
     title: DeleteRoleRelationRequest
