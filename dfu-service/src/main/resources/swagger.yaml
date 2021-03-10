@@ -839,6 +839,27 @@ paths:
         404:
           description: RequestBody not found
 
+  /organize/getExamOrganizeList:
+    post:
+      tags:
+        - Organize
+      summary: 获取未审核队伍
+      description: 获取未审核队伍
+      operationId: getExamOrganizeList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetExamOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /organize_application/add:
     post:
       tags:
@@ -1127,6 +1148,15 @@ definitions:
   UpdateAccountRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
+
+  GetExamOrganizeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OrganizeData'
 
   GetExamAccountRet:
     allOf:

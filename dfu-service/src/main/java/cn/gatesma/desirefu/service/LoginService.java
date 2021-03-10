@@ -69,7 +69,7 @@ public class LoginService {
         List<Accountuserrole_Record> records = accountUserRoleRepository.queryRoleRelation(null, null
                 , userId, null, DeleteStatus.NORMAL.code());
 
-        return  roleRecordsToRetData(records);
+        return roleRecordsToRetData(records);
     }
 
 

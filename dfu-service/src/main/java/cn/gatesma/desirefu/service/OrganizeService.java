@@ -8,10 +8,7 @@ import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.domain.api.generate.*;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountrelation_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -23,6 +20,7 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -213,5 +211,38 @@ public class OrganizeService {
         item.setCompetition(competitionService.getCompetitionById(record.getCompetitionid()));
         return item;
     }
+
+    public GetExamOrganizeRet getExamOrganizeList() {
+
+        // 1。 获取全部的未审核的学生账号
+        List<Account_Record> records = accountRepository.getExamAccount(AccountType.ORGANIZE.getValue());
+
+        if (CollectionUtils.isEmpty(records)) {
+            // 返回结果
+            return (GetExamOrganizeRet) new GetExamOrganizeRet()
+                    .code(ApiReturnCode.OK.code())
+                    .message(ApiReturnCode.OK.name());
+        }
+
+        // 2。通过ids查找normal record
+        List<Organize_Record> accountByIds =
+                organizeRepository.getOrganizeByIds(records.stream().map(Account_Record::getAccountid).collect(Collectors.toList()));
+
+        List<OrganizeData> data = new ArrayList<>();
+
+        for (Organize_Record organizeRecord : accountByIds) {
+            // 调用抽取的公共方法
+            data.add(recordToOrganizeData(organizeRecord));
+        }
+
+
+        // 返回结果
+        return (GetExamOrganizeRet) new GetExamOrganizeRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
+
 
 }
