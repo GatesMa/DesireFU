@@ -48,7 +48,7 @@ public interface CompetitionApi {
             method = RequestMethod.POST)
     ResponseEntity<SelectCompetitionRet> selectScrollCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectCompetitionRequest body);
 
-    @ApiOperation(value = "收藏比赛", nickname = "collectCompetition", notes = "收藏比赛", response = CollectCompetitionRet.class, tags={ "Competition", })
+    @ApiOperation(value = "收藏比赛", nickname = "collectCompetition", notes = "收藏比赛", response = CollectCompetitionRet.class, tags={ "比赛", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = CollectCompetitionRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -60,7 +60,7 @@ public interface CompetitionApi {
     ResponseEntity<CollectCompetitionRet> collectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CollectCompetitionRequest body);
 
 
-    @ApiOperation(value = "获得收藏的比赛", nickname = "getCollectCompetition", notes = "获得收藏的比赛", response = GetCollectCompetitionRet.class, tags={ "Competition", })
+    @ApiOperation(value = "获得收藏的比赛", nickname = "getCollectCompetition", notes = "获得收藏的比赛", response = GetCollectCompetitionRet.class, tags={ "比赛", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = GetCollectCompetitionRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -71,7 +71,7 @@ public interface CompetitionApi {
             method = RequestMethod.POST)
     ResponseEntity<GetCollectCompetitionRet> getCollectCompetition(@ApiParam(value = "" ,required=true )  @Valid @RequestBody GetCollectCompetitionRequest body);
 
-    @ApiOperation(value = "查看是否收藏", nickname = "checkCollectCompetition", notes = "查看是否收藏", response = CheckCollectCompetitionRet.class, tags={ "Competition", })
+    @ApiOperation(value = "查看是否收藏", nickname = "checkCollectCompetition", notes = "查看是否收藏", response = CheckCollectCompetitionRet.class, tags={ "比赛", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = CheckCollectCompetitionRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),

@@ -89,5 +89,15 @@ public class LoginApiController implements LoginApi {
         }
     }
 
+    public ResponseEntity<DeleteRoleRelationRet> deleteRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteRoleRelationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            DeleteRoleRelationRet ret = loginService.deleteRoleRelation(body);
+            return new ResponseEntity<>(ret, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
 
 }

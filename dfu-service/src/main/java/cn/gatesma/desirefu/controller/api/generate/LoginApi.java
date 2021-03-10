@@ -58,5 +58,16 @@ public interface LoginApi {
             method = RequestMethod.POST)
     ResponseEntity<SelectRoleRelationRet> selectRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectRoleRelationRequest body);
 
+    @ApiOperation(value = "删除RoleRelation", nickname = "deleteRoleRelation", notes = "删除RoleRelation", response = DeleteRoleRelationRet.class, tags={ "登陆", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = DeleteRoleRelationRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/login/deleteRoleRelation",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<DeleteRoleRelationRet> deleteRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteRoleRelationRequest body);
+
 
 }

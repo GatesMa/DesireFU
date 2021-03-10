@@ -219,5 +219,19 @@ public class LoginService {
         }
     }
 
+    public DeleteRoleRelationRet deleteRoleRelation(DeleteRoleRelationRequest request) {
+
+        if (request.getAccountRoleId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数有误");
+        }
+
+        accountUserRoleRepository.deleteRoleRelation(request.getAccountRoleId());
+
+        // 返回结果
+        return (DeleteRoleRelationRet) new DeleteRoleRelationRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
 
 }

@@ -544,6 +544,32 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /login/deleteRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 删除RoleRelation
+      description: 删除RoleRelation
+      operationId: deleteRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /external/code_2_wx_openid:
     post:
@@ -1176,6 +1202,18 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  DeleteRoleRelationRequest:
+    title: DeleteRoleRelationRequest
+    properties:
+      accountRoleId:
+        type: integer
+        format: int64
+        example: 1
+        description: accountRoleId
+  DeleteRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
 
   SelectRoleRelationRequest:
     properties:

@@ -47,7 +47,7 @@ public interface MessageApi {
             method = RequestMethod.POST)
     ResponseEntity<UpdateMessageStatusRet> updateMessageStatus(@ApiParam(value = "" ,required=true )  @Valid @RequestBody UpdateMessageStatusRequest body);
 
-    @ApiOperation(value = "删除消息", nickname = "deleteMessage", notes = "删除消息", response = DeleteMessageRet.class, tags={ "Message", })
+    @ApiOperation(value = "删除消息", nickname = "deleteMessage", notes = "删除消息", response = DeleteMessageRet.class, tags={ "消息", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = DeleteMessageRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -59,7 +59,7 @@ public interface MessageApi {
     ResponseEntity<DeleteMessageRet> deleteMessage(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteMessageRequest body);
 
 
-    @ApiOperation(value = "全读消息", nickname = "readAllMessage", notes = "全读消息", response = ReadAllMessageRet.class, tags={ "Message", })
+    @ApiOperation(value = "全读消息", nickname = "readAllMessage", notes = "全读消息", response = ReadAllMessageRet.class, tags={ "消息", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = ReadAllMessageRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),

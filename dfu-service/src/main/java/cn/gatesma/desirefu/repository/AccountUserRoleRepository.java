@@ -4,6 +4,7 @@ import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Notification_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.jooq.*;
@@ -197,6 +198,14 @@ public class AccountUserRoleRepository {
             stmt.and(ACCOUNTUSERROLE_.ROLE.in(roleList));
         }
         return stmt.fetch();
+    }
+
+    public int deleteRoleRelation(Long accountRoleId) {
+
+        UpdateSetMoreStep<Accountuserrole_Record> step = dslContext.update(ACCOUNTUSERROLE_)
+                .set(ACCOUNTUSERROLE_.DELETESTATUS, DeleteStatus.DELETED.code());
+
+        return step.where(ACCOUNTUSERROLE_.ACCOUNTROLEID.eq(accountRoleId)).execute();
     }
 
 
