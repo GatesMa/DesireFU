@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -12,8 +13,7 @@ import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.ACCOUNTUSERROLE_;
-import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.ACCOUNT_;
+import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.*;
 
 /**
  * User: gatesma
@@ -121,7 +121,7 @@ public class AccountUserRoleRepository {
      * 查询账号用户角色信息
      */
     public List<Accountuserrole_Record> queryRoleRelation(Long accountId, Integer accountType, Long userId,
-                                                          Integer role, Integer deleteStatus) {
+                                                          Integer role, Integer deleteStatus, Page page) {
 
         SelectConditionStep<Accountuserrole_Record> step = dslContext.selectFrom(ACCOUNTUSERROLE_)
                 .where();
@@ -145,6 +145,14 @@ public class AccountUserRoleRepository {
         if (null != role) {
             step.and(ACCOUNTUSERROLE_.ROLE.eq(role));
         }
+
+        // 翻页
+        if (page != null) {
+            step.limit(page.getPageSize()).offset(page.getPageSize() * (page.getPageNum() - 1));
+        }
+
+        // 按时间倒序
+        step.orderBy(ACCOUNTUSERROLE_.CREATEDTIME.desc());
 
         return step.fetch();
     }

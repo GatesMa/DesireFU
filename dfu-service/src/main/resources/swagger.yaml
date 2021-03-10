@@ -491,6 +491,59 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /login/addRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 添加一个用户可以登录的账号
+      description: 添加一个用户可以登录的账号
+      operationId: addRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /login/selectRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 获取RoleRelation
+      description: 获取RoleRelation
+      operationId: selectRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SelectRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /external/code_2_wx_openid:
     post:
@@ -1123,6 +1176,90 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  SelectRoleRelationRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+
+  SelectRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/SelectRoleRelationData'
+
+  SelectRoleRelationData:
+    properties:
+      accountRoleId:
+        type: integer
+        format: int64
+        example: 1
+        description: accountRoleId
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+      createdTime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+
+  AddRoleRelationRequest:
+    title: AddRoleRelationRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+      accountType:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+
+  AddRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
 
   UpdateAccountRequest:
     title: UpdateAccountRequest
