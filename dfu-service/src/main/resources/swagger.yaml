@@ -233,6 +233,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /normal_account/get_basic_number:
+    post:
+      tags:
+        - NormalAccount
+      summary: 学生系统获取账号基本数据
+      description: 学生系统获取账号基本数据
+      operationId: getNormalBasicData
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetNormalBasicDataRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetNormalBasicDataRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /account/update:
     post:
       tags:
@@ -1230,6 +1258,44 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  GetNormalBasicDataRequest:
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  GetNormalBasicDataRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/GetNormalBasicDataData'
+
+  GetNormalBasicDataData:
+    properties:
+      msgCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 消息个数
+      applicationCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 入队申请个数
+      organizeCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 队伍
+      collectCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 队伍
 
   ListOrganizeMemberRequest:
     properties:

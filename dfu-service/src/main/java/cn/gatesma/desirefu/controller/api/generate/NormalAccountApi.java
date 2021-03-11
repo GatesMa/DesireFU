@@ -57,6 +57,16 @@ public interface NormalAccountApi {
             method = RequestMethod.POST)
     ResponseEntity<GetExamAccountRet> getExamList();
 
+    @ApiOperation(value = "学生系统获取账号基本数据", nickname = "getNormalBasicData", notes = "学生系统获取账号基本数据", response = GetNormalBasicDataRet.class, tags={ "NormalAccount", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetNormalBasicDataRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/normal_account/get_basic_number",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetNormalBasicDataRet> getNormalBasicData(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalBasicDataRequest body);
 
 
 }

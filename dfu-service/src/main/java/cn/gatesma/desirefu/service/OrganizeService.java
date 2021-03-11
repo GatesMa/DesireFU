@@ -68,6 +68,12 @@ public class OrganizeService {
         Long competitionId = request.getCompetitionId();
         Long srcAccountId = request.getSrcAccountId();
 
+        // 检查一下，目前一个账号只能创建一个队伍
+        List<Organize_Record> records = organizeRepository.queryOrganize(null, competitionId, srcAccountId);
+        if (CollectionUtils.isNotEmpty(records)) {
+            throw new CustomerApiException(ApiReturnCode.LOGIC_ERROR, "一个账号只能创建一个比赛队伍");
+        }
+
         // 1. 先创建一个common账号 , 这个accountId等于Organize表中的organizeId
         long accountId = accountService.createAccount(request);
 
