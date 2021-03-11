@@ -2,15 +2,14 @@ package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
+import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.OrganizeApplicationStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.constants.type.MessageType;
+import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountapplication_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountrelation_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -22,6 +21,7 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -68,6 +68,12 @@ public class OrganizeService {
         Long competitionId = request.getCompetitionId();
         Long srcAccountId = request.getSrcAccountId();
 
+        // 检查一下，目前一个账号只能创建一个队伍
+        List<Organize_Record> records = organizeRepository.queryOrganize(null, competitionId, srcAccountId);
+        if (CollectionUtils.isNotEmpty(records)) {
+            throw new CustomerApiException(ApiReturnCode.LOGIC_ERROR, "一个账号只能创建一个比赛队伍");
+        }
+
         // 1. 先创建一个common账号 , 这个accountId等于Organize表中的organizeId
         long accountId = accountService.createAccount(request);
 
@@ -76,6 +82,12 @@ public class OrganizeService {
 
         // 3. 为队长创建记录
         organizeAccountRelationRepository.addOrganizeAccountRelation(accountId, srcAccountId, AccountType.ORGANIZE.getValue(), 1, rootUserId);
+
+        // 4。发送消息
+        messageService.sendMessage(
+                srcAccountId,
+                MessageType.CREATE_ORGANIZE.getValue(),
+                String.format("创建队伍（%s）成功， 请等待运营审核！", request.getNickName()));
 
         return accountId;
     }
@@ -89,6 +101,11 @@ public class OrganizeService {
                 .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
 
         for (Organize_Record organizeRecord : organizeRecords) {
+            // 只返回状态是已审核通过的
+            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
+            if (account.getAccountstatus() != AccountStatus.STATUS_NORMAL.code()) {
+                continue;
+            }
             // 调用抽取的公共方法
             data.add(recordToOrganizeData(organizeRecord));
         }
@@ -206,6 +223,66 @@ public class OrganizeService {
         // 设置比赛数据
         item.setCompetition(competitionService.getCompetitionById(record.getCompetitionid()));
         return item;
+    }
+
+    public GetExamOrganizeRet getExamOrganizeList() {
+
+        // 1。 获取全部的未审核的学生账号
+        List<Account_Record> records = accountRepository.getExamAccount(AccountType.ORGANIZE.getValue());
+
+        if (CollectionUtils.isEmpty(records)) {
+            // 返回结果
+            return (GetExamOrganizeRet) new GetExamOrganizeRet()
+                    .code(ApiReturnCode.OK.code())
+                    .message(ApiReturnCode.OK.name());
+        }
+
+        // 2。通过ids查找normal record
+        List<Organize_Record> accountByIds =
+                organizeRepository.getOrganizeByIds(records.stream().map(Account_Record::getAccountid).collect(Collectors.toList()));
+
+        List<OrganizeData> data = new ArrayList<>();
+
+        for (Organize_Record organizeRecord : accountByIds) {
+            // 调用抽取的公共方法
+            data.add(recordToOrganizeData(organizeRecord));
+        }
+
+
+        // 返回结果
+        return (GetExamOrganizeRet) new GetExamOrganizeRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
+
+    public ListOrganizeMemberRet listMember(ListOrganizeMemberRequest request) {
+
+        if (request.getOrganizeId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "OrganizeId必须传");
+        }
+
+        // 1。 获取全部的账号ID
+        List<Organizeaccountrelation_Record> records = organizeAccountRelationRepository.queryOrganizeAccountRelation(request.getOrganizeId(), null, null, null);
+
+        List<GetNormalAccountData> data = new ArrayList<>();
+
+        // 每一个账号添加到data里
+        if (CollectionUtils.isNotEmpty(records)) {
+            for (Organizeaccountrelation_Record record : records) {
+                GetNormalAccountData item = normalAccountService.getNormalAccountById(record.getAccountid());
+                item.createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+                data.add(item);
+            }
+        }
+
+        // 返回结果
+        return (ListOrganizeMemberRet) new ListOrganizeMemberRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
     }
 
 }

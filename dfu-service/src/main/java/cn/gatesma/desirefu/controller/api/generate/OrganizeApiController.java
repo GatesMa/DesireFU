@@ -76,11 +76,6 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
-
-
-
-
-
     private AddOrganizeRet add(AddOrganizeRequest request) {
 
         // 参数校验
@@ -108,6 +103,26 @@ public class OrganizeApiController implements OrganizeApi {
         // 校验accountType
         if (!AccountType.accountTypeSet.contains(request.getAccountType())) {
             throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "账号类型超出限制");
+        }
+    }
+
+    public ResponseEntity<GetExamOrganizeRet> getExamOrganizeList() {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            GetExamOrganizeRet response = organizeService.getExamOrganizeList();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<ListOrganizeMemberRet> listMember(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeMemberRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            ListOrganizeMemberRet response = organizeService.listMember(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
         }
     }
 

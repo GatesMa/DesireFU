@@ -1,8 +1,8 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
+import cn.gatesma.desirefu.domain.api.generate.GetNormalBasicDataData;
 import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
-import cn.gatesma.desirefu.domain.api.generate.SelectNotificationData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -13,16 +13,16 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * AddNotificationRet
+ * GetNormalBasicDataRet
  */
 @Validated
-public class AddNotificationRet extends ReturnCode implements Serializable {
+public class GetNormalBasicDataRet extends ReturnCode implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("data")
-  private SelectNotificationData data = null;
+  private GetNormalBasicDataData data = null;
 
-  public AddNotificationRet data(SelectNotificationData data) {
+  public GetNormalBasicDataRet data(GetNormalBasicDataData data) {
     this.data = data;
     return this;
   }
@@ -34,11 +34,11 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
   @ApiModelProperty(value = "")
 
   @Valid
-  public SelectNotificationData getData() {
+  public GetNormalBasicDataData getData() {
     return data;
   }
 
-  public void setData(SelectNotificationData data) {
+  public void setData(GetNormalBasicDataData data) {
     this.data = data;
   }
 
@@ -51,8 +51,8 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddNotificationRet addNotificationRet = (AddNotificationRet) o;
-    return Objects.equals(this.data, addNotificationRet.data) &&
+    GetNormalBasicDataRet getNormalBasicDataRet = (GetNormalBasicDataRet) o;
+    return Objects.equals(this.data, getNormalBasicDataRet.data) &&
         super.equals(o);
   }
 
@@ -64,7 +64,7 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AddNotificationRet {\n");
+    sb.append("class GetNormalBasicDataRet {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");

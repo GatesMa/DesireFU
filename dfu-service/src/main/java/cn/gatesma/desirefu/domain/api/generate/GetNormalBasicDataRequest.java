@@ -1,8 +1,6 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
-import cn.gatesma.desirefu.domain.api.generate.SelectNotificationData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -13,33 +11,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * AddNotificationRet
+ * GetNormalBasicDataRequest
  */
 @Validated
-public class AddNotificationRet extends ReturnCode implements Serializable {
+public class GetNormalBasicDataRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("data")
-  private SelectNotificationData data = null;
+  @JsonProperty("accountId")
+  private Long accountId = null;
 
-  public AddNotificationRet data(SelectNotificationData data) {
-    this.data = data;
+  public GetNormalBasicDataRequest accountId(Long accountId) {
+    this.accountId = accountId;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * 账号ID
+   * @return accountId
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "100000", value = "账号ID")
 
-  @Valid
-  public SelectNotificationData getData() {
-    return data;
+  public Long getAccountId() {
+    return accountId;
   }
 
-  public void setData(SelectNotificationData data) {
-    this.data = data;
+  public void setAccountId(Long accountId) {
+    this.accountId = accountId;
   }
 
 
@@ -51,22 +48,21 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddNotificationRet addNotificationRet = (AddNotificationRet) o;
-    return Objects.equals(this.data, addNotificationRet.data) &&
-        super.equals(o);
+    GetNormalBasicDataRequest getNormalBasicDataRequest = (GetNormalBasicDataRequest) o;
+    return Objects.equals(this.accountId, getNormalBasicDataRequest.accountId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, super.hashCode());
+    return Objects.hash(accountId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AddNotificationRet {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("class GetNormalBasicDataRequest {\n");
+    
+    sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -13,7 +13,8 @@ public enum MessageType {
     JOIN_ORGANIZE(2, "入队请求"),
     LEAVE_ORGANIZE(3, "离队消息"),
     JOIN_ORGANIZE_SUCCESS(4, "入队请求审批通过"),
-    JOIN_ORGANIZE_FAIL(3, "入队请求被拒绝"),
+    JOIN_ORGANIZE_FAIL(5, "入队请求被拒绝"),
+    CREATE_ORGANIZE(6, "创建队伍成功")
     ;
 
     private Integer value;

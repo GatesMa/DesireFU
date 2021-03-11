@@ -43,6 +43,17 @@ public class NormalAccountRepository {
         return stmt.fetchOne();
     }
 
+    /**
+     * 通过id查询账号
+     */
+    public List<Normalaccount_Record> getAccountByIds(List<Long> accountIds) {
+        SelectConditionStep<Normalaccount_Record> stmt = dslContext
+                .selectFrom(NORMALACCOUNT_)
+                .where(NORMALACCOUNT_.ACCOUNTID.in(accountIds))
+                .and(NORMALACCOUNT_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
+        return stmt.fetch();
+    }
+
     public List<Normalaccount_Record> queryNormalAccount(Long accountId, Integer collegeId, Integer departmentId,
                                                          String major, String stuId, String realName) {
 

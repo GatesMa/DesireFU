@@ -1,9 +1,11 @@
 package cn.gatesma.desirefu.repository;
 
 
+import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Message_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
@@ -16,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.ACCOUNT_;
+import static cn.gatesma.desirefu.domain.db.generate.DFU_.Tables.MESSAGE_;
 
 
 /**
@@ -108,6 +111,42 @@ public class AccountRepository {
         return stmt.fetch();
     }
 
+    /**
+     * 获取全部未审核的账号
+     */
+    public List<Account_Record> getExamAccount(Integer type) {
+        SelectConditionStep<Account_Record> stmt = dslContext
+                .selectFrom(ACCOUNT_)
+                .where(ACCOUNT_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
+                .and(ACCOUNT_.ACCOUNTTYPE.eq(type))
+                .and(ACCOUNT_.ACCOUNTSTATUS.eq(AccountStatus.STATUS_PENDING.code()));
+        return stmt.fetch();
+    }
+
+    /**
+     * 更新账号
+     */
+    public int updateAccount(Long accountId, Integer accountStatus, String nickname, String memo) {
+        Timestamp modifiedTime = TimeUtils.now();
+        UpdateSetMoreStep<Account_Record> stmt = dslContext.update(ACCOUNT_)
+                .set(ACCOUNT_.LASTMODIFIEDTIME, modifiedTime);
+
+        if (accountStatus != null) {
+            stmt.set(ACCOUNT_.ACCOUNTSTATUS, accountStatus);
+        }
+
+        if (StringUtils.isNotBlank(nickname)) {
+            stmt.set(ACCOUNT_.NICKNAME, nickname);
+        }
+
+        if (StringUtils.isNotBlank(memo)) {
+            stmt.set(ACCOUNT_.MEMO, memo);
+        }
+
+        return stmt.where(ACCOUNT_.ACCOUNTID.eq(accountId))
+                .and(ACCOUNT_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()))
+                .execute();
+    }
 
 
 }

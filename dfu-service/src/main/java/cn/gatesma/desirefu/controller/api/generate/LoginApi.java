@@ -5,8 +5,7 @@
  */
 package cn.gatesma.desirefu.controller.api.generate;
 
-import cn.gatesma.desirefu.domain.api.generate.CanLoginAccountRequest;
-import cn.gatesma.desirefu.domain.api.generate.CanLoginAccountRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,5 +35,39 @@ public interface LoginApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<CanLoginAccountRet> canLoginAccount(@ApiParam(value = "" ,required=true )  @Valid @RequestBody CanLoginAccountRequest body);
+
+    @ApiOperation(value = "添加一个用户可以登录的账号", nickname = "addRoleRelation", notes = "添加一个用户可以登录的账号", response = AddRoleRelationRet.class, tags={ "登陆", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = AddRoleRelationRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/login/addRoleRelation",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<AddRoleRelationRet> addRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody AddRoleRelationRequest body);
+
+    @ApiOperation(value = "获取RoleRelation", nickname = "selectRoleRelation", notes = "获取RoleRelation", response = SelectRoleRelationRet.class, tags={ "登陆", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = SelectRoleRelationRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/login/selectRoleRelation",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<SelectRoleRelationRet> selectRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectRoleRelationRequest body);
+
+    @ApiOperation(value = "删除RoleRelation", nickname = "deleteRoleRelation", notes = "删除RoleRelation", response = DeleteRoleRelationRet.class, tags={ "登陆", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = DeleteRoleRelationRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/login/deleteRoleRelation",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<DeleteRoleRelationRet> deleteRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteRoleRelationRequest body);
+
 
 }

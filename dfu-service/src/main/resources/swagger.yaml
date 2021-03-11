@@ -212,6 +212,83 @@ paths:
         404:
           description: RequestBody not found
 
+  /normal_account/getExamList:
+    post:
+      tags:
+        - NormalAccount
+      summary: 获取未审核学生账号
+      description: 获取未审核学生账号
+      operationId: getExamList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetExamAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /normal_account/get_basic_number:
+    post:
+      tags:
+        - NormalAccount
+      summary: 学生系统获取账号基本数据
+      description: 学生系统获取账号基本数据
+      operationId: getNormalBasicData
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetNormalBasicDataRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetNormalBasicDataRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /account/update:
+    post:
+      tags:
+        - Account
+      summary: 更新账号
+      description: 更新账号
+      operationId: updateAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 更新账号
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UpdateAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /competition_creator_account/add:
     post:
       tags:
@@ -442,6 +519,85 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /login/addRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 添加一个用户可以登录的账号
+      description: 添加一个用户可以登录的账号
+      operationId: addRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /login/selectRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 获取RoleRelation
+      description: 获取RoleRelation
+      operationId: selectRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SelectRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+  /login/deleteRoleRelation:
+    post:
+      tags:
+        - Login
+      summary: 删除RoleRelation
+      description: 删除RoleRelation
+      operationId: deleteRoleRelation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRoleRelationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteRoleRelationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /external/code_2_wx_openid:
     post:
@@ -520,6 +676,88 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SelectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /competition/collect:
+    post:
+      tags:
+        - Competition
+      summary: 收藏比赛
+      description: 收藏比赛
+      operationId: collectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CollectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+
+  /competition/get_collect:
+    post:
+      tags:
+        - Competition
+      summary: 获得收藏的比赛
+      description: 获得收藏的比赛
+      operationId: getCollectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetCollectCompetitionRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /competition/check_collect:
+    post:
+      tags:
+        - Competition
+      summary: 查看是否收藏
+      description: 查看是否收藏
+      operationId: checkCollectCompetition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CheckCollectCompetitionRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckCollectCompetitionRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -625,6 +863,32 @@ paths:
           description: Invalid RequestBody supplied
         404:
           description: RequestBody not found
+  /notification/delete:
+    post:
+      tags:
+        - Notification
+      summary: 删除公告
+      description: 删除公告
+      operationId: deleteNotification
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNotificationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteNotificationRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
 
   /organize/add:
     post:
@@ -677,6 +941,55 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ListOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize/listMember:
+    post:
+      tags:
+        - Organize
+      summary: 获取组织成员
+      description: 获取组织成员
+      operationId: listMember
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeMemberRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeMemberRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize/getExamOrganizeList:
+    post:
+      tags:
+        - Organize
+      summary: 获取未审核队伍
+      description: 获取未审核队伍
+      operationId: getExamOrganizeList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetExamOrganizeRet'
         400:
           description: Invalid RequestBody supplied
         404:
@@ -945,6 +1258,303 @@ definitions:
         type: integer
         format: int32
         description: 总共数据量
+
+  GetNormalBasicDataRequest:
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  GetNormalBasicDataRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/GetNormalBasicDataData'
+
+  GetNormalBasicDataData:
+    properties:
+      msgCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 消息个数
+      applicationCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 入队申请个数
+      organizeCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 队伍
+      collectCnt:
+        type: integer
+        format: int32
+        example: 10
+        description: 队伍
+
+  ListOrganizeMemberRequest:
+    properties:
+      organizeId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  ListOrganizeMemberRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetNormalAccountData'
+
+  DeleteRoleRelationRequest:
+    title: DeleteRoleRelationRequest
+    properties:
+      accountRoleId:
+        type: integer
+        format: int64
+        example: 1
+        description: accountRoleId
+  DeleteRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  SelectRoleRelationRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+
+  SelectRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/SelectRoleRelationData'
+
+  SelectRoleRelationData:
+    properties:
+      accountRoleId:
+        type: integer
+        format: int64
+        example: 1
+        description: accountRoleId
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+      createdTime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
+
+  AddRoleRelationRequest:
+    title: AddRoleRelationRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      userId:
+        type: integer
+        format: int64
+        example: 3453454
+        description: 操作者
+      role:
+        type: integer
+        format: int32
+        example: 1
+        description: 角色
+      accountType:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号类型
+
+  AddRoleRelationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  UpdateAccountRequest:
+    title: UpdateAccountRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      nickName:
+        type: string
+        example: gatesma
+        description: 账号名称
+      memo:
+        type: string
+        example: gatesma
+        description: 备注
+      accountStatus:
+        type: integer
+        format: int32
+        example: 1
+        description: 账号状态
+  UpdateAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  GetExamOrganizeRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OrganizeData'
+
+  GetExamAccountRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetNormalAccountData'
+
+  DeleteNotificationRequest:
+    title: DeleteNotificationRequest
+    properties:
+      noticeId:
+        type: integer
+        format: int32
+        description: noticeId
+  DeleteNotificationRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  CheckCollectCompetitionRequest:
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 比赛id
+
+  CheckCollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/CheckCollectCompetitionData'
+
+  CheckCollectCompetitionData:
+    properties:
+      isLiked:
+        type: integer
+        format: int32
+        example: 1
+        description: 是否收藏
+
+  CollectCompetitionRequest:
+    title: CollectCompetitionRequest
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 比赛ID
+      like:
+        type: integer
+        format: int32
+        description: 是否收藏 0-收藏，1-取消
+  CollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+
+  GetCollectCompetitionRequest:
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+
+  GetCollectCompetitionRet:
+    allOf:
+      - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/GetCollectCompetitionData'
+
+  GetCollectCompetitionData:
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 100000
+        description: id
+      accountId:
+        type: integer
+        format: int64
+        example: 100000
+        description: 账号ID
+      competitionId:
+        type: integer
+        format: int64
+        example: 123
+        description: 比赛id
+      competition:
+        $ref: '#/definitions/SelectCompetitionData'
+      createdTime:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
 
   GetCompetitionBasicDataRequest:
     properties:
@@ -2116,10 +2726,18 @@ definitions:
         type: string
         example: 马保国
         description: 真实姓名
+      created_time:
+        type: string
+        example: '2020-01-01 12:00:00'
+        description: 创建时间，格式：yyyy-MM-dd HH:mm:ss
 
   AddNotificationRet:
     allOf:
       - $ref: '#/definitions/ReturnCode'
+      - properties:
+          data:
+            $ref: '#/definitions/SelectNotificationData'
+
 
   AddNotificationRequest:
     properties:

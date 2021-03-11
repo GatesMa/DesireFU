@@ -4,9 +4,12 @@ import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.ApprovalStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.constants.type.OperatorRole;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
+import cn.gatesma.desirefu.domain.api.generate.UpdateAccountRequest;
+import cn.gatesma.desirefu.domain.api.generate.UpdateAccountRet;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Accountuserrole_Record;
 import cn.gatesma.desirefu.repository.AccountRepository;
@@ -42,6 +45,9 @@ public class AccountService {
 
     @Resource
     private AccountUserRoleRepository accountUserRoleRepository;
+
+    @Resource
+    private MessageService messageService;
 
     /**
      * 创建一个 Account_ 表记录，并绑定rootUserId跟account的关系
@@ -134,5 +140,19 @@ public class AccountService {
 //                .code(ApiReturnCode.OK.code())
 //                .message(ApiReturnCode.OK.name());
 //    }
+
+    public UpdateAccountRet updateAccount(UpdateAccountRequest request) {
+
+        if (request.getAccountId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数不对");
+        }
+
+        accountRepository.updateAccount(request.getAccountId(), request.getAccountStatus(), request.getNickName(), request.getMemo());
+
+        return (UpdateAccountRet) new UpdateAccountRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
 
 }

@@ -4,15 +4,20 @@ import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.type.AccountType;
+import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Collect_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competition_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Message_Record;
 import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
+import cn.gatesma.desirefu.repository.CollectRepository;
 import cn.gatesma.desirefu.repository.CompetitionRepository;
 import cn.gatesma.desirefu.repository.NormalAccountRepository;
 import cn.gatesma.desirefu.utils.HtmlUtils;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +27,10 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -40,6 +49,9 @@ public class CompetitionService {
 
     @Resource
     private CompetitionRepository competitionRepository;
+
+    @Resource
+    private CollectRepository collectRepository;
 
     public void createCompetition(AddCompetitionRequest request) {
 
@@ -198,6 +210,95 @@ public class CompetitionService {
             throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "比赛名称没传");
         }
 
+    }
+
+    public CollectCompetitionRet collectCompetition(CollectCompetitionRequest request) {
+        if (request.getLike() == null || request.getAccountId() == null || request.getCompetitionId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数不对");
+        }
+        if (request.getLike() == 0) {
+            // 看看是否有记录，如果有记录，删了
+            collectRepository.deleteCollect(request.getAccountId(), request.getCompetitionId());
+        } else {
+            // 看看是否有记录，没有的话插入
+            List<Collect_Record> records = collectRepository.queryCollectByAccountId(request.getAccountId(), request.getCompetitionId(), null);
+            if (CollectionUtils.isEmpty(records)) {
+                collectRepository.addCollect(request.getAccountId(), request.getCompetitionId());
+            }
+        }
+        // 返回结果
+        return (CollectCompetitionRet) new CollectCompetitionRet()
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+    public GetCollectCompetitionRet getCollectCompetition(GetCollectCompetitionRequest request) {
+
+        GetCollectCompetitionRet ret = RetCodeUtils.ok(new GetCollectCompetitionRet());
+
+        // page信息
+        // 如果page是空，填充默认值
+        if (request.getPage() == null) {
+            Page page = new Page().pageNum(DEFAULT_PAGE).pageSize(DEFAULT_PAGE_SIZE);
+            request.setPage(page);
+        } else {
+            if (request.getPage().getPageNum() == null) {
+                request.getPage().setPageNum(DEFAULT_PAGE);
+            }
+            if (request.getPage().getPageSize() == null) {
+                request.getPage().setPageSize(DEFAULT_PAGE_SIZE);
+            }
+        }
+
+
+        Long accountId = request.getAccountId();
+
+        List<Collect_Record> records = collectRepository.queryCollectByAccountId(accountId, null, request.getPage());
+
+        ret.setData(toSelectData(records));
+
+        return ret;
+
+    }
+
+    private List<GetCollectCompetitionData> toSelectData(List<Collect_Record> records) {
+
+        List<GetCollectCompetitionData> ret = new ArrayList<>();
+
+        if (CollectionUtils.isEmpty(records)) {
+            return ret;
+        }
+
+        for (Collect_Record record : records) {
+            SelectCompetitionData competitionById = getCompetitionById(record.getCompetitionid());
+            GetCollectCompetitionData item = new GetCollectCompetitionData();
+            item.setCompetition(competitionById);
+            item.setAccountId(record.getAccountid());
+            item.setCompetitionId(record.getCompetitionid());
+            item.setCreatedTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+            ret.add(item);
+        }
+
+        return ret;
+    }
+
+    public CheckCollectCompetitionRet checkCollectCompetition(CheckCollectCompetitionRequest request) {
+        if (request.getAccountId() == null || request.getCompetitionId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数不对");
+        }
+        List<Collect_Record> collect_records = collectRepository.queryCollectByAccountId(request.getAccountId(), request.getCompetitionId(), null);
+        CheckCollectCompetitionData data = new CheckCollectCompetitionData();
+        if (CollectionUtils.isEmpty(collect_records)) {
+            data.isLiked(0);
+        } else {
+            data.isLiked(1);
+        }
+
+        // 返回结果
+        return (CheckCollectCompetitionRet) new CheckCollectCompetitionRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
     }
 
 }

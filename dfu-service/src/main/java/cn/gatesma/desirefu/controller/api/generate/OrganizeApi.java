@@ -58,5 +58,26 @@ public interface OrganizeApi {
             method = RequestMethod.POST)
     ResponseEntity<UpdateOrganizeApplicationRet> updateOrganizeApplication(@ApiParam(value = "" ,required=true )  @Valid @RequestBody UpdateOrganizeApplicationRequest body);
 
+    @ApiOperation(value = "获取未审核队伍", nickname = "getExamOrganizeList", notes = "获取未审核队伍", response = GetExamOrganizeRet.class, tags={ "队伍", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetExamOrganizeRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/organize/getExamOrganizeList",
+            produces = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetExamOrganizeRet> getExamOrganizeList();
+
+    @ApiOperation(value = "获取组织成员", nickname = "listMember", notes = "获取组织成员", response = ListOrganizeMemberRet.class, tags={ "队伍", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ListOrganizeMemberRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/organize/listMember",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ListOrganizeMemberRet> listMember(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeMemberRequest body);
+
 
 }

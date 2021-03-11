@@ -2,10 +2,7 @@ package cn.gatesma.desirefu.controller.api.generate;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
-import cn.gatesma.desirefu.domain.api.generate.CanLoginAccountRequest;
-import cn.gatesma.desirefu.domain.api.generate.CanLoginAccountRet;
-import cn.gatesma.desirefu.domain.api.generate.GetDepartmentRequest;
-import cn.gatesma.desirefu.domain.api.generate.GetDepartmentRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.service.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
@@ -71,5 +68,36 @@ public class LoginApiController implements LoginApi {
 
         return loginService.getCanLoginAccount(request);
     }
+
+    public ResponseEntity<AddRoleRelationRet> addRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody AddRoleRelationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            AddRoleRelationRet ret = loginService.addRoleRelation(body);
+            return new ResponseEntity<>(ret, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<SelectRoleRelationRet> selectRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody SelectRoleRelationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            SelectRoleRelationRet ret = loginService.selectRoleRelation(body);
+            return new ResponseEntity<>(ret, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    public ResponseEntity<DeleteRoleRelationRet> deleteRoleRelation(@ApiParam(value = "" ,required=true )  @Valid @RequestBody DeleteRoleRelationRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            DeleteRoleRelationRet ret = loginService.deleteRoleRelation(body);
+            return new ResponseEntity<>(ret, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
 
 }

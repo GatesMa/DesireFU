@@ -37,6 +37,17 @@ public class OrganizeRepository {
         return stmt.fetchOne();
     }
 
+    /**
+     * 获取一个 Organize
+     */
+    public List<Organize_Record> getOrganizeByIds(List<Long> organizeIds) {
+        SelectConditionStep<Organize_Record> stmt = dslContext
+                .selectFrom(ORGANIZE_)
+                .where(ORGANIZE_.ORGANIZEID.in(organizeIds))
+                .and(ORGANIZE_.DELETESTATUS.eq(DeleteStatus.NORMAL.code()));
+        return stmt.fetch();
+    }
+
 
     public List<Organize_Record> queryOrganize(Long organizeId, Long competitionId, Long srcAccountId) {
         SelectConditionStep<Organize_Record> stmt = dslContext

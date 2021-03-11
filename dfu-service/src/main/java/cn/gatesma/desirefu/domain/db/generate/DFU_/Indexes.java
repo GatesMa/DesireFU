@@ -6,6 +6,7 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Collect_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
@@ -51,6 +52,7 @@ public class Indexes {
 
     public static final Index ACCOUNTUSERROLE__PRIMARY = Indexes0.ACCOUNTUSERROLE__PRIMARY;
     public static final Index ACCOUNT__PRIMARY = Indexes0.ACCOUNT__PRIMARY;
+    public static final Index COLLECT__PRIMARY = Indexes0.COLLECT__PRIMARY;
     public static final Index COLLEGE__PRIMARY = Indexes0.COLLEGE__PRIMARY;
     public static final Index COMPETITIONCREATORACCOUNT__PRIMARY = Indexes0.COMPETITIONCREATORACCOUNT__PRIMARY;
     public static final Index COMPETITIONVISIBLE__PRIMARY = Indexes0.COMPETITIONVISIBLE__PRIMARY;
@@ -77,6 +79,7 @@ public class Indexes {
     private static class Indexes0 {
         public static Index ACCOUNTUSERROLE__PRIMARY = Internal.createIndex("PRIMARY", Accountuserrole_.ACCOUNTUSERROLE_, new OrderField[] { Accountuserrole_.ACCOUNTUSERROLE_.ACCOUNTROLEID }, true);
         public static Index ACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Account_.ACCOUNT_, new OrderField[] { Account_.ACCOUNT_.ACCOUNTID }, true);
+        public static Index COLLECT__PRIMARY = Internal.createIndex("PRIMARY", Collect_.COLLECT_, new OrderField[] { Collect_.COLLECT_.ID }, true);
         public static Index COLLEGE__PRIMARY = Internal.createIndex("PRIMARY", College_.COLLEGE_, new OrderField[] { College_.COLLEGE_.COLLEGEID }, true);
         public static Index COMPETITIONCREATORACCOUNT__PRIMARY = Internal.createIndex("PRIMARY", Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_, new OrderField[] { Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_.ACCOUNTID }, true);
         public static Index COMPETITIONVISIBLE__PRIMARY = Internal.createIndex("PRIMARY", Competitionvisible_.COMPETITIONVISIBLE_, new OrderField[] { Competitionvisible_.COMPETITIONVISIBLE_.COMPETITIONID, Competitionvisible_.COMPETITIONVISIBLE_.COLLEGEID }, true);

@@ -1,14 +1,13 @@
 package cn.gatesma.desirefu.service;
 
 import cn.gatesma.desirefu.constants.ApiReturnCode;
-import cn.gatesma.desirefu.constants.status.AccountStatus;
-import cn.gatesma.desirefu.constants.status.ApprovalStatus;
-import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.config.TimeFmt;
+import cn.gatesma.desirefu.constants.status.*;
+import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.constants.type.OperatorRole;
+import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
-import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -22,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: gatesma
@@ -37,13 +37,31 @@ public class NormalAccountService {
     private NormalAccountRepository normalAccountRepository;
 
     @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
     private AccountService accountService;
 
     @Resource
     private CollegeRepository collegeRepository;
 
     @Resource
+    private MessageRepository messageRepository;
+
+    @Resource
     private DepartmentRepository departmentRepository;
+
+    @Resource
+    private OrganizeRepository organizeRepository;
+
+    @Resource
+    private OrganizeAccountApplicationRepository organizeAccountApplicationRepository;
+
+    @Resource
+    private OrganizeAccountRelationRepository organizeAccountRelationRepository;
+
+    @Resource
+    private CollectRepository collectRepository;
 
 
     @Resource
@@ -80,27 +98,7 @@ public class NormalAccountService {
 
         List<GetNormalAccountData> ret = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(records)) {
-            for (Normalaccount_Record record : records) {
-                GetNormalAccountData data = new GetNormalAccountData()
-                        .accountId(record.getAccountid())
-                        .accountType(record.getAccounttype())
-                        .collegeId(record.getCollegeid())
-                        .departmentId(record.getDepartmentid())
-                        .major(record.getMajor())
-                        .stuId(record.getStuid())
-                        .realName(record.getRealname());
-
-                // 填充学校名称和学院名称
-                College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
-                if (college != null) {
-                    data.setCollegeName(college.getName());
-                }
-                Department_Record department = departmentRepository.getDepartmentById(record.getDepartmentid(), DeleteStatus.NORMAL);
-                if (department != null) {
-                    data.setDepartmentName(department.getName());
-                }
-                ret.add(data);
-            }
+            ret = toGetNormalAccountList(records);
         }
         // 返回结果
         return (GetNormalAccountRet) new GetNormalAccountRet().data(ret)
@@ -134,5 +132,111 @@ public class NormalAccountService {
         return data;
 
     }
+
+    public GetExamAccountRet getExamList() {
+
+        // 1。 获取全部的未审核的学生账号
+        List<Account_Record> records = accountRepository.getExamAccount(AccountType.NORMAL.getValue());
+
+        if (CollectionUtils.isEmpty(records)) {
+            // 返回结果
+            return (GetExamAccountRet) new GetExamAccountRet()
+                    .code(ApiReturnCode.OK.code())
+                    .message(ApiReturnCode.OK.name());
+        }
+
+        // 2。通过ids查找normal record
+        List<Normalaccount_Record> accountByIds =
+                normalAccountRepository.getAccountByIds(records.stream().map(Account_Record::getAccountid).collect(Collectors.toList()));
+
+        List<GetNormalAccountData> getNormalAccountData = toGetNormalAccountList(accountByIds);
+
+
+        // 返回结果
+        return (GetExamAccountRet) new GetExamAccountRet()
+                .data(getNormalAccountData)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+
+    }
+
+
+    private List<GetNormalAccountData> toGetNormalAccountList(List<Normalaccount_Record> records) {
+        List<GetNormalAccountData> ret = new ArrayList<>();
+        for (Normalaccount_Record record : records) {
+            GetNormalAccountData data = new GetNormalAccountData()
+                    .accountId(record.getAccountid())
+                    .accountType(record.getAccounttype())
+                    .collegeId(record.getCollegeid())
+                    .departmentId(record.getDepartmentid())
+                    .major(record.getMajor())
+                    .stuId(record.getStuid())
+                    .realName(record.getRealname())
+                    .createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+
+            // 填充学校名称和学院名称
+            College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
+            if (college != null) {
+                data.setCollegeName(college.getName());
+            }
+            Department_Record department = departmentRepository.getDepartmentById(record.getDepartmentid(), DeleteStatus.NORMAL);
+            if (department != null) {
+                data.setDepartmentName(department.getName());
+            }
+            ret.add(data);
+        }
+        return ret;
+    }
+
+    public GetNormalBasicDataRet getNormalBasicData(GetNormalBasicDataRequest request) {
+
+        if (request.getAccountId() == null) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数不对");
+        }
+
+        Integer msgCnt = 0, applicationCnt = 0, organizeCnt, collectCnt;
+
+
+        // 消息数量
+        List<Message_Record> messageRecords
+                = messageRepository.queryMessage(null, MessageStatus.NOT_READ.code(), request.getAccountId(), null);
+        msgCnt = messageRecords.size();
+
+        // 入队申请
+        // 通过队长id筛选队伍
+        List<Long> organizeIds = new ArrayList<>();
+        List<Organize_Record> organizes = organizeRepository.getOrganizeListBySrcAccountId(request.getAccountId());
+        if (CollectionUtils.isNotEmpty(organizes)) {
+            organizeIds = organizes.stream().map(Organize_Record::getOrganizeid).collect(Collectors.toList());
+        }
+
+        // 通过这几个参数在OrganizeApplication表中找
+        List<Organizeaccountapplication_Record> accountApplication = organizeAccountApplicationRepository.queryOrganizeAccountApplication(
+                organizeIds, null, null, OrganizeApplicationStatus.APPLYING.code());
+        applicationCnt = accountApplication.size();
+
+        // 队伍数量
+        List<Organizeaccountrelation_Record> organizeRecords =
+                organizeAccountRelationRepository.queryOrganizeAccountRelation(null, request.getAccountId(), null, null);
+        organizeCnt = organizeRecords.size();
+
+        // 收藏
+        List<Collect_Record> collectRecords = collectRepository.queryCollectByAccountId(request.getAccountId(), null, null);
+        collectCnt = collectRecords.size();
+
+
+        GetNormalBasicDataData data = new GetNormalBasicDataData()
+                .applicationCnt(applicationCnt)
+                .collectCnt(collectCnt)
+                .msgCnt(msgCnt)
+                .organizeCnt(organizeCnt);
+        // 返回结果
+        return (GetNormalBasicDataRet) new GetNormalBasicDataRet()
+                .data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+
 
 }

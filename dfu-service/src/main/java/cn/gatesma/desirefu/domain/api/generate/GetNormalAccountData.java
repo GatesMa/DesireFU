@@ -44,6 +44,9 @@ public class GetNormalAccountData  implements Serializable {
   @JsonProperty("real_name")
   private String realName = null;
 
+  @JsonProperty("created_time")
+  private String createdTime = null;
+
   public GetNormalAccountData accountId(Long accountId) {
     this.accountId = accountId;
     return this;
@@ -215,6 +218,25 @@ public class GetNormalAccountData  implements Serializable {
     this.realName = realName;
   }
 
+  public GetNormalAccountData createdTime(String createdTime) {
+    this.createdTime = createdTime;
+    return this;
+  }
+
+  /**
+   * 创建时间，格式：yyyy-MM-dd HH:mm:ss
+   * @return createdTime
+  **/
+  @ApiModelProperty(example = "2020-01-01 12:00:00", value = "创建时间，格式：yyyy-MM-dd HH:mm:ss")
+
+  public String getCreatedTime() {
+    return createdTime;
+  }
+
+  public void setCreatedTime(String createdTime) {
+    this.createdTime = createdTime;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -233,12 +255,13 @@ public class GetNormalAccountData  implements Serializable {
         Objects.equals(this.departmentName, getNormalAccountData.departmentName) &&
         Objects.equals(this.major, getNormalAccountData.major) &&
         Objects.equals(this.stuId, getNormalAccountData.stuId) &&
-        Objects.equals(this.realName, getNormalAccountData.realName);
+        Objects.equals(this.realName, getNormalAccountData.realName) &&
+        Objects.equals(this.createdTime, getNormalAccountData.createdTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountType, collegeId, collegeName, departmentId, departmentName, major, stuId, realName);
+    return Objects.hash(accountId, accountType, collegeId, collegeName, departmentId, departmentName, major, stuId, realName, createdTime);
   }
 
   @Override
@@ -255,6 +278,7 @@ public class GetNormalAccountData  implements Serializable {
     sb.append("    major: ").append(toIndentedString(major)).append("\n");
     sb.append("    stuId: ").append(toIndentedString(stuId)).append("\n");
     sb.append("    realName: ").append(toIndentedString(realName)).append("\n");
+    sb.append("    createdTime: ").append(toIndentedString(createdTime)).append("\n");
     sb.append("}");
     return sb.toString();
   }

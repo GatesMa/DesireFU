@@ -69,5 +69,15 @@ public class AccountApiController implements AccountApi {
         return RetCodeUtils.ok(new AddAccountRet()).data(new AddAccountRetData().accountId(accountId));
     }
 
+    public ResponseEntity<UpdateAccountRet> updateAccount(@ApiParam(value = "更新账号" ,required=true )  @Valid @RequestBody UpdateAccountRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            UpdateAccountRet response = accountService.updateAccount(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
 
 }

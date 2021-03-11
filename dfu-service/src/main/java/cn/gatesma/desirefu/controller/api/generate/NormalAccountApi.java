@@ -5,10 +5,7 @@
  */
 package cn.gatesma.desirefu.controller.api.generate;
 
-import cn.gatesma.desirefu.domain.api.generate.AddNormalAccountRequest;
-import cn.gatesma.desirefu.domain.api.generate.AddNormalAccountRet;
-import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountRequest;
-import cn.gatesma.desirefu.domain.api.generate.GetNormalAccountRet;
+import cn.gatesma.desirefu.domain.api.generate.*;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -50,6 +47,26 @@ public interface NormalAccountApi {
             method = RequestMethod.POST)
     ResponseEntity<GetNormalAccountRet> getNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body);
 
+    @ApiOperation(value = "获取未审核学生账号", nickname = "getExamList", notes = "获取未审核学生账号", response = GetExamAccountRet.class, tags={ "普通账号", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetExamAccountRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/normal_account/getExamList",
+            produces = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetExamAccountRet> getExamList();
+
+    @ApiOperation(value = "学生系统获取账号基本数据", nickname = "getNormalBasicData", notes = "学生系统获取账号基本数据", response = GetNormalBasicDataRet.class, tags={ "NormalAccount", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetNormalBasicDataRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/normal_account/get_basic_number",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetNormalBasicDataRet> getNormalBasicData(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalBasicDataRequest body);
 
 
 }

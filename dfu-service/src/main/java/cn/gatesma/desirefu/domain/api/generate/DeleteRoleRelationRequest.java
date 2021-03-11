@@ -1,8 +1,6 @@
 package cn.gatesma.desirefu.domain.api.generate;
 
 import java.util.Objects;
-import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
-import cn.gatesma.desirefu.domain.api.generate.SelectNotificationData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -13,33 +11,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * AddNotificationRet
+ * DeleteRoleRelationRequest
  */
 @Validated
-public class AddNotificationRet extends ReturnCode implements Serializable {
+public class DeleteRoleRelationRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("data")
-  private SelectNotificationData data = null;
+  @JsonProperty("accountRoleId")
+  private Long accountRoleId = null;
 
-  public AddNotificationRet data(SelectNotificationData data) {
-    this.data = data;
+  public DeleteRoleRelationRequest accountRoleId(Long accountRoleId) {
+    this.accountRoleId = accountRoleId;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * accountRoleId
+   * @return accountRoleId
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "1", value = "accountRoleId")
 
-  @Valid
-  public SelectNotificationData getData() {
-    return data;
+  public Long getAccountRoleId() {
+    return accountRoleId;
   }
 
-  public void setData(SelectNotificationData data) {
-    this.data = data;
+  public void setAccountRoleId(Long accountRoleId) {
+    this.accountRoleId = accountRoleId;
   }
 
 
@@ -51,22 +48,21 @@ public class AddNotificationRet extends ReturnCode implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddNotificationRet addNotificationRet = (AddNotificationRet) o;
-    return Objects.equals(this.data, addNotificationRet.data) &&
-        super.equals(o);
+    DeleteRoleRelationRequest deleteRoleRelationRequest = (DeleteRoleRelationRequest) o;
+    return Objects.equals(this.accountRoleId, deleteRoleRelationRequest.accountRoleId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, super.hashCode());
+    return Objects.hash(accountRoleId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AddNotificationRet {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("class DeleteRoleRelationRequest {\n");
+    
+    sb.append("    accountRoleId: ").append(toIndentedString(accountRoleId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

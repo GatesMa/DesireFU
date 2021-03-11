@@ -6,6 +6,7 @@ package cn.gatesma.desirefu.domain.db.generate.DFU_;
 
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Account_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Accountuserrole_;
+import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Collect_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.College_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competition_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.Competitioncreatoraccount_;
@@ -49,7 +50,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Dfu_ extends SchemaImpl {
 
-    private static final long serialVersionUID = 1029945120;
+    private static final long serialVersionUID = -1894388163;
 
     /**
      * The reference instance of <code>DFU_</code>
@@ -65,6 +66,11 @@ public class Dfu_ extends SchemaImpl {
      * The table <code>DFU_.Account_</code>.
      */
     public final Account_ ACCOUNT_ = Account_.ACCOUNT_;
+
+    /**
+     * 收藏表
+     */
+    public final Collect_ COLLECT_ = Collect_.COLLECT_;
 
     /**
      * 高校信息
@@ -183,6 +189,7 @@ public class Dfu_ extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             Accountuserrole_.ACCOUNTUSERROLE_,
             Account_.ACCOUNT_,
+            Collect_.COLLECT_,
             College_.COLLEGE_,
             Competitioncreatoraccount_.COMPETITIONCREATORACCOUNT_,
             Competitionvisible_.COMPETITIONVISIBLE_,
