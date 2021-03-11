@@ -4,6 +4,7 @@ import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.ApprovalStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
+import cn.gatesma.desirefu.constants.type.MessageType;
 import cn.gatesma.desirefu.constants.type.OperatorRole;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRequest;
@@ -44,6 +45,9 @@ public class AccountService {
 
     @Resource
     private AccountUserRoleRepository accountUserRoleRepository;
+
+    @Resource
+    private MessageService messageService;
 
     /**
      * 创建一个 Account_ 表记录，并绑定rootUserId跟account的关系

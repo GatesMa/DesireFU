@@ -83,6 +83,12 @@ public class OrganizeService {
         // 3. 为队长创建记录
         organizeAccountRelationRepository.addOrganizeAccountRelation(accountId, srcAccountId, AccountType.ORGANIZE.getValue(), 1, rootUserId);
 
+        // 4。发送消息
+        messageService.sendMessage(
+                srcAccountId,
+                MessageType.CREATE_ORGANIZE.getValue(),
+                String.format("创建队伍（%s）成功， 请等待运营审核！", request.getNickName()));
+
         return accountId;
     }
 
