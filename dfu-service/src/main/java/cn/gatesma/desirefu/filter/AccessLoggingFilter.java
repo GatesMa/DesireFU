@@ -95,7 +95,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
                 LOGGER.error("filter error ", ex);
             } finally {
                 if (!isAsyncStarted(request)) {
-                    request.setAttribute(END_TIME_IN_MICRO, System.currentTimeMillis() * 1000);
+                    request.setAttribute(END_TIME_IN_MICRO, System.currentTimeMillis());
                     try {
                         monitor((ContentCachingRequestWrapper) requestToUse,
                                 (ContentCachingResponseWrapper) responseToUse);
