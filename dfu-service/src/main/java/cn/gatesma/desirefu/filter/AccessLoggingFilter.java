@@ -76,7 +76,7 @@ public class AccessLoggingFilter extends OncePerRequestFilter {
             LOGGER.debug("start doing trace log filter...");
 
             if (!isAsyncDispatch(request)) {
-                request.setAttribute(START_TIME_IN_MICRO, System.currentTimeMillis() * 1000);
+                request.setAttribute(START_TIME_IN_MICRO, System.currentTimeMillis());
             }
             HttpServletRequest requestToUse = request;
             HttpServletResponse responseToUse = response;
