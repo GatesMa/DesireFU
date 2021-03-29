@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.pojos.Organize_;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
@@ -29,6 +30,7 @@ public class OrganizeRepository {
     /**
      * 获取一个 Organize
      */
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public Organize_Record getOrganizeById(long organizeId) {
         SelectConditionStep<Organize_Record> stmt = dslContext
                 .selectFrom(ORGANIZE_)
@@ -40,6 +42,7 @@ public class OrganizeRepository {
     /**
      * 获取一个 Organize
      */
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public List<Organize_Record> getOrganizeByIds(List<Long> organizeIds) {
         SelectConditionStep<Organize_Record> stmt = dslContext
                 .selectFrom(ORGANIZE_)
@@ -48,7 +51,7 @@ public class OrganizeRepository {
         return stmt.fetch();
     }
 
-
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public List<Organize_Record> queryOrganize(Long organizeId, Long competitionId, Long srcAccountId) {
         SelectConditionStep<Organize_Record> stmt = dslContext
                 .selectFrom(ORGANIZE_)
@@ -68,6 +71,7 @@ public class OrganizeRepository {
     /**
      * 新增Organize
      */
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public boolean addOrganize(Long organizeId, Long competitionId, Long srcAccountId, Long createdUserId) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -101,6 +105,7 @@ public class OrganizeRepository {
     /**
      * 删除Organize_表数据
      */
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public int deleteOrganize(Long organizeId) {
 
         UpdateSetMoreStep<Organize_Record> step = dslContext.update(ORGANIZE_)
@@ -112,6 +117,7 @@ public class OrganizeRepository {
     /**
      * 通过srcAccountId查找Oragnize
      */
+    @DIAccessMo(table = "Organize_", db = "DFU_")
     public List<Organize_Record> getOrganizeListBySrcAccountId(Long srcAccountId) {
         SelectConditionStep<Organize_Record> stmt = dslContext
                 .selectFrom(ORGANIZE_)

@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -30,6 +31,7 @@ public class CollegeRepository {
     /**
      * 获取一个College
      */
+    @DIAccessMo(table = "College_", db = "DFU_")
     public College_Record getCollegeById(int collegeId, DeleteStatus deleteStatus) {
         SelectConditionStep<College_Record> stmt = dslContext
                 .selectFrom(COLLEGE_)
@@ -43,6 +45,7 @@ public class CollegeRepository {
     /**
      * 获取一个College
      */
+    @DIAccessMo(table = "College_", db = "DFU_")
     public College_Record getCollegeByIdentification(String identification) {
         SelectConditionStep<College_Record> stmt = dslContext
                 .selectFrom(COLLEGE_)
@@ -55,6 +58,7 @@ public class CollegeRepository {
      * 查询学校，名称和部门模糊，标识码精确
      * @return
      */
+    @DIAccessMo(table = "College_", db = "DFU_")
     public List<College_Record> queryCollege(String name, String ministry, String identification) {
         SelectConditionStep<College_Record> stmt = dslContext
                 .selectFrom(COLLEGE_)
@@ -77,6 +81,7 @@ public class CollegeRepository {
     /**
      * 新增College
      */
+    @DIAccessMo(table = "College_", db = "DFU_")
     public int addCollege(String name, String ministry, String identification, String location, String level, String memo) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -112,6 +117,7 @@ public class CollegeRepository {
     /**
      * 删除College_表数据
      */
+    @DIAccessMo(table = "College_", db = "DFU_")
     public int deleteCollege(int collegeId) {
 
         UpdateSetMoreStep<College_Record> step = dslContext.update(COLLEGE_)

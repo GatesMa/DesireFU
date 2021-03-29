@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Ossaccount_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -27,6 +28,7 @@ public class OssAccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "OssAccount_", db = "DFU_")
     public Ossaccount_Record getAccountById(Long accountId, DeleteStatus deleteStatus) {
         SelectConditionStep<Ossaccount_Record> stmt = dslContext
                 .selectFrom(OSSACCOUNT_)
@@ -40,6 +42,7 @@ public class OssAccountRepository {
     /**
      * 新增 OssAccount
      */
+    @DIAccessMo(table = "OssAccount_", db = "DFU_")
     public boolean addOssAccount(Long accountId, Integer accountType, Integer type, Long createdUserId) {
         Timestamp now = TimeUtils.now();
         int res = dslContext
@@ -71,6 +74,7 @@ public class OssAccountRepository {
     /**
      * 删除 OssAccount 表数据
      */
+    @DIAccessMo(table = "OssAccount_", db = "DFU_")
     public int deleteAccount(long accountId) {
 
         UpdateSetMoreStep<Ossaccount_Record> step = dslContext.update(OSSACCOUNT_)

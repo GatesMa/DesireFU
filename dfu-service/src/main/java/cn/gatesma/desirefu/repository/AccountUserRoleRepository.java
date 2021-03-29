@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
@@ -35,6 +36,7 @@ public class AccountUserRoleRepository {
      * @param userId 用户Id
      * @return
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public int queryValidAccountRoleCount(long accountId, int accountType, long userId) {
         int deleteStatus = DeleteStatus.NORMAL.code();
         return dslContext.selectCount().from(ACCOUNTUSERROLE_)
@@ -48,6 +50,7 @@ public class AccountUserRoleRepository {
     /**
      * 根据主键查询 AccountUserRole_
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public Accountuserrole_Record queryAccountRoleRecordById(long accountRoleId) {
         return dslContext.selectFrom(ACCOUNTUSERROLE_)
                 .where(ACCOUNTUSERROLE_.ACCOUNTROLEID.eq(accountRoleId))
@@ -58,6 +61,7 @@ public class AccountUserRoleRepository {
      * 新增/更新 AccountUserRole_
      *
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public Long saveAccountRoleRecord(Accountuserrole_Record record) {
 
         if (null == record) {
@@ -87,6 +91,7 @@ public class AccountUserRoleRepository {
     /**
      * 新增AccountUserRole
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public long addAccountUserRole(Long accountId, Integer accountType, Long userId, Integer role, Integer deleteStatus,
                                    Long createdUserId, Long lastModifiedUserId) {
         Timestamp now = TimeUtils.now();
@@ -121,6 +126,7 @@ public class AccountUserRoleRepository {
     /**
      * 查询账号用户角色信息
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public List<Accountuserrole_Record> queryRoleRelation(Long accountId, Integer accountType, Long userId,
                                                           Integer role, Integer deleteStatus, Page page) {
 
@@ -163,6 +169,7 @@ public class AccountUserRoleRepository {
      * (accountId, accountType, userId, role)未删除状态的只能存在一个
      *
      */
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public boolean hasAccountUserRole(Accountuserrole_Record record) {
 
         if (null == record) {
@@ -187,6 +194,7 @@ public class AccountUserRoleRepository {
         return step.fetchOne(0, int.class) > 0;
     }
 
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public Result<Accountuserrole_Record> selectAccountUserRoleRelation(List<Long> accountIds, Long userId, List<Integer> roleList) {
         SelectConditionStep<Accountuserrole_Record> stmt = dslContext.selectFrom(ACCOUNTUSERROLE_)
                 .where(ACCOUNTUSERROLE_.ACCOUNTID.in(accountIds))
@@ -200,6 +208,7 @@ public class AccountUserRoleRepository {
         return stmt.fetch();
     }
 
+    @DIAccessMo(table = "AccountUserRole_", db = "DFU_")
     public int deleteRoleRelation(Long accountRoleId) {
 
         UpdateSetMoreStep<Accountuserrole_Record> step = dslContext.update(ACCOUNTUSERROLE_)

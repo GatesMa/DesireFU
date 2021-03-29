@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Rootaccount_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -27,6 +28,7 @@ public class RootAccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "RootAccount_", db = "DFU_")
     public Rootaccount_Record getAccountById(Long accountId, DeleteStatus deleteStatus) {
         SelectConditionStep<Rootaccount_Record> stmt = dslContext
                 .selectFrom(ROOTACCOUNT_)
@@ -40,6 +42,7 @@ public class RootAccountRepository {
     /**
      * 新增 RootAccount
      */
+    @DIAccessMo(table = "RootAccount_", db = "DFU_")
     public boolean addRootAccount(Long accountId, Integer accountType, Long createdUserId) {
         Timestamp now = TimeUtils.now();
         int res = dslContext
@@ -69,6 +72,7 @@ public class RootAccountRepository {
     /**
      * 删除 RootAccount 表数据
      */
+    @DIAccessMo(table = "RootAccount_", db = "DFU_")
     public int deleteAccount(long accountId) {
 
         UpdateSetMoreStep<Rootaccount_Record> step = dslContext.update(ROOTACCOUNT_)

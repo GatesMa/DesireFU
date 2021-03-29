@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Competitioncreatoraccount_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
@@ -28,6 +29,7 @@ public class CompetitionCreatorAccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "CompetitionCreatorAccount_", db = "DFU_")
     public Competitioncreatoraccount_Record getAccountById(Long accountId, DeleteStatus deleteStatus) {
         SelectConditionStep<Competitioncreatoraccount_Record> stmt = dslContext
                 .selectFrom(COMPETITIONCREATORACCOUNT_)
@@ -41,6 +43,7 @@ public class CompetitionCreatorAccountRepository {
     /**
      * 新增 CompetitionCreatorAccount
      */
+    @DIAccessMo(table = "CompetitionCreatorAccount_", db = "DFU_")
     public boolean addCompetitionCreatorAccount(Long accountId, Integer accountType, String author, Long createdUserId) {
         Timestamp now = TimeUtils.now();
         int res = dslContext
@@ -72,6 +75,7 @@ public class CompetitionCreatorAccountRepository {
     /**
      * 删除 CompetitionCreatorAccount 表数据
      */
+    @DIAccessMo(table = "CompetitionCreatorAccount_", db = "DFU_")
     public int deleteAccount(long accountId) {
 
         UpdateSetMoreStep<Competitioncreatoraccount_Record> step = dslContext.update(COMPETITIONCREATORACCOUNT_)

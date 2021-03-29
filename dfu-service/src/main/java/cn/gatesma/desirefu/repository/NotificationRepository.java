@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Notification_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -30,6 +31,7 @@ public class NotificationRepository {
     /**
      * 获取一个 Notification
      */
+    @DIAccessMo(table = "Notification_", db = "DFU_")
     public Notification_Record getNotificationById(int noticeId) {
         SelectConditionStep<Notification_Record> stmt = dslContext
                 .selectFrom(NOTIFICATION_)
@@ -38,7 +40,7 @@ public class NotificationRepository {
         return stmt.fetchOne();
     }
 
-
+    @DIAccessMo(table = "Notification_", db = "DFU_")
     public List<Notification_Record> queryNotification(Integer noticeId, Integer type, Integer status) {
         SelectConditionStep<Notification_Record> stmt = dslContext
                 .selectFrom(NOTIFICATION_)
@@ -58,6 +60,7 @@ public class NotificationRepository {
     /**
      * 新增Notification
      */
+    @DIAccessMo(table = "Notification_", db = "DFU_")
     public int addNotification(Integer type, String frontImg, Integer status, String content) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -89,6 +92,7 @@ public class NotificationRepository {
     /**
      * 删除Notification_表数据
      */
+    @DIAccessMo(table = "Notification_", db = "DFU_")
     public int deleteNotification(int noticeId) {
 
         UpdateSetMoreStep<Notification_Record> step = dslContext.update(NOTIFICATION_)
