@@ -46,7 +46,7 @@ public class SwaggerDocumentationConfig {
                 new Tag("账号", "账号", 300),
                 new Tag("普通账号", "普通账号", 300),
                 new Tag("登陆", "登陆", 400),
-                new Tag("元数据", "元数据", 500),
+                new Tag("ES", "ES", 500),
                 new Tag("高校", "高校", 600),
                 new Tag("学院", "学院", 700),
                 new Tag("外部接口", "外部接口", 700),

@@ -12,9 +12,12 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.JsonUtil;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -27,10 +30,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.lang.Object;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
@@ -128,6 +133,10 @@ public class NormalAccountService {
 
         Normalaccount_Record record = normalAccountRepository.getAccountById(accountId, DeleteStatus.NORMAL);
 
+        if (record == null) {
+            return null;
+        }
+
         GetNormalAccountData data = new GetNormalAccountData()
                 .accountId(record.getAccountid())
                 .accountType(record.getAccounttype())
@@ -135,7 +144,8 @@ public class NormalAccountService {
                 .departmentId(record.getDepartmentid())
                 .major(record.getMajor())
                 .stuId(record.getStuid())
-                .realName(record.getRealname());
+                .realName(record.getRealname())
+                .createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
 
         // 填充学校名称和学院名称
         College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
@@ -346,6 +356,33 @@ public class NormalAccountService {
         }
 
         return queryBuilder;
+    }
+
+
+    public void syncAccount(Long accountId) {
+        boolean success = false;
+
+        GetNormalAccountData account = getNormalAccountById(accountId);
+
+        if (account == null) {
+            return;
+        }
+
+        String json = JSONObject.toJSONString(account, SerializerFeature.WriteMapNullValue);
+        Map<String, Object> dataMap = JSONObject.parseObject(json);
+
+        // 更新ES
+        UpdateResponse response = esService.upsertNormalAccount(accountId, dataMap);
+
+        if (response != null) {
+            success = true;
+            LOGGER.info("pushAccountToEs success , accountType = {}, accountId = {}", account.getAccountType(), accountId);
+        }
+
+        if (!success) {
+            LOGGER.error("pushAccountToEs error, accountId = {}", accountId);
+        }
+
     }
 
 
