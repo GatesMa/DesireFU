@@ -129,6 +129,24 @@ public class NormalAccountService {
                 .message(ApiReturnCode.OK.name());
     }
 
+    /**
+     * 获取Account
+     */
+    public GetNormalAccountRet getFromDB(GetNormalAccountRequest request) {
+        // 查数据库
+        List<Normalaccount_Record> records = normalAccountRepository.queryNormalAccount(
+                request.getAccountId(), request.getCollegeId(), request.getDepartmentId(), request.getMajor(), request.getStuId(), request.getRealName());
+
+        List<GetNormalAccountData> ret = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(records)) {
+            ret = toGetNormalAccountList(records);
+        }
+        // 返回结果
+        return (GetNormalAccountRet) new GetNormalAccountRet().data(ret)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
     public GetNormalAccountData getNormalAccountById(Long accountId) {
 
         Normalaccount_Record record = normalAccountRepository.getAccountById(accountId, DeleteStatus.NORMAL);

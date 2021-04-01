@@ -212,6 +212,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /normal_account/getFromDB:
+    post:
+      tags:
+        - NormalAccount
+      summary: 搜索学生账号DB
+      description: 搜索学生账号DB
+      operationId: getNormalAccountFromDB
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetNormalAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetNormalAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /normal_account/getExamList:
     post:
       tags:
@@ -925,6 +953,34 @@ paths:
       summary: 搜索组织
       description: 搜索组织
       operationId: listOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /organize/listFromDB:
+    post:
+      tags:
+        - Organize
+      summary: 搜索组织DB
+      description: 搜索组织DB
+      operationId: listFromDB
       consumes:
         - application/json
       produces:

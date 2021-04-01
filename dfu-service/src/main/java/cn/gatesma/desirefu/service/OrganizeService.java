@@ -135,6 +135,31 @@ public class OrganizeService {
                 .message(ApiReturnCode.OK.name());
     }
 
+    public ListOrganizeRet listFromDB(ListOrganizeRequest request) {
+
+        List<OrganizeData> data = new ArrayList<>();
+
+        // 通过这几个参数在Organize表中找
+        List<Organize_Record> organizeRecords = organizeRepository
+                .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
+
+        for (Organize_Record organizeRecord : organizeRecords) {
+            // 只返回状态是已审核通过的
+            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
+            if (account.getAccountstatus() != AccountStatus.STATUS_NORMAL.code()) {
+                continue;
+            }
+            // 调用抽取的公共方法
+            data.add(recordToOrganizeData(organizeRecord));
+        }
+
+
+        // 返回结果
+        return (ListOrganizeRet) new ListOrganizeRet().data(data)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
     /**
      * 更新申请的状态
      */

@@ -36,7 +36,7 @@ public interface OrganizeApi {
         method = RequestMethod.POST)
     ResponseEntity<AddOrganizeRet> addOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddOrganizeRequest body);
 
-    @ApiOperation(value = "搜索组织", nickname = "listOrganize", notes = "搜索组织", response = ListOrganizeRet.class, tags={ "队伍", })
+    @ApiOperation(value = "搜索组织ES", nickname = "listOrganize", notes = "搜索组织ES", response = ListOrganizeRet.class, tags={ "队伍", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = ListOrganizeRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -79,5 +79,15 @@ public interface OrganizeApi {
             method = RequestMethod.POST)
     ResponseEntity<ListOrganizeMemberRet> listMember(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeMemberRequest body);
 
+    @ApiOperation(value = "搜索组织DB", nickname = "listFromDB", notes = "搜索组织DB", response = ListOrganizeRet.class, tags={ "队伍", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ListOrganizeRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/organize/listFromDB",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ListOrganizeRet> listFromDB(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeRequest body);
 
 }
