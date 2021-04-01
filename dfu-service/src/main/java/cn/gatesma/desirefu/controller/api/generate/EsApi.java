@@ -45,5 +45,25 @@ public interface EsApi {
             method = RequestMethod.POST)
     ResponseEntity<ReturnCode> syncAllNormalAccount();
 
+    @ApiOperation(value = "同步全部队伍信息到ES里", nickname = "syncAllOrganize", notes = "同步全部队伍信息到ES里", response = ReturnCode.class, tags={ "ES", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ReturnCode.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/es/syncAllOrganize",
+            produces = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ReturnCode> syncAllOrganize();
+
+    @ApiOperation(value = "同步一个队伍信息到ES里", nickname = "syncSubOrganize", notes = "同步一个队伍信息到ES里", response = ReturnCode.class, tags={ "ES", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ReturnCode.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/es/syncSubOrganize",
+            produces = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<ReturnCode> syncSubOrganize(@NotNull @ApiParam(value = "账号ID，;分割", required = true) @Valid @RequestParam(value = "organizeIds", required = true) String organizeIds);
+
 
 }

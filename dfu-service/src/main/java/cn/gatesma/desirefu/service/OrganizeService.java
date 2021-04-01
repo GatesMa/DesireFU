@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.service;
 
+import cn.gatesma.desirefu.constant.EsConst;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
@@ -11,16 +12,29 @@ import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
+import cn.gatesma.desirefu.utils.JsonUtil;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.lang.Object;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -60,6 +74,9 @@ public class OrganizeService {
     @Resource
     private MessageService messageService;
 
+    @Resource
+    private EsService esService;
+
 
     public Long createOrganize(AddOrganizeRequest request) {
 
@@ -94,24 +111,26 @@ public class OrganizeService {
 
     public ListOrganizeRet list(ListOrganizeRequest request) {
 
-        List<OrganizeData> data = new ArrayList<>();
-        
-        // 通过这几个参数在Organize表中找
-        List<Organize_Record> organizeRecords = organizeRepository
-                .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
+//        List<OrganizeData> data = new ArrayList<>();
 
-        for (Organize_Record organizeRecord : organizeRecords) {
-            // 只返回状态是已审核通过的
-            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
-            if (account.getAccountstatus() != AccountStatus.STATUS_NORMAL.code()) {
-                continue;
-            }
-            // 调用抽取的公共方法
-            data.add(recordToOrganizeData(organizeRecord));
-        }
+        // 通过这几个参数在Organize表中找
+//        List<Organize_Record> organizeRecords = organizeRepository
+//                .queryOrganize(request.getOrganizeId(), request.getCompetitionId(), request.getSrcAccountId());
+//
+//        for (Organize_Record organizeRecord : organizeRecords) {
+//            // 只返回状态是已审核通过的
+//            Account_Record account = accountRepository.getAccountById(organizeRecord.getOrganizeid(), DeleteStatus.NORMAL);
+//            if (account.getAccountstatus() != AccountStatus.STATUS_NORMAL.code()) {
+//                continue;
+//            }
+//            // 调用抽取的公共方法
+//            data.add(recordToOrganizeData(organizeRecord));
+//        }
+
+        List<OrganizeData> organizeFromES = getOrganizeFromES(request);
 
         // 返回结果
-        return (ListOrganizeRet) new ListOrganizeRet().data(data)
+        return (ListOrganizeRet) new ListOrganizeRet().data(organizeFromES)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
     }
@@ -282,6 +301,110 @@ public class OrganizeService {
                 .data(data)
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
+
+    }
+
+    public List<OrganizeData> getOrganizeFromES(ListOrganizeRequest request) {
+
+
+        // 根据request生成queryBuilder
+        BoolQueryBuilder queryBuilder = getBoolQueryBuilder(request);
+
+        // 返回查询结果, 默认最多500
+        SearchResponse searchResponse = esService.queryFromES(EsConst.DESIREFU_SERVICE_INDEX, EsConst.INDEX_TYPE_ORGANIZE,
+                queryBuilder, null, null, 0, 500);
+
+        return toOrganizeData(searchResponse);
+    }
+
+    private List<OrganizeData> toOrganizeData(SearchResponse response) {
+        List<OrganizeData> accounts = new LinkedList<>();
+        if (null != response) {
+            SearchHits searchHits = response.getHits();
+            SearchHit[] hits = searchHits.getHits();
+            // 获取需要的字段
+            for (SearchHit hit : hits) {
+                String source = hit.getSourceAsString();
+                OrganizeData accountData = JsonUtil.deSerialize(source, OrganizeData.class);
+                if (null != accountData) {
+                    accounts.add(accountData);
+                }
+                // 队长的ID
+                Long srcAccountId = accountData.getSrcAccountId();
+                // 获取队长信息
+                List<GetNormalAccountData> accountFromES = normalAccountService.getNormalAccountFromES(new GetNormalAccountRequest().accountId(srcAccountId));
+                if (CollectionUtils.isNotEmpty(accountFromES)) {
+                    accountData.setCaptain(accountFromES.get(0));
+                }
+            }
+        }
+        return accounts;
+    }
+
+    private BoolQueryBuilder getBoolQueryBuilder(ListOrganizeRequest request) {
+
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        // account_id 查询条件
+        if (request.getOrganizeId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "_id", request.getOrganizeId()
+                    )
+            );
+        }
+
+        // college_id 查询条件
+        if (request.getCompetitionId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "competitionId", request.getCompetitionId()
+                    )
+            );
+        }
+
+        // departmentId 查询条件
+        if (request.getSrcAccountId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "srcAccountId", request.getSrcAccountId()
+                    )
+            );
+        }
+
+        return queryBuilder;
+    }
+
+
+    public void syncOrganize(Long organizeId) {
+        boolean success = false;
+
+        if (organizeId == null) {
+            return;
+        }
+        Organize_Record record = organizeRepository.getOrganizeById(organizeId);
+
+        if (record == null) {
+            return;
+        }
+
+        OrganizeData organizeData = recordToOrganizeData(record);
+
+
+        String json = JSONObject.toJSONString(organizeData, SerializerFeature.WriteMapNullValue);
+        Map<String, Object> dataMap = JSONObject.parseObject(json);
+
+        // 更新ES
+        UpdateResponse response = esService.upsertOrganize(organizeId, dataMap);
+
+        if (response != null) {
+            success = true;
+            LOGGER.info("pushAccountToEs success , organizeId = {}", organizeId);
+        }
+
+        if (!success) {
+            LOGGER.error("pushAccountToEs error, organizeId = {}", organizeId);
+        }
 
     }
 

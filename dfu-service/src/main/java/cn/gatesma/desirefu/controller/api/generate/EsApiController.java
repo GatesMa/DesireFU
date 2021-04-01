@@ -5,6 +5,7 @@ import cn.gatesma.desirefu.domain.api.generate.AddAccountRet;
 import cn.gatesma.desirefu.domain.api.generate.AddAccountRetData;
 import cn.gatesma.desirefu.domain.api.generate.ReturnCode;
 import cn.gatesma.desirefu.service.processor.BatchSyncAccountToEsProcessor;
+import cn.gatesma.desirefu.service.processor.BatchSyncOrganizeToEsProcessor;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,9 @@ public class EsApiController implements EsApi {
     @Resource
     private BatchSyncAccountToEsProcessor sycnAccountToEsProcessor;
 
+    @Resource
+    private BatchSyncOrganizeToEsProcessor syncOrganizeToEsProcessor;
+
     @org.springframework.beans.factory.annotation.Autowired
     public EsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -76,5 +80,35 @@ public class EsApiController implements EsApi {
         ReturnCode returnCode = RetCodeUtils.create(ApiReturnCode.OK.code(), "account批量同步中，请不要重复调用");
         return new ResponseEntity<ReturnCode>(returnCode, HttpStatus.OK);
     }
+
+    public ResponseEntity<ReturnCode> syncAllOrganize() {
+
+
+        syncOrganizeToEsProcessor.syncAllOrganizeToEs();
+
+
+        ReturnCode returnCode = RetCodeUtils.create(ApiReturnCode.OK.code(), "批量同步中，请不要重复调用");
+        return new ResponseEntity<ReturnCode>(returnCode, HttpStatus.OK);
+    }
+
+    public ResponseEntity<ReturnCode> syncSubOrganize(@NotNull @ApiParam(value = "账号ID，;分割", required = true) @Valid @RequestParam(value = "organizeIds", required = true) String organizeIds) {
+        List<Long> organizeIdList = new ArrayList<>();
+
+        String[] array = organizeIds.split(";");
+        for (String id : array) {
+            organizeIdList.add(Long.valueOf(id));
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                syncOrganizeToEsProcessor.syncSubOrganizeToEs(organizeIdList);
+            }
+        }).start();
+
+        ReturnCode returnCode = RetCodeUtils.create(ApiReturnCode.OK.code(), "批量同步中，请不要重复调用");
+        return new ResponseEntity<ReturnCode>(returnCode, HttpStatus.OK);
+    }
+
 
 }

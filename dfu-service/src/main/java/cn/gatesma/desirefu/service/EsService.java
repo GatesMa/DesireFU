@@ -72,6 +72,10 @@ public class EsService {
         return upsertDoc(EsConst.DESIREFU_SERVICE_INDEX, EsConst.INDEX_TYPE_NORMAL_ACCOUNT, String.valueOf(accountId), dataMap);
     }
 
+    public UpdateResponse upsertOrganize(long organizeId, Map<String, Object> dataMap) {
+        return upsertDoc(EsConst.DESIREFU_SERVICE_INDEX, EsConst.INDEX_TYPE_ORGANIZE, String.valueOf(organizeId), dataMap);
+    }
+
     private UpdateResponse upsertDoc(String index, String type, String docId, Map<String, Object> dataMap) {
         LOOGER.info("upsertDoc index = {}, type = {}, docId = {}, dataMap = {}", index, type, docId, dataMap);
 

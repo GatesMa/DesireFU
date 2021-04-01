@@ -1258,6 +1258,54 @@ paths:
         404:
           description: RequestBody not found
 
+  /es/syncSubOrganize:
+    post:
+      tags:
+        - ES
+      summary: 同步一个队伍信息到ES里
+      description: 同步一个队伍信息到ES里
+      operationId: syncSubOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "organizeIds"
+          in: "query"
+          description: "账号ID，;分割"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /es/syncAllOrganize:
+    post:
+      tags:
+        - ES
+      summary: 同步全部队伍信息到ES里
+      description: 同步全部队伍信息到ES里
+      operationId: syncAllOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
 definitions:
   Object:
     type: object
