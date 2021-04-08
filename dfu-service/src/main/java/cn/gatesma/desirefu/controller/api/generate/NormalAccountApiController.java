@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.controller.api.generate;
 
+import cn.gatesma.desirefu.annotation.NeedSyncAddNormalAnnotation;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
@@ -47,6 +48,8 @@ public class NormalAccountApiController implements NormalAccountApi {
         this.request = request;
     }
 
+    @Override
+    @NeedSyncAddNormalAnnotation
     public ResponseEntity<AddNormalAccountRet> addNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddNormalAccountRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -57,6 +60,7 @@ public class NormalAccountApiController implements NormalAccountApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetNormalAccountRet> getNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -115,6 +119,7 @@ public class NormalAccountApiController implements NormalAccountApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetExamAccountRet> getExamList() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -125,6 +130,7 @@ public class NormalAccountApiController implements NormalAccountApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetNormalBasicDataRet> getNormalBasicData(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalBasicDataRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -135,6 +141,7 @@ public class NormalAccountApiController implements NormalAccountApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetNormalAccountRet> getNormalAccountFromDB(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
