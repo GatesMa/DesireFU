@@ -12,6 +12,7 @@ import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
+import cn.gatesma.desirefu.service.processor.BatchSyncOrganizeToEsProcessor;
 import cn.gatesma.desirefu.utils.JsonUtil;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import com.alibaba.fastjson.JSONObject;
@@ -31,10 +32,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.lang.Object;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -76,6 +74,9 @@ public class OrganizeService {
 
     @Resource
     private EsService esService;
+
+    @Resource
+    private BatchSyncOrganizeToEsProcessor syncOrganizeToEsProcessor;
 
 
     public Long createOrganize(AddOrganizeRequest request) {
@@ -175,6 +176,10 @@ public class OrganizeService {
 
             // 发送审批成功通知
             sendSuccessMessage(request.getId());
+
+            // 更新ES信息
+            syncOrganizeToEsProcessor.syncSubOrganizeToEs(Arrays.asList(record.getOrganizeid()));
+
         } else if (request.getStatus() == OrganizeApplicationStatus.REJECT.code()) {
             // 发送审批拒绝通知
             sendFailMessage(request.getId());
