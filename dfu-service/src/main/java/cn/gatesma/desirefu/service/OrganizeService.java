@@ -356,10 +356,12 @@ public class OrganizeService {
                 }
                 // 队长的ID
                 Long srcAccountId = accountData.getSrcAccountId();
-                // 获取队长信息
-                List<GetNormalAccountData> accountFromES = normalAccountService.getNormalAccountFromES(new GetNormalAccountRequest().accountId(srcAccountId));
-                if (CollectionUtils.isNotEmpty(accountFromES)) {
-                    accountData.setCaptain(accountFromES.get(0));
+                if (srcAccountId != null) {
+                    // 获取队长信息
+                    List<GetNormalAccountData> accountFromES = normalAccountService.getNormalAccountFromES(new GetNormalAccountRequest().accountId(srcAccountId));
+                    if (CollectionUtils.isNotEmpty(accountFromES)) {
+                        accountData.setCaptain(accountFromES.get(0));
+                    }
                 }
             }
         }
@@ -413,10 +415,35 @@ public class OrganizeService {
             return;
         }
 
-        OrganizeData organizeData = recordToOrganizeData(record);
+        // ------------------------------------------------
+        OrganizeData item = new OrganizeData();
+        item.setOrganizeId(record.getOrganizeid());
+        item.setCompetitionId(record.getCompetitionid());
+        item.setSrcAccountId(record.getSrcaccountid());
+        item.setCreatedIme(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
+
+        // 队伍名称：organizeId对应的nickName
+        Account_Record account = accountRepository.getAccountById(record.getOrganizeid(), DeleteStatus.NORMAL);
+        if (account != null) {
+            item.setNickName(account.getNickname());
+        }
+
+        // 队长信息，通过srcAccountId获取NormalAccount的数据
+//        GetNormalAccountData captain = normalAccountService.getNormalAccountById(record.getSrcaccountid());
+//        item.setCaptain(captain);
+
+        // 查找队伍有多少人
+        List<Organizeaccountrelation_Record> relation =
+                organizeAccountRelationRepository.queryOrganizeAccountRelation(record.getOrganizeid(), null, null, null);
+        // 设置队伍人数
+        item.setMemberNum(relation.size());
+
+        // 设置比赛数据
+        item.setCompetition(competitionService.getCompetitionById(record.getCompetitionid()));
+        // ------------------------------------------------
 
 
-        String json = JSONObject.toJSONString(organizeData, SerializerFeature.WriteMapNullValue);
+        String json = JSONObject.toJSONString(item, SerializerFeature.WriteMapNullValue);
         Map<String, Object> dataMap = JSONObject.parseObject(json);
 
         // 更新ES
