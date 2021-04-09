@@ -7,6 +7,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -119,6 +120,19 @@ public class TimeUtils {
     public static Integer convertStringToSeconds(String strFmtDate) {
         Date date = convertStringToDate(strFmtDate);
         return convertDateToSeconds(date);
+    }
+
+    /**
+     * 获取几天前或者几天后的日期，若day=-4，则取4天前日期
+     * @param date
+     * @param day
+     * @return
+     */
+    public static Date getSomeDay(Date date, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, day);
+        return calendar.getTime();
     }
 }
 

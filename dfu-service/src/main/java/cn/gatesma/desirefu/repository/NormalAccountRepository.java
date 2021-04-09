@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
 import org.jooq.SelectConditionStep;
 import org.jooq.UpdateSetMoreStep;
+import org.jooq.types.UInteger;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -144,6 +145,18 @@ public class NormalAccountRepository {
                 .set(NORMALACCOUNT_.DELETESTATUS, DeleteStatus.DELETED.code());
 
         return step.where(NORMALACCOUNT_.ACCOUNTID.eq(accountId)).execute();
+    }
+
+    /**
+     * 获取最近被修改的数据
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public List<Long> getRecentUpdateAccountIdList(Timestamp startTime, Timestamp endTime) {
+        return dslContext.select(NORMALACCOUNT_.ACCOUNTID).from(NORMALACCOUNT_)
+                .where(NORMALACCOUNT_.LASTMODIFIEDTIME.between(startTime, endTime))
+                .fetch(0, Long.class);
     }
 
 
