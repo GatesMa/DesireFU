@@ -104,7 +104,7 @@ dependencies {
     compile 'com.zaxxer:HikariCP:3.4.1'
 
     // JMX监控 版权问题，目前下载不了，先不用
-    //compile 'com.sun.jdmk:jmxtools:1.2.1'
+//    compile 'com.sun.jdmk:jmxtools:1.2.1'
 
     // es
     compile 'org.elasticsearch.client:transport:5.4.1'
@@ -112,6 +112,10 @@ dependencies {
 
     // COS文件
     compile group: 'com.qcloud', name: 'cos_api', version: '5.6.28'
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
+
 
 
 }

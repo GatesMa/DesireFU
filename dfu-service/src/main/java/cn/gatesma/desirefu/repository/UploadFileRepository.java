@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.utils.TimeUtils;
 import org.jooq.DSLContext;
@@ -22,7 +23,7 @@ public class UploadFileRepository {
     @Resource
     private DSLContext dslContext;
 
-
+    @DIAccessMo(table = "UploadFile_", db = "DFU_")
     public int createUploadFile(String fileType, Long accountId, int accountType, String fileName, String fileURL) {
         Timestamp now = TimeUtils.now();
         return dslContext.insertInto(

@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organizeaccountrelation_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -28,6 +29,7 @@ public class OrganizeAccountRelationRepository {
     /**
      * 获取一个 Organizeaccountrelation
      */
+    @DIAccessMo(table = "OrganizeAccountRelation_", db = "DFU_")
     public Organizeaccountrelation_Record getOrganizeAccountRelationById(long id) {
         SelectConditionStep<Organizeaccountrelation_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTRELATION_)
@@ -36,7 +38,7 @@ public class OrganizeAccountRelationRepository {
         return stmt.fetchOne();
     }
 
-
+    @DIAccessMo(table = "OrganizeAccountRelation_", db = "DFU_")
     public List<Organizeaccountrelation_Record> queryOrganizeAccountRelation(Long organizeId, Long accountId, Integer accountType, Integer isOwnerAccount) {
         SelectConditionStep<Organizeaccountrelation_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTRELATION_)
@@ -59,6 +61,7 @@ public class OrganizeAccountRelationRepository {
     /**
      * 新增 OrganizeAccountRelation
      */
+    @DIAccessMo(table = "OrganizeAccountRelation_", db = "DFU_")
     public long addOrganizeAccountRelation(Long organizeId, Long accountId, Integer accountType, Integer isOwnerAccount, Long createdUserId) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -94,6 +97,7 @@ public class OrganizeAccountRelationRepository {
     /**
      * 删除 OrganizeAccountRelation 表数据
      */
+    @DIAccessMo(table = "OrganizeAccountRelation_", db = "DFU_")
     public int deleteOrganizeAccountRelation(Long id) {
 
         UpdateSetMoreStep<Organizeaccountrelation_Record> step = dslContext.update(ORGANIZEACCOUNTRELATION_)

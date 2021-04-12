@@ -15,8 +15,8 @@ tags:
     description: 用户接口
   - name: Login
     description: 登录接口
-  - name: Meta
-    description: 元数据接口
+  - name: ES
+    description: ES相关接口
   - name: Upload
     description: 文件上传接口
   - name: College
@@ -191,6 +191,34 @@ paths:
       summary: 搜索学生账号
       description: 搜索学生账号
       operationId: getNormalAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/GetNormalAccountRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetNormalAccountRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /normal_account/getFromDB:
+    post:
+      tags:
+        - NormalAccount
+      summary: 搜索学生账号DB
+      description: 搜索学生账号DB
+      operationId: getNormalAccountFromDB
       consumes:
         - application/json
       produces:
@@ -946,6 +974,34 @@ paths:
         404:
           description: RequestBody not found
 
+  /organize/listFromDB:
+    post:
+      tags:
+        - Organize
+      summary: 搜索组织DB
+      description: 搜索组织DB
+      operationId: listFromDB
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 创建账号
+          required: true
+          schema:
+            $ref: '#/definitions/ListOrganizeRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListOrganizeRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
   /organize/listMember:
     post:
       tags:
@@ -1205,6 +1261,102 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GetCompetitionBasicDataRet'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /es/syncSubNormalAccount:
+    post:
+      tags:
+        - ES
+      summary: 同步一个账号信息到ES里
+      description: 同步一个账号信息到ES里
+      operationId: syncSubNormalAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "accountIds"
+          in: "query"
+          description: "账号ID，;分割"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /es/syncAllNormalAccount:
+    post:
+      tags:
+        - ES
+      summary: 同步全部账号信息到ES里
+      description: 同步全部账号信息到ES里
+      operationId: syncAllNormalAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /es/syncSubOrganize:
+    post:
+      tags:
+        - ES
+      summary: 同步一个队伍信息到ES里
+      description: 同步一个队伍信息到ES里
+      operationId: syncSubOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "organizeIds"
+          in: "query"
+          description: "账号ID，;分割"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
+        400:
+          description: Invalid RequestBody supplied
+        404:
+          description: RequestBody not found
+
+  /es/syncAllOrganize:
+    post:
+      tags:
+        - ES
+      summary: 同步全部队伍信息到ES里
+      description: 同步全部队伍信息到ES里
+      operationId: syncAllOrganize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnCode'
         400:
           description: Invalid RequestBody supplied
         404:

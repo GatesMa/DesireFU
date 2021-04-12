@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
@@ -34,6 +35,7 @@ public class UserLoginRepository {
      * @param deleteStatus  删除状态，可为空, 表示全部
      * @return login对应的user
      */
+    @DIAccessMo(table = "UserLogin_", db = "DFU_")
     public Userlogin_Record getLoginUser(String loginName, int loginNameType, DeleteStatus deleteStatus) {
         SelectConditionStep<Userlogin_Record> stmt = dslContext.selectFrom(USERLOGIN_)
                 .where(USERLOGIN_.LOGINNAME.eq(loginName))
@@ -48,6 +50,7 @@ public class UserLoginRepository {
     /**
      * 根据userId获取user的所有登陆信息
      */
+    @DIAccessMo(table = "UserLogin_", db = "DFU_")
     public List<Userlogin_Record> getUserLoginList(long userId, DeleteStatus deleteStatus) {
         SelectConditionStep<Userlogin_Record> stmt = dslContext.selectFrom(USERLOGIN_)
                 .where(USERLOGIN_.USERID.eq(userId));
@@ -67,6 +70,7 @@ public class UserLoginRepository {
      * @param userId        用户ID
      * @return 变更记录数
      */
+    @DIAccessMo(table = "UserLogin_", db = "DFU_")
     public int insertUserLogin(String loginName, int loginNameType, long userId, Long createdUserId) {
         return insertUserLogin(loginName, loginNameType, userId, DeleteStatus.NORMAL, createdUserId);
     }
@@ -98,6 +102,7 @@ public class UserLoginRepository {
      * 检查updateUserLogin的参数
      * @param id
      */
+    @DIAccessMo(table = "UserLogin_", db = "DFU_")
     private void checkUpdateUserLoginThrown(Long id, long userId) {
         if(id==null || userId == 0){
             throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM,"Illegal param for updating UserLogin_");
@@ -107,6 +112,7 @@ public class UserLoginRepository {
     /**
      * 根据id和loginName，更新UserLogin_表
      */
+    @DIAccessMo(table = "UserLogin_", db = "DFU_")
     public int updateUserLogin(Long id, long userId, Long operatorUserId, DeleteStatus newDeleteStatus) {
         // 参数校验
         checkUpdateUserLoginThrown(id, userId);

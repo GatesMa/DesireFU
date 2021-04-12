@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.constants.status.MessageStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
@@ -34,6 +35,7 @@ public class MessageRepository {
     /**
      * ID GET
      */
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public Message_Record getMessageById(long id) {
         SelectConditionStep<Message_Record> stmt = dslContext
                 .selectFrom(MESSAGE_)
@@ -42,6 +44,7 @@ public class MessageRepository {
         return stmt.fetchOne();
     }
 
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public List<Message_Record> queryMessage(Integer type, Integer status, Long accountId, Page page) {
         SelectConditionStep<Message_Record> stmt = dslContext
                 .selectFrom(MESSAGE_)
@@ -68,6 +71,7 @@ public class MessageRepository {
     /**
      * 新增Message
      */
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public int addMessage(Integer type, Integer status, Long accountId, String content) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -98,6 +102,7 @@ public class MessageRepository {
     /**
      * 删除Message_表数据
      */
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public int deleteMessage(List<Long> ids) {
 
         UpdateSetMoreStep<Message_Record> step = dslContext.update(MESSAGE_)
@@ -109,6 +114,7 @@ public class MessageRepository {
     /**
      * 更新状态
      */
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public int updateMessageStatus(List<Long> ids, Integer status) {
         Timestamp modifiedTime = TimeUtils.now();
         UpdateSetMoreStep<Message_Record> stmt = dslContext.update(MESSAGE_)
@@ -124,6 +130,7 @@ public class MessageRepository {
      * 把accountId的全部消息设为已读
      * @param accountId
      */
+    @DIAccessMo(table = "Message_", db = "DFU_")
     public int updateAllMessageStatus(Long accountId) {
         Timestamp modifiedTime = TimeUtils.now();
         UpdateSetMoreStep<Message_Record> stmt = dslContext.update(MESSAGE_)

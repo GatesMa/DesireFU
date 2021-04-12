@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.controller.api.generate;
 
+import cn.gatesma.desirefu.annotation.NeedSyncAddOrganizeAnnotation;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.type.AccountType;
 import cn.gatesma.desirefu.controller.api.CustomerApiException;
@@ -46,6 +47,8 @@ public class OrganizeApiController implements OrganizeApi {
         this.request = request;
     }
 
+    @Override
+    @NeedSyncAddOrganizeAnnotation
     public ResponseEntity<AddOrganizeRet> addOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddOrganizeRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -56,6 +59,7 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    @Override
     public ResponseEntity<ListOrganizeRet> listOrganize(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -66,6 +70,7 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    @Override
     public ResponseEntity<UpdateOrganizeApplicationRet> updateOrganizeApplication(@ApiParam(value = "" ,required=true )  @Valid @RequestBody UpdateOrganizeApplicationRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -106,6 +111,7 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    @Override
     public ResponseEntity<GetExamOrganizeRet> getExamOrganizeList() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -116,10 +122,22 @@ public class OrganizeApiController implements OrganizeApi {
         }
     }
 
+    @Override
     public ResponseEntity<ListOrganizeMemberRet> listMember(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeMemberRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             ListOrganizeMemberRet response = organizeService.listMember(body);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");
+        }
+    }
+
+    @Override
+    public ResponseEntity<ListOrganizeRet> listFromDB(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody ListOrganizeRequest body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            ListOrganizeRet response = organizeService.listFromDB(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");

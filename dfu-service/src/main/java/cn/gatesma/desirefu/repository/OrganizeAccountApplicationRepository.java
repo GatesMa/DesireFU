@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Organize_Record;
@@ -31,6 +32,7 @@ public class OrganizeAccountApplicationRepository {
     /**
      * 获取一个 OrganizeAccountApplication
      */
+    @DIAccessMo(table = "OrganizeAccountApplication_", db = "DFU_")
     public Organizeaccountapplication_Record getOrganizeAccountApplicationById(long id) {
         SelectConditionStep<Organizeaccountapplication_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTAPPLICATION_)
@@ -39,7 +41,7 @@ public class OrganizeAccountApplicationRepository {
         return stmt.fetchOne();
     }
 
-
+    @DIAccessMo(table = "OrganizeAccountApplication_", db = "DFU_")
     public List<Organizeaccountapplication_Record> queryOrganizeAccountApplication(List<Long> organizeId, Long accountId, Integer accountType, Integer status) {
         SelectConditionStep<Organizeaccountapplication_Record> stmt = dslContext
                 .selectFrom(ORGANIZEACCOUNTAPPLICATION_)
@@ -66,6 +68,7 @@ public class OrganizeAccountApplicationRepository {
     /**
      * 更新申请的状态
      */
+    @DIAccessMo(table = "OrganizeAccountApplication_", db = "DFU_")
     public int updateApplication(Long id, Integer status, Long userId) {
         Timestamp modifiedTime = TimeUtils.now();
         UpdateSetMoreStep<Organizeaccountapplication_Record> stmt = dslContext.update(ORGANIZEACCOUNTAPPLICATION_).set(ORGANIZEACCOUNTAPPLICATION_.LASTMODIFIEDUSERID, userId == null ? 0 : userId)
@@ -80,6 +83,7 @@ public class OrganizeAccountApplicationRepository {
     /**
      * 新增 OrganizeAccountApplication
      */
+    @DIAccessMo(table = "OrganizeAccountApplication_", db = "DFU_")
     public long addOrganizeAccountApplication(Long organizeId, Long accountId, Integer accountType, Integer status, Long createdUserId) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -115,6 +119,7 @@ public class OrganizeAccountApplicationRepository {
     /**
      * 删除 OrganizeAccountApplication 表数据
      */
+    @DIAccessMo(table = "OrganizeAccountApplication_", db = "DFU_")
     public int deleteOrganizeAccountApplication(Long id) {
 
         UpdateSetMoreStep<Organizeaccountapplication_Record> step = dslContext.update(ORGANIZEACCOUNTAPPLICATION_)

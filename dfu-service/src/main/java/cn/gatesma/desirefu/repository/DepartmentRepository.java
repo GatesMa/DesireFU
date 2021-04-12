@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.College_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Department_Record;
@@ -32,6 +33,7 @@ public class DepartmentRepository {
     /**
      * 获取一个College
      */
+    @DIAccessMo(table = "Department_", db = "DFU_")
     public Department_Record getDepartmentById(int departmentId, DeleteStatus deleteStatus) {
         SelectConditionStep<Department_Record> stmt = dslContext
                 .selectFrom(DEPARTMENT_)
@@ -47,6 +49,7 @@ public class DepartmentRepository {
      *
      * @return
      */
+    @DIAccessMo(table = "Department_", db = "DFU_")
     public List<Department_Record> queryDepartment(Integer departmentId, String name, Integer collegeId) {
         SelectConditionStep<Department_Record> stmt = dslContext
                 .selectFrom(DEPARTMENT_)
@@ -66,6 +69,7 @@ public class DepartmentRepository {
     /**
      * 新增Department
      */
+    @DIAccessMo(table = "Department_", db = "DFU_")
     public int addDepartment(String name, Integer collegeId) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -93,6 +97,7 @@ public class DepartmentRepository {
     /**
      * 删除Department_表数据
      */
+    @DIAccessMo(table = "Department_", db = "DFU_")
     public int deleteDepartment(int departmentId) {
 
         UpdateSetMoreStep<Department_Record> step = dslContext.update(DEPARTMENT_)

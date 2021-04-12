@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.User_Record;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -29,6 +30,7 @@ public class UserRepository {
     /**
      * 获取一个User
      */
+    @DIAccessMo(table = "User_", db = "DFU_")
     public User_Record getUser(long userId, DeleteStatus deleteStatus) {
         SelectConditionStep<User_Record> stmt = dslContext
                 .selectFrom(USER_)
@@ -42,6 +44,7 @@ public class UserRepository {
     /**
      * 新增user
      */
+    @DIAccessMo(table = "User_", db = "DFU_")
     public Long insertUser(Long createdUserId, Timestamp createdTime, String cellphone, String email, String userName) {
 
         createdUserId = (createdUserId == null) ? 0L : createdUserId;
@@ -75,6 +78,7 @@ public class UserRepository {
     /**
      * 更新
      */
+    @DIAccessMo(table = "User_", db = "DFU_")
     public boolean updateUser(long userId, String userName, String cellphone, String email) {
 
         UpdateSetMoreStep<User_Record> updateStep = dslContext.update(USER_)
@@ -98,6 +102,7 @@ public class UserRepository {
     /**
      * 删除User_表数据
      */
+    @DIAccessMo(table = "User_", db = "DFU_")
     public int deleteUser(long userId, Long operatorUserId) {
 
         UpdateSetMoreStep<User_Record> step = dslContext.update(USER_)

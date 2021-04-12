@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.repository;
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.api.generate.Page;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Collect_Record;
@@ -30,6 +31,7 @@ public class CollectRepository {
     /**
      * ID GET
      */
+    @DIAccessMo(table = "Collect_", db = "DFU_")
     public Collect_Record getCollectById(long id) {
         SelectConditionStep<Collect_Record> stmt = dslContext
                 .selectFrom(COLLECT_)
@@ -38,6 +40,7 @@ public class CollectRepository {
         return stmt.fetchOne();
     }
 
+    @DIAccessMo(table = "Collect_", db = "DFU_")
     public List<Collect_Record> queryCollectByAccountId(Long accountId, Long competitionId, Page page) {
         SelectConditionStep<Collect_Record> stmt = dslContext
                 .selectFrom(COLLECT_)
@@ -63,6 +66,7 @@ public class CollectRepository {
     /**
      * 新增Collect
      */
+    @DIAccessMo(table = "Collect_", db = "DFU_")
     public int addCollect(Long accountId, Long competitionId) {
 
         Timestamp createdTime = TimeUtils.now();
@@ -89,6 +93,7 @@ public class CollectRepository {
     /**
      * 删除Collect_表数据
      */
+    @DIAccessMo(table = "Collect_", db = "DFU_")
     public int deleteCollect(List<Long> ids) {
 
         UpdateSetMoreStep<Collect_Record> step = dslContext.update(COLLECT_)
@@ -100,6 +105,7 @@ public class CollectRepository {
     /**
      * 删除Collect_表数据
      */
+    @DIAccessMo(table = "Collect_", db = "DFU_")
     public void deleteCollect(Long accountId, Long competitionId) {
 
         UpdateSetMoreStep<Collect_Record> step = dslContext.update(COLLECT_)

@@ -36,7 +36,7 @@ public interface NormalAccountApi {
         method = RequestMethod.POST)
     ResponseEntity<AddNormalAccountRet> addNormalAccount(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody AddNormalAccountRequest body);
 
-    @ApiOperation(value = "搜索学生账号", nickname = "getNormalAccount", notes = "搜索学生账号", response = GetNormalAccountRet.class, tags={ "普通账号", })
+    @ApiOperation(value = "搜索学生账号ES", nickname = "getNormalAccount", notes = "搜索学生账号ES", response = GetNormalAccountRet.class, tags={ "普通账号", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = GetNormalAccountRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -57,7 +57,7 @@ public interface NormalAccountApi {
             method = RequestMethod.POST)
     ResponseEntity<GetExamAccountRet> getExamList();
 
-    @ApiOperation(value = "学生系统获取账号基本数据", nickname = "getNormalBasicData", notes = "学生系统获取账号基本数据", response = GetNormalBasicDataRet.class, tags={ "NormalAccount", })
+    @ApiOperation(value = "学生系统获取账号基本数据", nickname = "getNormalBasicData", notes = "学生系统获取账号基本数据", response = GetNormalBasicDataRet.class, tags={ "普通账号", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = GetNormalBasicDataRet.class),
             @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
@@ -67,6 +67,17 @@ public interface NormalAccountApi {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     ResponseEntity<GetNormalBasicDataRet> getNormalBasicData(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalBasicDataRequest body);
+
+    @ApiOperation(value = "搜索学生账号DB", nickname = "getNormalAccountFromDB", notes = "搜索学生账号DB", response = GetNormalAccountRet.class, tags={ "普通账号", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = GetNormalAccountRet.class),
+            @ApiResponse(code = 400, message = "Invalid RequestBody supplied"),
+            @ApiResponse(code = 404, message = "RequestBody not found") })
+    @RequestMapping(value = "/normal_account/getFromDB",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<GetNormalAccountRet> getNormalAccountFromDB(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body);
 
 
 }

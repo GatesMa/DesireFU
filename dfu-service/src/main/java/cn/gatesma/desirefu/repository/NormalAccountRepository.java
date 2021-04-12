@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Normalaccount_Record;
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
 import org.jooq.SelectConditionStep;
 import org.jooq.UpdateSetMoreStep;
+import org.jooq.types.UInteger;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -33,6 +35,7 @@ public class NormalAccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "NormalAccount_", db = "DFU_")
     public Normalaccount_Record getAccountById(Long accountId, DeleteStatus deleteStatus) {
         SelectConditionStep<Normalaccount_Record> stmt = dslContext
                 .selectFrom(NORMALACCOUNT_)
@@ -46,6 +49,7 @@ public class NormalAccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "NormalAccount_", db = "DFU_")
     public List<Normalaccount_Record> getAccountByIds(List<Long> accountIds) {
         SelectConditionStep<Normalaccount_Record> stmt = dslContext
                 .selectFrom(NORMALACCOUNT_)
@@ -54,6 +58,7 @@ public class NormalAccountRepository {
         return stmt.fetch();
     }
 
+    @DIAccessMo(table = "NormalAccount_", db = "DFU_")
     public List<Normalaccount_Record> queryNormalAccount(Long accountId, Integer collegeId, Integer departmentId,
                                                          String major, String stuId, String realName) {
 
@@ -92,6 +97,7 @@ public class NormalAccountRepository {
     /**
      * 新增 NormalAccount
      */
+    @DIAccessMo(table = "NormalAccount_", db = "DFU_")
     public boolean addNormalAccount(Long accountId, Integer accountType, Integer collegeId, Integer departmentId,
                                  String major, String stuId, String realName, Long createdUserId) {
         Timestamp now = TimeUtils.now();
@@ -132,12 +138,25 @@ public class NormalAccountRepository {
     /**
      * 删除 NormalAccount 表数据
      */
+    @DIAccessMo(table = "NormalAccount_", db = "DFU_")
     public int deleteAccount(long accountId) {
 
         UpdateSetMoreStep<Normalaccount_Record> step = dslContext.update(NORMALACCOUNT_)
                 .set(NORMALACCOUNT_.DELETESTATUS, DeleteStatus.DELETED.code());
 
         return step.where(NORMALACCOUNT_.ACCOUNTID.eq(accountId)).execute();
+    }
+
+    /**
+     * 获取最近被修改的数据
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public List<Long> getRecentUpdateAccountIdList(Timestamp startTime, Timestamp endTime) {
+        return dslContext.select(NORMALACCOUNT_.ACCOUNTID).from(NORMALACCOUNT_)
+                .where(NORMALACCOUNT_.LASTMODIFIEDTIME.between(startTime, endTime))
+                .fetch(0, Long.class);
     }
 
 

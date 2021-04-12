@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.CompetitionState;
 import cn.gatesma.desirefu.constants.status.CompetitionStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
@@ -38,6 +39,7 @@ public class CompetitionRepository {
     /**
      * 通过id查询比赛
      */
+    @DIAccessMo(table = "Competition_", db = "DFU_")
     public Competition_Record getCompetitionById(Long competitionId, DeleteStatus deleteStatus) {
         SelectConditionStep<Competition_Record> stmt = dslContext
                 .selectFrom(COMPETITION_)
@@ -51,6 +53,7 @@ public class CompetitionRepository {
     /**
      * 新增 COMPETITION_
      */
+    @DIAccessMo(table = "Competition_", db = "DFU_")
     public boolean addCompetition(Long accountId, Integer accountType, Integer type, String title, String founder,
                                   String content, Integer status, Timestamp beginTime, Timestamp endTime, Long createdUserId, String overviewImg, String overviewText) {
         Timestamp now = TimeUtils.now();
@@ -97,6 +100,7 @@ public class CompetitionRepository {
         return res == 1;
     }
 
+    @DIAccessMo(table = "Competition_", db = "DFU_")
     public List<Competition_Record> queryCompetition(List<Long> competitionIds, Long accountId, Integer type,
            String title, String founder, Integer status, Integer state, String sortField, String sortType, Page page) {
 
@@ -183,6 +187,7 @@ public class CompetitionRepository {
      * @param accountId
      * @return
      */
+    @DIAccessMo(table = "Competition_", db = "DFU_")
     public List<Competition_Record> queryCompetition(Long accountId) {
 
         SelectConditionStep<Competition_Record> stmt = dslContext
@@ -196,6 +201,7 @@ public class CompetitionRepository {
         return stmt.fetch();
     }
 
+    @DIAccessMo(table = "Competition_", db = "DFU_")
     public int deleteCompetition(long competitionId) {
 
         UpdateSetMoreStep<Competition_Record> step = dslContext.update(COMPETITION_)

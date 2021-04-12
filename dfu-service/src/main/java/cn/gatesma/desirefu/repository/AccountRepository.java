@@ -1,6 +1,7 @@
 package cn.gatesma.desirefu.repository;
 
 
+import cn.gatesma.desirefu.config.aspect.annotation.DIAccessMo;
 import cn.gatesma.desirefu.constants.status.AccountStatus;
 import cn.gatesma.desirefu.constants.status.DeleteStatus;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.Account_Record;
@@ -35,6 +36,7 @@ public class AccountRepository {
     /**
      * 通过id查询账号
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public Account_Record getAccountById(Long accountId, DeleteStatus deleteStatus) {
         SelectConditionStep<Account_Record> stmt = dslContext
                 .selectFrom(ACCOUNT_)
@@ -48,6 +50,7 @@ public class AccountRepository {
     /**
      * 新增Account
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public long addAccount(Integer accountType, String nickName, Integer accountStatus, Integer approvalStatus,
                            String memo, Long auditUserId, String auditMsg, Timestamp auditedTime, Long rootUserId,
                            Timestamp createdTime, Integer deleteStatus, Long lastModifiedUserId, Timestamp lastModifiedTime) {
@@ -90,6 +93,7 @@ public class AccountRepository {
     /**
      * 删除Account_表数据
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public int deleteAccount(long accountId) {
 
         UpdateSetMoreStep<Account_Record> step = dslContext.update(ACCOUNT_)
@@ -101,6 +105,7 @@ public class AccountRepository {
     /**
      * 批量通过uid获取数据
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public List<Account_Record> batchGetAccountById(List<Long> accountIds) {
 
         SelectConditionStep<Account_Record> stmt = dslContext
@@ -114,6 +119,7 @@ public class AccountRepository {
     /**
      * 获取全部未审核的账号
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public List<Account_Record> getExamAccount(Integer type) {
         SelectConditionStep<Account_Record> stmt = dslContext
                 .selectFrom(ACCOUNT_)
@@ -126,6 +132,7 @@ public class AccountRepository {
     /**
      * 更新账号
      */
+    @DIAccessMo(table = "Account_", db = "DFU_")
     public int updateAccount(Long accountId, Integer accountStatus, String nickname, String memo) {
         Timestamp modifiedTime = TimeUtils.now();
         UpdateSetMoreStep<Account_Record> stmt = dslContext.update(ACCOUNT_)

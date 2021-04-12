@@ -1,5 +1,6 @@
 package cn.gatesma.desirefu.service;
 
+import cn.gatesma.desirefu.constant.EsConst;
 import cn.gatesma.desirefu.constants.ApiReturnCode;
 import cn.gatesma.desirefu.constants.config.TimeFmt;
 import cn.gatesma.desirefu.constants.status.*;
@@ -9,19 +10,35 @@ import cn.gatesma.desirefu.controller.api.CustomerApiException;
 import cn.gatesma.desirefu.domain.api.generate.*;
 import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
+import cn.gatesma.desirefu.utils.JsonUtil;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.lang.Object;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
 
 /**
  * User: gatesma
@@ -63,6 +80,9 @@ public class NormalAccountService {
     @Resource
     private CollectRepository collectRepository;
 
+    @Resource
+    private EsService esService;
+
 
     @Resource
     private AccountUserRoleRepository accountUserRoleRepository;
@@ -92,7 +112,28 @@ public class NormalAccountService {
      * 获取Account
      */
     public GetNormalAccountRet get(GetNormalAccountRequest request) {
+        // 查数据库
+//        List<Normalaccount_Record> records = normalAccountRepository.queryNormalAccount(
+//                request.getAccountId(), request.getCollegeId(), request.getDepartmentId(), request.getMajor(), request.getStuId(), request.getRealName());
+//
+//        List<GetNormalAccountData> ret = new ArrayList<>();
+//        if (CollectionUtils.isNotEmpty(records)) {
+//            ret = toGetNormalAccountList(records);
+//        }
 
+        // 查es
+        List<GetNormalAccountData> ret = getNormalAccountFromES(request);
+        // 返回结果
+        return (GetNormalAccountRet) new GetNormalAccountRet().data(ret)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 获取Account
+     */
+    public GetNormalAccountRet getFromDB(GetNormalAccountRequest request) {
+        // 查数据库
         List<Normalaccount_Record> records = normalAccountRepository.queryNormalAccount(
                 request.getAccountId(), request.getCollegeId(), request.getDepartmentId(), request.getMajor(), request.getStuId(), request.getRealName());
 
@@ -110,6 +151,10 @@ public class NormalAccountService {
 
         Normalaccount_Record record = normalAccountRepository.getAccountById(accountId, DeleteStatus.NORMAL);
 
+        if (record == null) {
+            return null;
+        }
+
         GetNormalAccountData data = new GetNormalAccountData()
                 .accountId(record.getAccountid())
                 .accountType(record.getAccounttype())
@@ -117,7 +162,8 @@ public class NormalAccountService {
                 .departmentId(record.getDepartmentid())
                 .major(record.getMajor())
                 .stuId(record.getStuid())
-                .realName(record.getRealname());
+                .realName(record.getRealname())
+                .createdTime(TimeUtils.convertDateToString(record.getCreatedtime(), TimeFmt.getTimeFmt()));
 
         // 填充学校名称和学院名称
         College_Record college = collegeRepository.getCollegeById(record.getCollegeid(), DeleteStatus.NORMAL);
@@ -236,6 +282,127 @@ public class NormalAccountService {
                 .code(ApiReturnCode.OK.code())
                 .message(ApiReturnCode.OK.name());
     }
+
+
+    public List<GetNormalAccountData> getNormalAccountFromES(GetNormalAccountRequest request) {
+
+
+        // 根据request生成queryBuilder
+        BoolQueryBuilder queryBuilder = getBoolQueryBuilder(request);
+
+        // 返回查询结果, 默认最多500
+        SearchResponse searchResponse = esService.queryFromES(EsConst.DESIREFU_SERVICE_INDEX, EsConst.INDEX_TYPE_NORMAL_ACCOUNT,
+                queryBuilder, null, null, 0, 500);
+
+        return toAccountData(searchResponse);
+    }
+
+    private List<GetNormalAccountData> toAccountData(SearchResponse response) {
+        List<GetNormalAccountData> accounts = new LinkedList<GetNormalAccountData>();
+        if (null != response) {
+            SearchHits searchHits = response.getHits();
+            SearchHit[] hits = searchHits.getHits();
+            // 获取需要的字段
+            for (SearchHit hit : hits) {
+                String source = hit.getSourceAsString();
+                GetNormalAccountData accountData = JsonUtil.deSerialize(source, GetNormalAccountData.class);
+                if (null != accountData) {
+                    accounts.add(accountData);
+                }
+            }
+        }
+        return accounts;
+    }
+
+
+    private BoolQueryBuilder getBoolQueryBuilder(GetNormalAccountRequest request) {
+
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        // account_id 查询条件
+        if (request.getAccountId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "_id", request.getAccountId()
+                    )
+            );
+        }
+
+        // college_id 查询条件
+        if (request.getCollegeId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "collegeId", request.getCollegeId()
+                    )
+            );
+        }
+
+        // departmentId 查询条件
+        if (request.getDepartmentId() != null) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "departmentId", request.getDepartmentId()
+                    )
+            );
+        }
+
+        // major 查询条件
+        if (StringUtils.isNotBlank(request.getMajor())) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "major", request.getMajor()
+                    )
+            );
+        }
+
+        // stuId 查询条件
+        if (StringUtils.isNotBlank(request.getStuId())) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "stuId", request.getStuId()
+                    )
+            );
+        }
+
+        // realName 查询条件
+        if (StringUtils.isNotBlank(request.getRealName())) {
+            queryBuilder.must(
+                    QueryBuilders.termQuery(
+                            "realName", request.getRealName()
+                    )
+            );
+        }
+
+        return queryBuilder;
+    }
+
+
+    public void syncAccount(Long accountId) {
+        boolean success = false;
+
+        GetNormalAccountData account = getNormalAccountById(accountId);
+
+        if (account == null) {
+            return;
+        }
+
+        String json = JSONObject.toJSONString(account, SerializerFeature.WriteMapNullValue);
+        Map<String, Object> dataMap = JSONObject.parseObject(json);
+
+        // 更新ES
+        UpdateResponse response = esService.upsertNormalAccount(accountId, dataMap);
+
+        if (response != null) {
+            success = true;
+            LOGGER.info("pushAccountToEs success , accountType = {}, accountId = {}", account.getAccountType(), accountId);
+        }
+
+        if (!success) {
+            LOGGER.error("pushAccountToEs error, accountId = {}", accountId);
+        }
+
+    }
+
 
 
 
