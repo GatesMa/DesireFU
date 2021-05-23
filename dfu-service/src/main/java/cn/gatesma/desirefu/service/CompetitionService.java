@@ -14,6 +14,7 @@ import cn.gatesma.desirefu.repository.AccountUserRoleRepository;
 import cn.gatesma.desirefu.repository.CollectRepository;
 import cn.gatesma.desirefu.repository.CompetitionRepository;
 import cn.gatesma.desirefu.repository.NormalAccountRepository;
+import cn.gatesma.desirefu.service.ratelimit.RateLimiterMethodService;
 import cn.gatesma.desirefu.utils.HtmlUtils;
 import cn.gatesma.desirefu.utils.RetCodeUtils;
 import cn.gatesma.desirefu.utils.TimeUtils;
@@ -52,6 +53,9 @@ public class CompetitionService {
 
     @Resource
     private CollectRepository collectRepository;
+
+    @Resource
+    private RateLimiterMethodService rateLimiterMethodService;
 
     public void createCompetition(AddCompetitionRequest request) {
 
@@ -92,6 +96,9 @@ public class CompetitionService {
     public SelectCompetitionRet selectCompetition(SelectCompetitionRequest request) {
 
         SelectCompetitionRet ret = RetCodeUtils.ok(new SelectCompetitionRet());;
+
+        // 限流
+        // queryRateLimit(request);
 
         // page信息
         fillPage(request);
@@ -169,6 +176,12 @@ public class CompetitionService {
                 .overviewImg(record.getOverviewimg())
                 .overviewText(record.getOverviewtext());
         return data;
+    }
+
+    public void queryRateLimit(SelectCompetitionRequest request){
+        // 检查限流，一分钟20次
+        // TODO 配置改成动态修改
+        rateLimiterMethodService.rateLimitQuery(20);
     }
 
     private void fillPage(SelectCompetitionRequest request) {
