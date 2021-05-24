@@ -145,7 +145,7 @@ public class NormalAccountApiController implements NormalAccountApi {
     public ResponseEntity<GetNormalAccountRet> getNormalAccountFromDB(@ApiParam(value = "创建账号" ,required=true )  @Valid @RequestBody GetNormalAccountRequest body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            GetNormalAccountRet response = normalAccountService.getFromDB(body);
+            GetNormalAccountRet response = normalAccountService.getFromDBWithData(body);
             return new ResponseEntity<GetNormalAccountRet>(response, HttpStatus.OK);
         } else {
             throw new CustomerApiException(ApiReturnCode.HEADER_ACCEPT_MISSING, "Accept 'application/json' was expected");

@@ -12,6 +12,7 @@ import cn.gatesma.desirefu.domain.db.generate.DFU_.tables.records.*;
 import cn.gatesma.desirefu.repository.*;
 import cn.gatesma.desirefu.utils.JsonUtil;
 import cn.gatesma.desirefu.utils.TimeUtils;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.collections.CollectionUtils;
@@ -111,7 +112,7 @@ public class NormalAccountService {
     /**
      * 获取Account
      */
-    public GetNormalAccountRet get(GetNormalAccountRequest request) {
+    public GetNormalAccountRet  get(GetNormalAccountRequest request) {
         // 查数据库
 //        List<Normalaccount_Record> records = normalAccountRepository.queryNormalAccount(
 //                request.getAccountId(), request.getCollegeId(), request.getDepartmentId(), request.getMajor(), request.getStuId(), request.getRealName());
@@ -132,7 +133,18 @@ public class NormalAccountService {
     /**
      * 获取Account
      */
-    public GetNormalAccountRet getFromDB(GetNormalAccountRequest request) {
+    public GetNormalAccountRet getFromDBWithData(GetNormalAccountRequest request) {
+        List<GetNormalAccountData> fromDB = getFromDB(request);
+        // 返回结果
+        return (GetNormalAccountRet) new GetNormalAccountRet().data(fromDB)
+                .code(ApiReturnCode.OK.code())
+                .message(ApiReturnCode.OK.name());
+    }
+
+    /**
+     * 获取Account
+     */
+    public List<GetNormalAccountData> getFromDB(GetNormalAccountRequest request) {
         // 查数据库
         List<Normalaccount_Record> records = normalAccountRepository.queryNormalAccount(
                 request.getAccountId(), request.getCollegeId(), request.getDepartmentId(), request.getMajor(), request.getStuId(), request.getRealName());
@@ -141,10 +153,7 @@ public class NormalAccountService {
         if (CollectionUtils.isNotEmpty(records)) {
             ret = toGetNormalAccountList(records);
         }
-        // 返回结果
-        return (GetNormalAccountRet) new GetNormalAccountRet().data(ret)
-                .code(ApiReturnCode.OK.code())
-                .message(ApiReturnCode.OK.name());
+        return ret;
     }
 
     public GetNormalAccountData getNormalAccountById(Long accountId) {
@@ -284,8 +293,13 @@ public class NormalAccountService {
     }
 
 
+    // 出现错误降级查DB
+    @SentinelResource(value = "getNormalAccountFromES", fallback = "getFromDB")
     public List<GetNormalAccountData> getNormalAccountFromES(GetNormalAccountRequest request) {
 
+        if (request.getAccountId()== 1L) {
+            throw new CustomerApiException(ApiReturnCode.ILLEGAL_PARAM, "参数不对");
+        }
 
         // 根据request生成queryBuilder
         BoolQueryBuilder queryBuilder = getBoolQueryBuilder(request);
