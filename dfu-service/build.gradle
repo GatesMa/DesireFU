@@ -116,6 +116,21 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
 
+    //sentinel
+    compile 'com.alibaba.csp:sentinel-annotation-aspectj:1.6.3'
+    compile 'com.alibaba.csp:sentinel-core:1.6.3'
+    compile 'com.alibaba.csp:sentinel-transport-simple-http:1.6.3'
+    //sentinel cluster
+    compile 'com.alibaba.csp:sentinel-transport-common:1.6.3'
+    compile 'com.alibaba.csp:sentinel-cluster-common-default:1.6.3'
+    compile 'com.alibaba.csp:sentinel-cluster-client-default:1.6.3'
+    compile 'com.alibaba.csp:sentinel-cluster-server-default:1.6.3'
+    compile 'com.alibaba.csp:sentinel-datasource-zookeeper:1.6.3'
+
+    //版本号要与spring-boot对应，否则会出现意想不到的错误
+    //https://blog.csdn.net/xiaoll880214/article/details/98088423
+    compile 'org.springframework.cloud:spring-cloud-starter-alibaba-sentinel:0.1.2.RELEASE'
+
 
 
 }
